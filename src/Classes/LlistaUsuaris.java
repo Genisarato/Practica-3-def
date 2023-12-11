@@ -32,8 +32,10 @@ public class LlistaUsuaris extends Llista{
                 System.out.println("El nickname ja esta utilitzat.");
             }
             else {
-                llista[nElem] = new Usuaris(nom, mail, codi);
+                Usuaris usuari = new Usuaris(nom, mail, codi);
+                llista[nElem] = usuari.copia();
                 nElem++;
+                guardarArxiu(usuari);
             }
         }
     }
