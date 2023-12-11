@@ -1,4 +1,10 @@
 package Classes;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /*Classe de llista usuaris, amb el seu constructor, com que no tinc decidit fer la excepcio del nickname, que suposo que al main, he fet
  * un mètode auxiliar per controlar que no hi ha cap nicnkame igual a la llista. S'hauria de implementar una excepcio, més endevant ho
  * intentaré :)
@@ -44,8 +50,25 @@ public class LlistaUsuaris extends Llista{
             else{
                 llista[nElem] = n.copia();
                 nElem++;
+                guardarArxiu(n);
             }
         }
+    }
+
+    public void guardarArxiu(Usuaris n){
+         String nombreArchivo = "Llista_usuaris.txt";
+
+        // Obtener la ruta absoluta del archivo
+        String rutaAbsoluta = new File("src", nombreArchivo).getAbsolutePath();
+
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta, true))){
+            bw.write(n.toString());
+            bw.newLine();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 
     /*Mètode toString no implementat */
