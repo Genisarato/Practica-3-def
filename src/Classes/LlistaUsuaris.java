@@ -15,9 +15,7 @@ import java.util.Scanner;
 public class LlistaUsuaris extends Llista{
     
     private Usuaris[] llista;
-    /*Constructor
-     * @param mida de la llista
-     */
+    /*Constructor*/
     public LlistaUsuaris(){
         super();
         llista = new Usuaris[1000];
@@ -29,7 +27,7 @@ public class LlistaUsuaris extends Llista{
      * @param mail
      * @param codi Postal
      */
-    /*Se podria borrar el mètode, pero encara no. */
+    /*Es podria borrar el mètode, pero encara no. */
     public void afegir(String nom, String mail, int codi){
         if(nElem<llista.length){
             boolean afegit = false;
@@ -43,8 +41,8 @@ public class LlistaUsuaris extends Llista{
                     afegit = true;
                 }catch(RuntimeException e){
                     System.out.println(e.getMessage());
-                    System.out.println("Introduce otro nickname");
-                    /*Leer otro nickname */
+                    System.out.println("Introdueix un altre nickname");
+                    /*Implementar llegir un altre nickname i el setNickname*/
                 }
             }
         }
@@ -53,7 +51,7 @@ public class LlistaUsuaris extends Llista{
     /*Mètode auxiliar per afegir un usuari de l'arxiu llista_usuaris.txt a la llista sense copiar al arxiu per no tenir duplicats.
      * També es podria fer dins al bucle de llegirfitxer, era per fer-ho més elegant :) 
      */
-    public void afegirsensecopiar(Usuaris usuari){
+    private void afegirsensecopiar(Usuaris usuari){
                 llista[nElem] = usuari.copia();
                 nElem++;
     }
@@ -63,15 +61,15 @@ public class LlistaUsuaris extends Llista{
      * JA QUE ES DONA PER SUPOSAT QUE NO DONA MAI MÉS GRAN QUE LA LENGTH 
      * NI HI HA CAP NICKNAME IGUAL(JA QUE TOT EL QUE HI HA A L'ARXIU JA ESTA CORRECTE).
      * AL MAIN S'HA DE FER A LES PRIMERES LINIES.
+     * SI NO POT OCASIONAR PROBLEMES A LA LLISTA
      * 
      */
     public void llegirfitxer(){
-        String nombreArchivo = "Llista_usuaris.txt";
-        File file = new File("src", nombreArchivo);
+        String nomarxiu= "Llista_usuaris.txt";
+        File file = new File("src", nomarxiu);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String llegit = scanner.nextLine();
-                System.out.println("Leegida: " + llegit + "\n");
                 String[] parts = llegit.split(",");
                 String nom = parts[0].trim();
                 String mail = parts[1].trim();
@@ -81,7 +79,7 @@ public class LlistaUsuaris extends Llista{
                 
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Archivo no encontrado: " + nombreArchivo);
+            System.out.println("Error 404 not found");
         }
 
     }
@@ -93,7 +91,7 @@ public class LlistaUsuaris extends Llista{
     public void afegir(Usuaris n){
         if(nElem < llista.length){
             boolean afegit = false;
-            while (!afegit) {
+            while (!afegit){
                 try{
                     nicknameigual(n.getNickname());
                     llista[nElem] = n.copia();
@@ -102,8 +100,8 @@ public class LlistaUsuaris extends Llista{
                     afegit = true;
                 }catch(RuntimeException e){
                     System.out.println(e.getMessage());
-                    System.out.println("Introduce otro nickname");
-                    /*Leer otro nickname */
+                    System.out.println("Introdueix un altre nickname");
+                    /*Implementar llegir un altre nickname i el setNickname*/
                 }
             }
     }
@@ -112,15 +110,15 @@ public class LlistaUsuaris extends Llista{
 
     /*Mètdoe per guardar un usuari al arxiu Llista_usuaris.txt */
     public void guardarArxiu(Usuaris n){
-        String nombreArchivo = "Llista_usuaris.txt";
+        String nomarxiu = "Llista_usuaris.txt";
 
-        // Obtener la ruta absoluta del archivo
-        String rutaAbsoluta = new File("src", nombreArchivo).getAbsolutePath();
+        String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta, true))){
             bw.write(n.getNickname() + "," + n.getMail() + "," + n.getCodiPostal());
             bw.newLine();
             System.out.println("Guardat\n");
+            bw.flush();
         }
         catch (IOException e){
             System.out.println("Error\n");
