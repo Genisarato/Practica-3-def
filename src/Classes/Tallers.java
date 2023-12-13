@@ -12,7 +12,7 @@ public class Tallers extends Activitats {
         return hora;
     }
 
-    public durada() {
+    public getDurada() {
         return durada;
     }
 

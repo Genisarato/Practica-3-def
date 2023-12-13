@@ -7,11 +7,12 @@ assumim que són de novembre de 2023). També haurem de poder indicar quina enti
 a que hi hagi varietat, les activitats no es repeteixen mai, és a dir, cada activitat ha de guardar un sol
 dia. */
 
+//Crear get i set  per tal de poder obtenir els atributs de cada activitat i per si s'ha de modificar alguna dada
 /*Activitat es guarda format NOM;CODI;LLOC;DIA;ENTITATCREA;CODIPOSTAL*/ 
 public class Activitats {
     private String codi, nom, lloc, entitatCrea;
     private int codiPostal, dia;
-    private static int nAct = 100;
+    private static int nAct = 0;
 
     /**
      * Constructor
@@ -24,22 +25,30 @@ public class Activitats {
     public Activitats(String nom, String lloc, int dia, String entitatCrea, int codiPostal){
         this.nom = nom;
         codi = entitatCrea.substring(0, 3) + Integer.toString(nAct);
-        incrementarAct();
+        //incrementarAct();
+        nAct++;
         this.lloc = lloc;
         this.dia = dia;
         this.entitatCrea = entitatCrea;
         this.codiPostal = codiPostal;
+        afegirAct();
     }
-
-    public static void incrementarAct(){
+    
+    /*public static void incrementarAct(){
        nAct++;
-    }
+    }*/
     /**
 	 * Getter
 	 * @return dia de la data
 	 */
 	public int getDia() {
 		return dia;
+	}
+    /** Getter
+	 * @return dia de la data
+	 */
+	public int getNom() {
+		return nom;
 	}
 
     /**
@@ -52,7 +61,7 @@ public class Activitats {
     }
     
     /**
-     * Mètode que afegeix una activitat al fitxer
+     * Mètode que afegeix una activitat al fitxer, fer la crida desde metode constructor demanar i anar escrivint en el fiter
      */
     public void afegirAct(){
 
