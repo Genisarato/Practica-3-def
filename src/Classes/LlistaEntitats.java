@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class LlistaEntitats extends Llista{
+
+public class LlistaEntitats extends Llista<Entitats>{
     private Entitats[] llista;
 
     /*Constructor*/
@@ -23,7 +25,7 @@ public class LlistaEntitats extends Llista{
      * @param codi Telefon(TO DO fer el comprovar que el telefon es de 9 xifres)
      */
     /*Es podria borrar el mètode, pero encara no. */
-    public void afegir(String n, int telef, String mail) {
+    public void agregar(String n, int telef, String mail) {
         if(nElem < llista.length){
             Entitats copia = new Entitats(n, telef, mail);
             llista[nElem] = copia;
@@ -36,7 +38,7 @@ public class LlistaEntitats extends Llista{
      * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
      * @param entitat
      */
-    public void afegir(Entitats n){
+    public void agregar(Entitats n){
         if(nElem < llista.length){
             llista[nElem] = n.copia();
             nElem++;
@@ -102,6 +104,48 @@ public class LlistaEntitats extends Llista{
                 text = text + llista[i] + "\n";
             }
             return text;
+    }
+    public int tamano(){
+        return nElem;
+    }
+
+    public void eliminar(Entitats entitat){
+        int j = -1;
+        int i;
+        for(i = 0; i<nElem && j == -1; i++){
+            if(llista[i].esIgual(entitat)) j = i;
+        }
+        if(j != -1){
+            while (j<nElem-1){
+                llista[j] = llista[j+1];
+                j++;
+            }
+            nElem--;
+        }
+    }
+
+    public void vaciar(){
+        nElem = 0;
+        String nomarxiu = "Llista_entitats.txt";
+
+        String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
+        try (PrintWriter writer = new PrintWriter(rutaAbsoluta)) {
+            // Simplemente cierra el archivo sin escribir nada, lo que borra su contenido.
+        } catch (IOException e) {
+            System.out.println("Error al intentar vaciar el archivo: " + e.getMessage());
+        }
+    }
+
+    public void imprimir(){
+        System.out.println(toString());
+    }
+
+    public boolean contiene(Entitats entitat){
+        boolean conte = false;
+        for(int i = 0; i<nElem; i++){
+            if(llista[i].esIgual(entitat)) conte = true;
+        }
+        return conte;
     }
 
 

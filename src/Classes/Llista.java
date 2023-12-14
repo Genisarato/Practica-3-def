@@ -16,5 +16,7 @@ public abstract class Llista<T> {
     public abstract void imprimir();
     public abstract void vaciar();
     public abstract String toString();
+    /*Pou aixo dixau q son proves, pasa del tema este q ia teu asplicare :) */
+    //pasaallista(String llegit);
 
 }

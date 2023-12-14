@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /*Classe de llista usuaris, amb el seu constructor, com que no tinc decidit fer la excepcio del nickname, que suposo que al main, he fet
@@ -12,7 +13,7 @@ import java.util.Scanner;
  * intentaré :)
  */
 
-public class LlistaUsuaris extends Llista{
+public class LlistaUsuaris extends Llista<Usuaris>{
     
     private Usuaris[] llista;
     /*Constructor*/
@@ -28,7 +29,7 @@ public class LlistaUsuaris extends Llista{
      * @param codi Postal
      */
     /*Es podria borrar el mètode, pero encara no. */
-    public void afegir(String nom, String mail, int codi){
+    public void agregar(String nom, String mail, int codi){
         if(nElem<llista.length){
             boolean afegit = false;
             while (!afegit) {
@@ -70,6 +71,7 @@ public class LlistaUsuaris extends Llista{
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String llegit = scanner.nextLine();
+                pasaallista();
                 String[] parts = llegit.split(",");
                 String nom = parts[0].trim();
                 String mail = parts[1].trim();
@@ -83,12 +85,13 @@ public class LlistaUsuaris extends Llista{
         }
 
     }
+    
 
     /*Mètode afegir pasant un usuari directament que també comprova que no hi ha cap nickname igual,
      * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
      * @param usuari
      */
-    public void afegir(Usuaris n){
+    public void agregar(Usuaris n){
         if(nElem < llista.length){
             boolean afegit = false;
             while (!afegit){
@@ -106,6 +109,25 @@ public class LlistaUsuaris extends Llista{
             }
     }
 }
+
+    public int tamano(){
+        return nElem;
+    }
+
+    public void eliminar(Usuaris n){
+        int j = -1;
+        int i;
+        for(i = 0; i < nElem && j == -1; i++){
+            if(llista[i].igual(n))  j = i;
+        }
+        if(j != -1){
+            while(j<nElem-1){
+                llista[j] = llista[j+1];
+                j++;
+            }
+            nElem--;
+        }
+    }
 
 
     /*Mètdoe per guardar un usuari al arxiu Llista_usuaris.txt */
@@ -142,6 +164,33 @@ public class LlistaUsuaris extends Llista{
             if(llista[i].getNickname().equalsIgnoreCase(nom)) throw new RuntimeException("El nickname ya está en uso.");
         }
        return trobat;   
+    }
+
+    public void vaciar(){
+        nElem = 0;
+        String nomarxiu = "Llista_usuaris.txt";
+
+        String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
+        try (PrintWriter writer = new PrintWriter(rutaAbsoluta)) {
+            // Simplemente cierra el archivo sin escribir nada, lo que borra su contenido.
+        } catch (IOException e) {
+            System.out.println("Error al intentar vaciar el archivo: " + e.getMessage());
+        }
+    }
+
+
+
+    public void imprimir() {
+        System.out.println(toString());
+    }
+
+    @Override
+    public boolean contiene(Usuaris elemento) {
+        boolean conte = false;
+        for(int i = 0; i<nElem; i++){
+            if(llista[i].igual(elemento)) conte= true;
+        }
+        return conte;
     }
     
 }

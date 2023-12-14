@@ -38,6 +38,10 @@ public class Usuaris {
         return new Usuaris(nickname, mail, codiPostal);
     }
 
+    public boolean igual(Usuaris n){
+        return(this.getNickname().equals(n.getNickname()) && this.getMail().equals(n.getMail()) && this.getCodiPostal() == n.getCodiPostal());
+    }
+
     /*toString */
     public String toString(){
         String text;
