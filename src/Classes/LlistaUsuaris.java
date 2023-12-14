@@ -71,7 +71,7 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String llegit = scanner.nextLine();
-                pasaallista();
+                //pasaallista();
                 String[] parts = llegit.split(",");
                 String nom = parts[0].trim();
                 String mail = parts[1].trim();
