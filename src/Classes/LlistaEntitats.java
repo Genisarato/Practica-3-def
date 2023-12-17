@@ -105,6 +105,8 @@ public class LlistaEntitats extends Llista<Entitats>{
             }
             return text;
     }
+
+    
     public int tamano(){
         return nElem;
     }

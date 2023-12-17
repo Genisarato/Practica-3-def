@@ -161,7 +161,7 @@ public class LlistaUsuaris extends Llista<Usuaris>{
     private boolean nicknameigual(String nom){
         boolean trobat = false;
         for(int i = 0; i<nElem; i++){
-            if(llista[i].getNickname().equalsIgnoreCase(nom)) throw new RuntimeException("El nickname ya está en uso.");
+            if(llista[i].getNickname().equalsIgnoreCase(nom)) throw new RuntimeException("El nickname está usat.");
         }
        return trobat;   
     }

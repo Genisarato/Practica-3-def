@@ -33,6 +33,17 @@ public class Usuaris {
         return codiPostal;
     }
 
+    public void setNickname(String nickname){
+        this.nickname = nickname;
+    }
+
+    public void SetMail(String mail){
+        this.mail = mail;
+    }
+
+    public void SetCodiPostal(int codi){
+        this.codiPostal = codi;
+    }
     /*Mètode copia */
     public Usuaris copia(){
         return new Usuaris(nickname, mail, codiPostal);

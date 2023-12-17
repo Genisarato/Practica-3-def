@@ -31,6 +31,18 @@ public class Entitats {
         return mail;
     }
 
+    public void SetNom(String nom){
+        this.nom = nom;
+    }
+
+    public void SetTelef(int telef){
+        this.telef = telef;
+    }
+
+    public void SetMail(String mail){
+        this.mail = mail;
+    }
+
     /*Mètode copia */
     public Entitats copia(){
         return (new Entitats(this.getNom(), this.getTelef(), this.getMail()));
