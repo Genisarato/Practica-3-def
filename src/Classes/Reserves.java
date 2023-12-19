@@ -49,8 +49,8 @@ public class Reserves {
     }
     private boolean tallerple(Tallers taller){
         boolean ple = false;
-        //Implementar en la classe tallers el mètode public void places lliures()
-        if(!tallers.placeslliures()) ple = true;
+        //Implementar en la classe tallers el mètode public void places lliures() -> FET
+        if(!taller.placesLliures()) ple = true;
         return ple;
 
     }

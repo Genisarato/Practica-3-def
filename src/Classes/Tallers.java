@@ -1,49 +1,62 @@
+/*
+ * Programadors:
+ * Judith Mateu Domingo - judith.mateu@estudiants.urv.cat
+ * Jan Torres Rodriguez - jan.torres@estudiants.urv.cat
+ */
+
 package Classes;
 
 /*Els tallers es fan en una hora concreta del dia, i tenen una durada determinada. Tenen també
 una capacitat fixada, i els usuaris s’hi ha de registrar*/
 public class Tallers extends Activitats {
-    private int hora, dia_t, durada, capacitat, usuarisApuntats;
-    private int[] valoracions, usuariosValor;
+    private int hora, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal;
 
     // Otros atributos y métodos...
+
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, int dia_t, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
+        super(nom, lloc, dia, entitatCrea, codiPostal);
+        this.dia_t = dia_t;
+        this.durada = durada;
+        this.capacitat = capacitat;
+        this.usuarisApuntats = usuarisApuntats;
+        this.sumaVal = sumaVal;
+        this.nVal = nVal;
+        
+    }
 
     public int getHora() {
         return hora;
     }
 
-    public getDurada() {
+    public int getDurada() {
         return durada;
     }
 
-    public void agregarValoracion(int valoracion) {
-        // Verificar si hay espacio para más valoraciones
-        if (usuarisApuntats < valoracions.length) {
-            // Añadir la valoración al arreglo
-            valoracions[usuarisApuntats] = valoracion;
-            // Incrementar el contador de usuarios apuntados
-            usuarisApuntats++;
-        } else {
-            System.out.println("No hay espacio para más valoraciones.");
-        }
+    public void afegirValoracio(int valoracion) {
+        sumaVal = sumaVal + valoracion;
+        nVal++;
     }
 
     public float mitjanaValoracions() {
-        int i;
-        float sumaValoracions = 0.0f;
-        if (usuarisApuntats == 0) {
-            return 0.0f;
-        }
-        for (i = 0; i < usuarisApuntats; i++) {
-            sumaValoracions = sumaValoracions + valoracions[i];
-        }
-        sumaValoracions = sumaValoracions / usuarisApuntats;
-        return sumaValoracions;
+        return (float)(sumaVal/nVal);
     }
 
     public float proporcioTallers() {
         float proporcio = 0;
         proporcio = (float) usuarisApuntats / capacitat;
         return proporcio;
+    }
+
+    public boolean placesLliures(){
+        return capacitat > usuarisApuntats;
+    }
+
+    public boolean esIgual(Activitats a){
+        
+    }
+
+    public Tallers copia(){
+        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+        return (Tallers)aux;
     }
 }

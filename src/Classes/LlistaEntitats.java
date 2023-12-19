@@ -42,7 +42,7 @@ public class LlistaEntitats extends Llista<Entitats>{
         if(nElem < llista.length){
             llista[nElem] = n.copia();
             nElem++;
-            guardarArxiu(n);
+            guardarArxiu(n);    
         }
     }
 

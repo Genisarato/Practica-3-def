@@ -9,9 +9,9 @@ dia. */
 
 //Crear get i set  per tal de poder obtenir els atributs de cada activitat i per si s'ha de modificar alguna dada
 /*Activitat es guarda format NOM;CODI;LLOC;DIA;ENTITATCREA;CODIPOSTAL*/ 
-public class Activitats {
-    private String codi, nom, lloc, entitatCrea;
-    private int codiPostal, dia;
+public abstract class Activitats {
+    protected String codi, nom, lloc, entitatCrea;
+    protected int codiPostal, dia;
     private static int nAct = 0;
 
     /**
@@ -25,18 +25,17 @@ public class Activitats {
     public Activitats(String nom, String lloc, int dia, String entitatCrea, int codiPostal){
         this.nom = nom;
         codi = entitatCrea.substring(0, 3) + Integer.toString(nAct);
-        //incrementarAct();
-        nAct++;
+        incrementarAct();
         this.lloc = lloc;
         this.dia = dia;
         this.entitatCrea = entitatCrea;
         this.codiPostal = codiPostal;
-        afegirAct();
     }
     
-    /*public static void incrementarAct(){
+    public static void incrementarAct(){
        nAct++;
-    }*/
+    }
+
     /**
 	 * Getter
 	 * @return dia de la data
@@ -47,7 +46,7 @@ public class Activitats {
     /** Getter
 	 * @return dia de la data
 	 */
-	public int getNom() {
+	public String getNom() {
 		return nom;
 	}
 
@@ -59,26 +58,16 @@ public class Activitats {
     public boolean diaIgual (int dia){
         return this.dia == dia;
     }
-    
-    /**
-     * Mètode que afegeix una activitat al fitxer, fer la crida desde metode constructor demanar i anar escrivint en el fiter
-     */
-    public void afegirAct(){
-
-    }
 
     public float proporcioTallers(){
         return 0.0f;
     }
-    
 
     public String toString () {
         return ("\nNOM: "+nom+" LLOC: "+lloc+" AMB CODI POSTAL "+codiPostal+" EL DIA "+dia+" DE NOVEMBRE DE 2023.\nENTITAT QUE L'HA CREAT: "+entitatCrea+" AMB EL CODI "+codi);
     }
 
-    /*public Activitats copia() {
-	Activitats mesura=new Activitats(nom, codi, lloc, dia, entitatCrea, codiPostal);
-	return mesura;
-	}*/
+    public abstract Activitats copia();
+    public abstract boolean esIgual(Activitats a);
     }
 
