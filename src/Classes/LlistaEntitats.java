@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-
+/*Authors: Genís Aragonès Torralbo */
 public class LlistaEntitats extends Llista<Entitats>{
     private Entitats[] llista;
 

@@ -12,7 +12,7 @@ import java.util.Scanner;
  * un mètode auxiliar per controlar que no hi ha cap nicnkame igual a la llista. S'hauria de implementar una excepcio, més endevant ho
  * intentaré :)
  */
-
+/*Authors: Genís Aragonès Torralbo */
 public class LlistaUsuaris extends Llista<Usuaris>{
     
     private Usuaris[] llista;

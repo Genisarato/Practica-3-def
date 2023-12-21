@@ -2,6 +2,7 @@ package Classes;
 /*Classe usuaris amb el seu constructor que li passen uns certs paràmetres, s'hauria de mirar tema excepcions ja que 2 nicknames no poden
  * ser iguals però no tinc molt clar com fer-ho
 */
+/*Authors: Genís Aragonès Torralbo */
 public class Usuaris {
     private String nickname;
     private String mail;
