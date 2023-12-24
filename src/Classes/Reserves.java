@@ -4,15 +4,14 @@ import java.util.Random;
 
 public class Reserves {
 
-    private int codiReserva;
+    private int codiReserva = 0;
     private Usuaris usuari;
     private Tallers taller;
 
 
     public Reserves(Usuaris u, Tallers taller) {
         if(!tallerple(taller)){
-            Random codi = new Random();
-            codiReserva = codi.nextInt();
+            codiReserva = codiReserva + 1;
             usuari = u.copia();
             taller = taller.copia();
             //implementar en la classe tallers el mètode public tallers copia()
@@ -20,6 +19,7 @@ public class Reserves {
         //implementar excepcion taller ple
 
     }
+
 
     public Usuaris getUsuari(){
         return(usuari.copia());

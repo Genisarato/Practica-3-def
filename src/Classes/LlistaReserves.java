@@ -29,7 +29,6 @@ public class LlistaReserves extends Llista<Reserves>{
                 comprovaReserva(n);
                 llista[nElem] = n.copia();
                 nElem++;
-                guardarArxiu(n);
             }catch(Excepcions e){
                 System.out.println(e.getMessage());
             }
@@ -47,26 +46,29 @@ public class LlistaReserves extends Llista<Reserves>{
                 comprovaReserva(copia);
                 llista[nElem] = copia;
                 nElem++;
-                guardarArxiu(copia);
             } catch(Excepcions e){
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    /*Métode que guarda la reserva comprovada a l'arxiu
-     * @param reserva
+    /*Mètdoe per guardar la llista al arxiu Llista_reserves.txt
+     * ATENCIO: S'HA DE FER UNA VEGADA S'HAN FINALITZAT LES OPERACIONS DE LA LLISTA: AGREGAR, BORRAR, ETC..
+     * I ABANS DE TANCAR EL PROGAMA, SINÓ ES PERDRA TOT EL CONTINUGT DE LLISTA NO GUARDAT ANTERIORMENT, JA QUE
+     * EL MÉTODE ELIMINAR ERA MÉS FÀCIL LA IMPLEMENTACIÓ AIXÍ I ÉS MÉS EFICIENT
      */
-    public void guardarArxiu(Reserves n){
+    public void guardarArxiu(){
         String nomarxiu = "Llista_reserves.txt";
 
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta, true))){
-            bw.write(n.getCodiReserva() + "," + n.getTallers() + "," + n.getUsuari());
-            bw.newLine();
-            System.out.println("Guardat\n");
-            bw.flush();
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
+            for(int i = 0; i <nElem; i++){
+                bw.write(llista[i].getCodiReserva() + "," + llista[i].getUsuari() + "," +llista[i].getTallers());
+                bw.newLine();
+                System.out.println("Guardat\n");
+            }
+            bw.close();
         }
         catch (IOException e){
             System.out.println("Error\n");
@@ -90,10 +92,14 @@ public class LlistaReserves extends Llista<Reserves>{
 
     /*Void que elimina una reserva en específic */
     public void eliminar(Reserves reserves){
-        int j = -1;
+        int j = 0;
+        boolean trobat = false;
         int i;
-        for(i = 0; i<nElem && j == -1; i++){
-            if(llista[i].esIgual(reserves)) j = i;
+        for(i = 0; i<nElem && !trobat; i++){
+            if(llista[i].esIgual(reserves)){
+              j = i; 
+              trobat = true; 
+            } 
         }
         if(j != -1){
             while (j<nElem-1){
@@ -162,7 +168,7 @@ public class LlistaReserves extends Llista<Reserves>{
                 int codi = Integer.parseInt(parts[0].trim());
                 String  usuari = parts[1].trim();
                 String taller = parts[2].trim();
-                Reserves reserva = new Reserva(codi, usuari, taller);
+                Reserves reserva = new Reserves(codi, usuari, taller);
                 this.afegirsensecopiar(reserva);
                 
             }
@@ -181,5 +187,3 @@ public class LlistaReserves extends Llista<Reserves>{
 
     }
    
-    
-
