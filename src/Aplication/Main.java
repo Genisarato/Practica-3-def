@@ -43,11 +43,13 @@ public class Main {
 			// Registrar la petició d’un usuari per reservar un taller.
 			case 6:
 				System.out.println("\nHas escollit registrar la petició d’un usuari per reservar un taller.");
+				/*Genis */
 				break;
 
 			// Mostrar els usuaris que s’han apuntat a un taller.
 			case 7:
 				System.out.println("\nHas escollit mostrar els usuaris que s’han apuntat a un taller.");
+				/*Genis */
 				break;
 
 			// Calcular l’usuari que s’ha apuntat a més tallers.
