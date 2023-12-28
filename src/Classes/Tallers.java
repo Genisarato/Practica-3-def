@@ -6,13 +6,10 @@
 
 package Classes;
 
-/*Els tallers es fan en una hora concreta del dia, i tenen una durada determinada. Tenen també
-una capacitat fixada, i els usuaris s’hi ha de registrar*/
 public class Tallers extends Activitats {
     private int hora, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal;
 
     // Otros atributos y métodos...
-
     public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, int dia_t, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
         super(nom, lloc, dia, entitatCrea, codiPostal);
         this.dia_t = dia_t;
@@ -32,6 +29,12 @@ public class Tallers extends Activitats {
         return durada;
     }
 
+    @Override
+    public int getUsuarisApuntats(){
+        return usuarisApuntats;
+    }
+
+    //No es mira si la valoració es fa quan ja ha passat el taller. S'hauria de fer? Suposo que no, perque no tenim manera de saber el dia actual per l'usuari, no? (punt 9 del main)
     public void afegirValoracio(int valoracion) {
         sumaVal = sumaVal + valoracion;
         nVal++;
@@ -41,20 +44,19 @@ public class Tallers extends Activitats {
         return (float)(sumaVal/nVal);
     }
 
+    @Override
     public float proporcioTallers() {
         float proporcio = 0;
         proporcio = (float) usuarisApuntats / capacitat;
         return proporcio;
     }
 
+    @Override
     public boolean placesLliures(){
         return capacitat > usuarisApuntats;
     }
 
-    public boolean esIgual(Activitats a){
-        
-    }
-
+    @Override
     public Tallers copia(){
         Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
         return (Tallers)aux;

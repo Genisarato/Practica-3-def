@@ -31,6 +31,17 @@ public abstract class Activitats {
         this.entitatCrea = entitatCrea;
         this.codiPostal = codiPostal;
     }
+
+    //En el cas de fer una copia duna activitat, el codi entenc que no es pot tornar a generar (si es tornes a generar nAct hauria augmentat i el codi acabaria sent diferent), de manera que quan fem una copia duna activitat, li haurem de passar el codi, no?
+    //el seguent constructor es nomes si acabem passant per passametre el codi de l'activitat a mes a mes de tota la info
+    public Activitats(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi){
+        this.nom = nom;
+        this.codi = codi;
+        this.lloc = lloc;
+        this.dia = dia;
+        this.entitatCrea = entitatCrea;
+        this.codiPostal = codiPostal;
+    }
     
     public static void incrementarAct(){
        nAct++;
@@ -43,12 +54,46 @@ public abstract class Activitats {
 	public int getDia() {
 		return dia;
 	}
-    /** Getter
+
+    /**
+     *  Getter
 	 * @return dia de la data
 	 */
 	public String getNom() {
 		return nom;
 	}
+
+    /**
+     * Getter
+     * @return codi
+     */
+    public String getCodi() {
+        return codi;
+    }
+
+    /**
+     * Getter
+     * @return lloc
+     */
+    public String getLloc() {
+        return lloc;
+    }
+
+    /**
+     * Getter
+     * @return entitat que crea l'activitat
+     */
+    public String getEntitatCrea() {
+        return entitatCrea;
+    }
+
+    /**
+     * Getter
+     * @return codi postal de l'activitat
+     */
+    public int getCodiPostal() {
+        return codiPostal;
+    }
 
     /**
      * Mètode que compara si dos dies són iguals
@@ -63,11 +108,23 @@ public abstract class Activitats {
         return 0.0f;
     }
 
+    public boolean placesLliures(){
+        return false;
+    }
+
+    public String getPersona(){
+        return null;
+    }
+
+    public int getUsuarisApuntats(){
+        return 0;
+    }
+
     public String toString () {
         return ("\nNOM: "+nom+" LLOC: "+lloc+" AMB CODI POSTAL "+codiPostal+" EL DIA "+dia+" DE NOVEMBRE DE 2023.\nENTITAT QUE L'HA CREAT: "+entitatCrea+" AMB EL CODI "+codi);
     }
 
     public abstract Activitats copia();
-    public abstract boolean esIgual(Activitats a);
-    }
+
+}
 

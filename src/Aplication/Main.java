@@ -20,8 +20,8 @@ public class Main {
 				System.out.print("\nHas escollit mostrar les dades de qualsevol llista que tingueu definida.");
 				break;
 			case 2:
-				System.out.println(
-						"\nHas escollit obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
+				System.out.println("\nHas escollit obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
+				op2();
 				break;
 
 			// Obtenir i mostrar la llista de les activitats que es duen a terme en un dia
@@ -95,7 +95,7 @@ public class Main {
         System.out.println("\nIntrodueix el número de la operació que vulguis realitzar\n");
 		System.out.println("\n\t1. Mostrar les dades de qualsevol llista que tingueu definida.\n");
 		System.out.println("\t2. Obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
-		System.out.println("\t3. Mostrar el conjunt de mesures d’una província entre una franja de dates");
+		System.out.println("\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
 		System.out.println("\t4. Obtenir i mostrar la llista dels tallers que tenen places disponibles.");
 		System.out.println("\t5. Afegir una nova activitat ");
 		System.out.println("\t6. Registrar la petició d’un usuari per reservar un taller.");
@@ -103,7 +103,7 @@ public class Main {
 		System.out.println("\t8. Calcular l’usuari que s’ha apuntat a més tallers.");
 		System.out.println("\t9. Registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
         System.out.println("\t10. Calcular la nota mitja que ha rebut un taller.");
-        System.out.println("\t11. Quin és el taller que ha tingut més èxit? C");
+        System.out.println("\t11. Quin és el taller que ha tingut més èxit?");
         System.out.println("\t12. Obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
         System.out.println("\t13. Mostrar les dades de les xerrades que farà una persona concreta.");
         System.out.println("\t14. Donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
@@ -131,6 +131,10 @@ public class Main {
 
 	public static void mostraLlista(Llista llista) {
 		System.err.println(llista.toString());
+	}
+
+	public void op2(){
+		
 	}
 
 }

@@ -162,7 +162,7 @@ public class LlistaReserves extends Llista<Reserves>{
                 int codi = Integer.parseInt(parts[0].trim());
                 String  usuari = parts[1].trim();
                 String taller = parts[2].trim();
-                Reserves reserva = new Reserva(codi, usuari, taller);
+                Reserves reserva = new Reserves(codi, usuari, taller); //USUARI HA DE SER UNA INSTANCIA PER A QUE FUNCIONI. EL MATEIX AMB TALLER, SINO NO FUNCIONA
                 this.afegirsensecopiar(reserva);
                 
             }
