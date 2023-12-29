@@ -51,7 +51,7 @@ public class Tallers extends Activitats {
         return capacitat > usuarisApuntats;
     }
 
-    public boolean esIgual(Activitats a){
+    public boolean igual(Activitats a){
         
     }
 
@@ -59,4 +59,5 @@ public class Tallers extends Activitats {
         Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
         return (Tallers)aux;
     }
+
 }

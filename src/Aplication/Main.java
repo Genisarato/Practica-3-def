@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Classes.Entitats;
 import Classes.Usuaris;
 import Classes.Llista;
-
+//Autors: Judith Mateu Domingo
 public class Main {
 	int opcio;
 	Scanner teclat = new Scanner(System.in);
@@ -19,9 +19,9 @@ public class Main {
 			case 1:
 				System.out.print("\nHas escollit mostrar les dades de qualsevol llista que tingueu definida.");
 				break;
-			case 2:
-				System.out.println(
-						"\nHas escollit obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
+			//
+				case 2:
+				System.out.println("\nHas escollit obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
 				break;
 
 			// Obtenir i mostrar la llista de les activitats que es duen a terme en un dia
@@ -109,28 +109,6 @@ public class Main {
         System.out.println("\t14. Donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
 		System.out.println("\t15. Sortir de l'aplicació");
 		System.out.print("\n\tIndica opcio: ");
-	}
-
-	/*
-	 * Mètode merament estètic per mostrar entitat, es pot esborrar.
-	 * 
-	 * @param entitat que es vol mostrar
-	 */
-	public static void mostraentitat(Entitats entitat) {
-		System.out.println(entitat.toString());
-	}
-
-	/*
-	 * Mètode merament estètic per mostrar un usuari, es pot esborrar.
-	 * 
-	 * @param usuari que es vol mostrar
-	 */
-	public static void mostraUsuari(Usuaris usuari) {
-		System.err.println(usuari.toString());
-	}
-
-	public static void mostraLlista(Llista llista) {
-		System.err.println(llista.toString());
 	}
 
 }

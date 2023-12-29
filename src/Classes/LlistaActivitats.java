@@ -1,8 +1,10 @@
 package Classes;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class LlistaActivitats extends Llista<Activitats>{
     private Activitats[] llista;
@@ -97,7 +99,26 @@ public class LlistaActivitats extends Llista<Activitats>{
         throw new UnsupportedOperationException("Unimplemented method 'toString'");
     }
 
+    public void llegirfitxer(){
+        String nomarxiu= "Llista_activitats.txt";
+        File file = new File("src", nomarxiu);
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String llegit = scanner.nextLine();
+                //pasaallista();
+                String[] parts = llegit.split(",");
+                String nom = parts[0].trim();
+                String mail = parts[1].trim();
+                int codi = Integer.parseInt(parts[2].trim());
+                Usuaris usuari = new Usuaris(nom, mail, codi);
+                this.afegirsensecopiar(usuari);
+                
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error 404 not found");
+        }
 
+    }
     
 
 }
