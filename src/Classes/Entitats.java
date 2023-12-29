@@ -1,5 +1,6 @@
 package Classes;
 /*Classe entitat que crea una entitat a parti de uns paràmetres */
+/*Authors: Genís Aragonès Torralbo */
 public class Entitats {
     private String nom;
     private int telef;

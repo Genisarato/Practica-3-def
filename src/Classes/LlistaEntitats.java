@@ -30,7 +30,6 @@ public class LlistaEntitats extends Llista<Entitats>{
             Entitats copia = new Entitats(n, telef, mail);
             llista[nElem] = copia;
             nElem++;
-            guardarArxiu(copia);
         }
     }
 
@@ -41,8 +40,7 @@ public class LlistaEntitats extends Llista<Entitats>{
     public void agregar(Entitats n){
         if(nElem < llista.length){
             llista[nElem] = n.copia();
-            nElem++;
-            guardarArxiu(n);    
+            nElem++;   
         }
     }
 
@@ -79,17 +77,23 @@ public class LlistaEntitats extends Llista<Entitats>{
         nElem++;
     }
 
-    /*Mètdoe per guardar una entitat al arxiu Llista_entitats.txt */
-    public void guardarArxiu(Entitats n){
+    /*Mètdoe per guardar la llista al arxiu Llista_entitats.txt
+     * ATENCIO: S'HA DE FER UNA VEGADA S'HAN FINALITZAT LES OPERACIONS DE LA LLISTA: AGREGAR, BORRAR, ETC..
+     * I ABANS DE TANCAR EL PROGAMA, SINÓ ES PERDRA TOT EL CONTINUGT DE LLISTA NO GUARDAT ANTERIORMENT, JA QUE
+     * EL MÉTODE ELIMINAR ERA MÉS FÀCIL LA IMPLEMENTACIÓ AIXÍ I ÉS MÉS EFICIENT
+     */
+    public void guardarArxiu(){
         String nomarxiu = "Llista_entitats.txt";
 
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta, true))){
-            bw.write(n.getNom() + "," + n.getMail() + "," + n.getTelef());
-            bw.newLine();
-            System.out.println("Guardat\n");
-            bw.flush();
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
+            for(int i = 0; i <nElem; i++){
+                bw.write(llista[i].getNom() + "," + llista[i].getMail() + "," +llista[i].getTelef());
+                bw.newLine();
+                System.out.println("Guardat\n");
+            }
+            bw.close();
         }
         catch (IOException e){
             System.out.println("Error\n");

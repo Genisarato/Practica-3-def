@@ -8,6 +8,10 @@ public class Xerrades extends Activitats {
         this.nomPersona = nomPersona;
     }
 
+    public String getPersona(){
+        return nomPersona;
+    }
+    
     public Xerrades copia(){
         Activitats aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, nomPersona);
         return (Xerrades)aux;

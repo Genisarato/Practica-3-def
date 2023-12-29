@@ -38,7 +38,6 @@ public class LlistaUsuaris extends Llista<Usuaris>{
                     Usuaris usuari = new Usuaris(nom, mail, codi);
                     llista[nElem] = usuari.copia();
                     nElem++;
-                    guardarArxiu(usuari);
                     afegit = true;
                 }catch(RuntimeException e){
                     System.out.println(e.getMessage());
@@ -99,7 +98,6 @@ public class LlistaUsuaris extends Llista<Usuaris>{
                     nicknameigual(n.getNickname());
                     llista[nElem] = n.copia();
                     nElem++;
-                    guardarArxiu(n);
                     afegit = true;
                 }catch(RuntimeException e){
                     System.out.println(e.getMessage());
@@ -115,10 +113,14 @@ public class LlistaUsuaris extends Llista<Usuaris>{
     }
 
     public void eliminar(Usuaris n){
-        int j = -1;
+        int j = 0;
+        boolean trobat = false;
         int i;
-        for(i = 0; i < nElem && j == -1; i++){
-            if(llista[i].igual(n))  j = i;
+        for(i = 0; i < nElem && !trobat; i++){
+            if(llista[i].igual(n)){
+                j = i;
+                trobat = true;
+            }  
         }
         if(j != -1){
             while(j<nElem-1){
@@ -130,17 +132,23 @@ public class LlistaUsuaris extends Llista<Usuaris>{
     }
 
 
-    /*Mètdoe per guardar un usuari al arxiu Llista_usuaris.txt */
-    public void guardarArxiu(Usuaris n){
+    /*Mètdoe per guardar la llista al arxiu Llista_usuaris.txt
+     * ATENCIO: S'HA DE FER UNA VEGADA S'HAN FINALITZAT LES OPERACIONS DE LA LLISTA: AGREGAR, BORRAR, ETC..
+     * I ABANS DE TANCAR EL PROGAMA, SINÓ ES PERDRA TOT EL CONTINUGT DE LLISTA NO GUARDAT ANTERIORMENT, JA QUE
+     * EL MÉTODE ELIMINAR ERA MÉS FÀCIL LA IMPLEMENTACIÓ AIXÍ I ÉS MÉS EFICIENT
+     */
+    public void guardarArxiu(){
         String nomarxiu = "Llista_usuaris.txt";
 
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta, true))){
-            bw.write(n.getNickname() + "," + n.getMail() + "," + n.getCodiPostal());
-            bw.newLine();
-            System.out.println("Guardat\n");
-            bw.flush();
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
+            for(int i = 0; i <nElem; i++){
+                bw.write(llista[i].getNickname() + "," + llista[i].getMail() + "," +llista[i].getCodiPostal());
+                bw.newLine();
+                System.out.println("Guardat\n");
+            }
+            bw.close();
         }
         catch (IOException e){
             System.out.println("Error\n");
