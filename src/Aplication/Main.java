@@ -7,6 +7,7 @@ import Classes.Usuaris;
 import Classes.Llista;
 //Autors: Judith Mateu Domingo
 public class Main {
+	public static void main(String[] args){
 	int opcio;
 	Scanner teclat = new Scanner(System.in);
 	do{
@@ -43,16 +44,21 @@ public class Main {
 			// Registrar la petició d’un usuari per reservar un taller.
 			case 6:
 				System.out.println("\nHas escollit registrar la petició d’un usuari per reservar un taller.");
+				//fet
+				/*Crea una reserva  */
 				break;
 
 			// Mostrar els usuaris que s’han apuntat a un taller.
 			case 7:
 				System.out.println("\nHas escollit mostrar els usuaris que s’han apuntat a un taller.");
+				//genis
+				//fet
 				break;
 
 			// Calcular l’usuari que s’ha apuntat a més tallers.
 			case 8:
 				System.out.println("\nHas escollit calcular l’usuari que s’ha apuntat a més tallers.");
+				//genis
 				break;
 
 			// Registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop
@@ -88,6 +94,7 @@ public class Main {
 		}
 	}while(opcio!=15);
 	System.out.println("Has sortit del programa amb èxit!");
+}
 	// Obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.
 
 	// Mostrar el menú d'opcions

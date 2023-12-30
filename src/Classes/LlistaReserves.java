@@ -1,12 +1,12 @@
 package Classes;
 
-import java.io.BufferedWriter;
+import java.io.EOFException;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /*Authors: Genís Aragonès Torralbo */
 
@@ -29,7 +29,6 @@ public class LlistaReserves extends Llista<Reserves>{
                 comprovaReserva(n);
                 llista[nElem] = n.copia();
                 nElem++;
-                guardarArxiu(n);
             }catch(Excepcions e){
                 System.out.println(e.getMessage());
             }
@@ -47,29 +46,30 @@ public class LlistaReserves extends Llista<Reserves>{
                 comprovaReserva(copia);
                 llista[nElem] = copia;
                 nElem++;
-                guardarArxiu(copia);
             } catch(Excepcions e){
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    /*Métode que guarda la reserva comprovada a l'arxiu
-     * @param reserva
+    /*Mètdoe per guardar la llista al arxiu Llista_reserves.ser
+     * ATENCIO: S'HA DE FER UNA VEGADA S'HAN FINALITZAT LES OPERACIONS DE LA LLISTA: AGREGAR, BORRAR, ETC..
+     * I ABANS DE TANCAR EL PROGAMA, SINÓ ES PERDRA TOT EL CONTINUGT DE LLISTA NO GUARDAT ANTERIORMENT, JA QUE
+     * EL MÉTODE ELIMINAR ERA MÉS FÀCIL LA IMPLEMENTACIÓ AIXÍ I ÉS MÉS EFICIENT
      */
-    public void guardarArxiu(Reserves n){
-        String nomarxiu = "Llista_reserves.txt";
+    public void guardarArxiu() {
+        String nomarxiu = "Llista_reserves.ser";
 
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta, true))){
-            bw.write(n.getCodiReserva() + "," + n.getTallers() + "," + n.getUsuari());
-            bw.newLine();
-            System.out.println("Guardat\n");
-            bw.flush();
-        }
-        catch (IOException e){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaAbsoluta))) {
+            for (int i = 0; i < nElem; i++) {
+                oos.writeObject(llista[i]);
+            }
+            System.out.println("Guardado\n");
+        } catch (IOException e) {
             System.out.println("Error\n");
+            e.printStackTrace();
         }
     }
     
@@ -109,13 +109,11 @@ public class LlistaReserves extends Llista<Reserves>{
      */
     public void vaciar(){
         nElem = 0;
-        String nomarxiu = "Llista_reserves.txt";
+        String nomarxiu = "Llista_reserves.ser";
 
-        String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
-        try (PrintWriter writer = new PrintWriter(rutaAbsoluta)) {
-            // Simplemente cierra el archivo sin escribir nada, lo que borra su contenido.
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomarxiu))) {
         } catch (IOException e) {
-            System.out.println("Error al intentar vaciar el archivo: " + e.getMessage());
+            System.out.println("Error al intentar buidar l'arxiu: " + e.getMessage());
         }
     }
     /*Métode que mostra la llista per pantalla */
@@ -143,7 +141,7 @@ public class LlistaReserves extends Llista<Reserves>{
         }
     }
 
-   /* Mètode que llegeix el contingut del fitxer llista_usuaris.txt 
+   /* Mètode que llegeix el contingut del fitxer llista_usuaris.ser 
     *  ATENCIO: AQUEST MÈTODE SEMPRE S'HA DE FER ABANS DE COMENÇAR AMB EL PROGAMA
      * JA QUE ES DONA PER SUPOSAT QUE NO DONA MAI MÉS GRAN QUE LA LENGTH 
      * NI HI HA CAP NICKNAME IGUAL(JA QUE TOT EL QUE HI HA A L'ARXIU JA ESTA CORRECTE).
@@ -151,23 +149,26 @@ public class LlistaReserves extends Llista<Reserves>{
      * SI NO POT OCASIONAR PROBLEMES A LA LLISTA
      * 
      */
-    public void llegirfitxer(){
-        String nomarxiu= "Llista_reserves.txt";
-        File file = new File("src", nomarxiu);
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String llegit = scanner.nextLine();
-                //pasaallista();
-                String[] parts = llegit.split(",");
-                int codi = Integer.parseInt(parts[0].trim());
-                String  usuari = parts[1].trim();
-                String taller = parts[2].trim();
-                Reserves reserva = new Reserves(codi, usuari, taller); //USUARI HA DE SER UNA INSTANCIA PER A QUE FUNCIONI. EL MATEIX AMB TALLER, SINO NO FUNCIONA
-                this.afegirsensecopiar(reserva);
-                
+    public void llegirfitxer() {
+        String nomarxiu = "Llista_reserves.ser";
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomarxiu))) {
+            while (true) {
+                try {
+                    Object obj = ois.readObject();
+
+                    if (obj instanceof Reserves) {
+                        Reserves reserva = (Reserves) obj;
+                        afegirsensecopiar(reserva);
+                    }
+                } catch (EOFException e) {
+                    break; // Fin del archivo
+                }
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error 404 not found");
+            System.out.println("Cargado\n");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error al cargar el archivo serializado\n");
+            e.printStackTrace();
         }
     }
 
@@ -177,6 +178,25 @@ public class LlistaReserves extends Llista<Reserves>{
     private void afegirsensecopiar(Reserves reserva){
                 llista[nElem] = reserva.copia();
                 nElem++;
+    }
+
+    //Métode que retorna una llista de usuaris que estan apuntats a un taller en específic
+    //@param taller
+    public LlistaUsuaris usuarisTaller(Tallers taller){
+        LlistaUsuaris usuaris = new LlistaUsuaris();
+        for(int i = 0; i< nElem; i++){
+            if(llista[i].getTallers().equals(taller))usuaris.agregar(llista[i].getUsuari());
+        }
+        return usuaris;
+    }
+
+    public Usuaris usuarimesapuntat(){
+        LlistaUsuaris subllista = new LlistaUsuaris();
+        for(int i = 0; i<nElem; i++){
+            subllista.agregar(llista[i].getUsuari());
+        }
+
+        
     }
 
     }
