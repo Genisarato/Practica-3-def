@@ -28,6 +28,7 @@ public class LlistaReserves extends Llista<Reserves>{
             try{
                 comprovaReserva(n);
                 llista[nElem] = n.copia();
+                n.getUsuari().updateapuntats();
                 nElem++;
             }catch(Excepcions e){
                 System.out.println(e.getMessage());
@@ -45,6 +46,7 @@ public class LlistaReserves extends Llista<Reserves>{
                 Reserves copia = new Reserves(u, taller);
                 comprovaReserva(copia);
                 llista[nElem] = copia;
+                u.updateapuntats();
                 nElem++;
             } catch(Excepcions e){
                 System.out.println(e.getMessage());
@@ -191,10 +193,15 @@ public class LlistaReserves extends Llista<Reserves>{
     }
 
     public Usuaris usuarimesapuntat(){
-        LlistaUsuaris subllista = new LlistaUsuaris();
-        for(int i = 0; i<nElem; i++){
-            subllista.agregar(llista[i].getUsuari());
+        int max = 0;
+        Usuaris usuarimesapuntat = null;
+        for(int i = 0; i < nElem; i++){
+            if(llista[i].getUsuari().getTallerapuntats() > max){
+                max = llista[i].getUsuari().getTallerapuntats();
+                usuarimesapuntat = llista[i].getUsuari().copia();
+            }
         }
+        return usuarimesapuntat;
 
         
     }

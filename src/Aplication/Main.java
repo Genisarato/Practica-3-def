@@ -59,6 +59,7 @@ public class Main {
 			case 8:
 				System.out.println("\nHas escollit calcular l’usuari que s’ha apuntat a més tallers.");
 				//genis
+				//fet
 				break;
 
 			// Registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop

@@ -7,6 +7,7 @@ public class Usuaris {
     private String nickname;
     private String mail;
     private int codiPostal;
+    private int tallerapuntats;
 
     /*Constructor
      * @param nom/nicnkame
@@ -17,6 +18,7 @@ public class Usuaris {
         nickname = nom;
         this.mail = mail;
         this.codiPostal = codiPostal;
+        tallerapuntats = 0;
     }
 
     /*Getter del nickname */
@@ -59,6 +61,14 @@ public class Usuaris {
         String text;
         text = "El nickname de l'usuari es: " + nickname + ", el seu correu es: " + mail + " i el seu codi postal es: " + codiPostal;
         return text;
+    }
+
+    public void updateapuntats(){
+        tallerapuntats = tallerapuntats + 1;
+    }
+
+    public int getTallerapuntats(){
+        return tallerapuntats;
     }
 
 
