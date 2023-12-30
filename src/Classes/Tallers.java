@@ -32,6 +32,10 @@ public class Tallers extends Activitats {
         return durada;
     }
 
+    public int getcapacitat(){
+        return capacitat;
+    }
+
     public void afegirValoracio(int valoracion) {
         sumaVal = sumaVal + valoracion;
         nVal++;
