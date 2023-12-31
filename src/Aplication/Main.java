@@ -20,13 +20,12 @@ public class Main {
 			case 1:
 				System.out.print("\nHas escollit mostrar les dades de qualsevol llista que tingueu definida.");
 				break;
-			//
-				case 2:
+			//Obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.
+			case 2:
 				System.out.println("\nHas escollit obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
 				break;
 
-			// Obtenir i mostrar la llista de les activitats que es duen a terme en un dia
-			// indicat per teclat.
+			// Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.
 			case 3:
 				System.out.println("\nHas escollit obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
 				break;

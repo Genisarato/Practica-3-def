@@ -9,6 +9,10 @@ public class Visites extends Activitats {
         this.adaptCegues = adaptCegues;
     }
 
+    public String atributsExtra(){
+        return (audioguies + "," + adaptCegues);
+    }
+
     public Visites copia(){
         Activitats aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, audioguies, adaptCegues);
         return (Visites)aux;

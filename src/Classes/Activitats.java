@@ -1,18 +1,17 @@
+/*
+ * Programadors:
+ * Judith Mateu Domingo - judith.mateu@estudiants.urv.cat
+ * Jan Torres Rodriguez - jan.torres@estudiants.urv.cat
+ */
+
 package Classes;
 
-/*Totes les activitats tenen un codi que els identifica, que es genera automàticament a partir de les 3
-primeres lletres del nom de l’entitat, i seguides d’un número (començant per 100). De totes les
-activitats es guarda també el nom, el lloc, el codi postal, i el dia en que es fa (el mes i l’any no cal, ja
-assumim que són de novembre de 2023). També haurem de poder indicar quina entitat l’ha creat. Per
-a que hi hagi varietat, les activitats no es repeteixen mai, és a dir, cada activitat ha de guardar un sol
-dia. */
-
 //Crear get i set  per tal de poder obtenir els atributs de cada activitat i per si s'ha de modificar alguna dada
-/*Activitat es guarda format NOM;CODI;LLOC;DIA;ENTITATCREA;CODIPOSTAL*/ 
+
 public abstract class Activitats {
     protected String codi, nom, lloc, entitatCrea;
     protected int codiPostal, dia;
-    private static int nAct = 0;
+    private static int nAct = 100;
 
     /**
      * Constructor
@@ -24,7 +23,7 @@ public abstract class Activitats {
      */
     public Activitats(String nom, String lloc, int dia, String entitatCrea, int codiPostal){
         this.nom = nom;
-        codi = entitatCrea.substring(0, 3) + Integer.toString(nAct);
+        codi = entitatCrea.substring(0, 3) + Integer.toString(nAct); //ens permet crear el codi
         incrementarAct();
         this.lloc = lloc;
         this.dia = dia;
@@ -32,7 +31,7 @@ public abstract class Activitats {
         this.codiPostal = codiPostal;
     }
 
-    //En el cas de fer una copia duna activitat, el codi entenc que no es pot tornar a generar (si es tornes a generar nAct hauria augmentat i el codi acabaria sent diferent), de manera que quan fem una copia duna activitat, li haurem de passar el codi, no?
+    //En el cas de fer una copia d'una activitat, el codi entenc que no es pot tornar a generar (si es tornes a generar nAct hauria augmentat i el codi acabaria sent diferent), de manera que quan fem una copia duna activitat, li haurem de passar el codi, no?
     //el seguent constructor es nomes si acabem passant per passametre el codi de l'activitat a mes a mes de tota la info
     public Activitats(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi){
         this.nom = nom;
@@ -42,7 +41,10 @@ public abstract class Activitats {
         this.entitatCrea = entitatCrea;
         this.codiPostal = codiPostal;
     }
-    
+    /**
+    * Incrementa el valor de la variable nAct.
+    * Aquest mètode s'encarrega d'augmentar en 1 la quantitat d'activitats (nAct). Cmoençant desde 100.
+     */
     public static void incrementarAct(){
        nAct++;
     }
@@ -104,19 +106,19 @@ public abstract class Activitats {
         return this.dia == dia;
     }
 
-    public float proporcioTallers(){
+    public float proporcioTallers(){        //S'implementa el mètode real en la classe Tallers
         return 0.0f;
     }
 
-    public boolean placesLliures(){
+    public boolean placesLliures(){         //S'implementa el mètode real en la classe Tallers
         return false;
     }
 
-    public String getPersona(){
+    public String getPersona(){             //S'implementa el mètode real en la classe Xerrades
         return null;
     }
 
-    public int getUsuarisApuntats(){
+    public int getUsuarisApuntats(){        //S'implementa el mètode real en la classe Tallers
         return 0;
     }
 
@@ -124,7 +126,7 @@ public abstract class Activitats {
         return ("\nNOM: "+nom+" LLOC: "+lloc+" AMB CODI POSTAL "+codiPostal+" EL DIA "+dia+" DE NOVEMBRE DE 2023.\nENTITAT QUE L'HA CREAT: "+entitatCrea+" AMB EL CODI "+codi);
     }
 
+    public abstract String atributsExtra();
     public abstract Activitats copia();
 
 }
-

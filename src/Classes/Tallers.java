@@ -36,6 +36,13 @@ public class Tallers extends Activitats {
         return capacitat;
     }
 
+    @Override
+    public int getUsuarisApuntats(){
+        return usuarisApuntats;
+    }
+
+    //No es mira si la valoració es fa quan ja ha passat el taller. S'hauria de fer? Suposo que no, perque no tenim manera de saber el dia actual per l'usuari, no? (punt 9 del main)
+
     public void afegirValoracio(int valoracion) {
         sumaVal = sumaVal + valoracion;
         nVal++;
@@ -45,23 +52,32 @@ public class Tallers extends Activitats {
         return (float)(sumaVal/nVal);
     }
 
+    @Override
     public float proporcioTallers() {
         float proporcio = 0;
         proporcio = (float) usuarisApuntats / capacitat;
         return proporcio;
     }
 
+    @Override
     public boolean placesLliures(){
         return capacitat > usuarisApuntats;
     }
 
-    public boolean igual(Activitats a){
-        
+     
+    public String atributsExtra(){
+        return (dia_t + "," + durada + "," + capacitat + "," + usuarisApuntats + "," + sumaVal + "," + nVal);
     }
-
+    
+    @Override
     public Tallers copia(){
         Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
         return (Tallers)aux;
+    }
+
+    public boolean igual(Tallers tallers) {
+        
+        return false;
     }
 
 }

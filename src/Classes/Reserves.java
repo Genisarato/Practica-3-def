@@ -56,6 +56,6 @@ public class Reserves {
     }
 
     public boolean esIgual(Reserves reserva){
-            return(this.getUsuari().igual(this.getUsuari()) && this.getTallers().igual(this.getTallers()));
+            return(this.getUsuari().igual(reserva.getUsuari()) && this.getTallers().igual(reserva.getTallers()));
     }
 }
