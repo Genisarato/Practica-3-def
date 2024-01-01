@@ -23,6 +23,16 @@ public class Tallers extends Activitats {
         this.nVal = nVal;
         
     }
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, int dia_t, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
+        super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
+        this.dia_t = dia_t;
+        this.durada = durada;
+        this.capacitat = capacitat;
+        this.usuarisApuntats = usuarisApuntats;
+        this.sumaVal = sumaVal;
+        this.nVal = nVal;
+        
+    }
 
     public int getHora() {
         return hora;
@@ -64,14 +74,14 @@ public class Tallers extends Activitats {
         return capacitat > usuarisApuntats;
     }
 
-     
+    
     public String atributsExtra(){
         return (dia_t + "," + durada + "," + capacitat + "," + usuarisApuntats + "," + sumaVal + "," + nVal);
     }
     
     @Override
     public Tallers copia(){
-        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, true, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
         return (Tallers)aux;
     }
 

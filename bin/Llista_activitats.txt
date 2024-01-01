@@ -2,3 +2,7 @@ TRE100,Tres en raya,Salou,5,Proide,43840
 LAB101,Laboratori Experimenta,Tarragona,11,ICIQ,43007
 PYT102,Python basic, Tarragona,6,ETSE,43005
 FOT103,Fotografia principiants, Cambrils,9,PicturesTorres,43850
+
+TALLERS: nom, lloc, dia, entitatCrea, codiPostal, codi, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal
+XERRADES: nom, lloc, dia, entitatCrea, codiPostal, codi, nomPersona
+VISITES: nom, lloc, dia, entitatCrea, codiPostal, codi, audioguies, adaptCegues

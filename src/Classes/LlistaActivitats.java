@@ -27,14 +27,6 @@ public class LlistaActivitats extends Llista<Activitats>{
     }
 
     /**
-     * Mètode que afegeix la còpia d'una activitat a la última posició disponible
-     * @param a - activitat a afegir
-     */
-    public void afegirAct(Activitats a){
-        llista[nElem] = a.copia();
-    }
-
-    /**
      * Mètode que troba totes les activitats que ha fet una entitat
      * @param ent - entitat de la que en volem saber les activitats
      * @return llista amb totes les activitats que ha creat una entitat concreta
@@ -43,7 +35,7 @@ public class LlistaActivitats extends Llista<Activitats>{
         LlistaActivitats aux = new LlistaActivitats(nElem);
 
         for (int i = 0; i < nElem-1; i++){
-            if (llista[i].getEntitatCrea().equalsIgnoreCase(ent)) aux.afegirAct(llista[i]);
+            if (llista[i].getEntitatCrea().equalsIgnoreCase(ent)) aux.agregar(llista[i]);
         }
         return aux;
     }
@@ -57,7 +49,7 @@ public class LlistaActivitats extends Llista<Activitats>{
         LlistaActivitats aux = new LlistaActivitats(nElem);
         for (int i = 0; i < nElem-1; i++){
             if (llista[i] instanceof Visites){
-                if (llista[i].getEntitatCrea().equalsIgnoreCase(ent)) aux.afegirAct(llista[i]);
+                if (llista[i].getEntitatCrea().equalsIgnoreCase(ent)) aux.agregar(llista[i]);
             }
         }
         return aux;
@@ -71,7 +63,7 @@ public class LlistaActivitats extends Llista<Activitats>{
     public LlistaActivitats mateixDia(int dia){
         LlistaActivitats aux = new LlistaActivitats(nElem);
         for (int i = 0; i < nElem-1; i++){
-            if (llista[i].diaIgual(dia)) aux.afegirAct(llista[i]);
+            if (llista[i].diaIgual(dia)) aux.agregar(llista[i]);
         }
         return aux;
     }
@@ -84,7 +76,7 @@ public class LlistaActivitats extends Llista<Activitats>{
         LlistaActivitats aux = new LlistaActivitats(nElem);
         
         for (int i = 0; i < nElem-1; i++){
-            if (llista[i].placesLliures()) aux.afegirAct(llista[i]);
+            if (llista[i].placesLliures()) aux.agregar(llista[i]);
         }
         return aux;
     }
@@ -113,7 +105,7 @@ public class LlistaActivitats extends Llista<Activitats>{
         LlistaActivitats aux = new LlistaActivitats(nElem);
         for (int i = 0; i < nElem-1; i++){
             if (llista[i] instanceof Xerrades){
-                if (llista[i].getPersona().equalsIgnoreCase(nom)) aux.afegirAct(llista[i]);
+                if (llista[i].getPersona().equalsIgnoreCase(nom)) aux.agregar(llista[i]);
             }
         }
         return aux;
@@ -154,26 +146,49 @@ public class LlistaActivitats extends Llista<Activitats>{
         }
         return trobat;
     }
-    //Xerrades:6 comes    Tallers:11 comes      Visites:7 comes
+
      /* Mètode que llegeix el contingut del fitxer llista_entitats.txt 
     *  ATENCIO: AQUEST MÈTODE SEMPRE S'HA DE FER ABANS DE COMENÇAR AMB EL PROGAMA
      * JA QUE ES DONA PER SUPOSAT QUE NO DONA MAI MÉS GRAN QUE LA LENGTH.
      * SI ES FA DESPRÉS POT OCASIONAR PROBLEMES
      */
-    //modificar
      public void llegirfitxer(){
-        String nomarxiu = "Llista_entitats.txt";
+        String nomarxiu = "Llista_activitats.txt";
         File file = new File("src", nomarxiu);
+        Activitats aux;
+
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String linia = scanner.nextLine();
                 String[] parts = linia.split(",");
+            
                 String codi = parts[0].trim();
-                String mail = parts[1].trim();
-                int telef = Integer.parseInt(parts[2].trim());
-                Entitats entitats = new Entitats(codi, telef, mail);
-                this.afegirAct(null);
-                
+                String nom = parts[1].trim();
+                String lloc = parts[2].trim();
+                int dia = Integer.parseInt(parts[3].trim());
+                String entitatCrea = parts[4].trim();
+                int codiPostal = Integer.parseInt(parts[5].trim());                         //Els atributs comuns acaben aqui
+
+                if (parts[7] == null){
+                    String nomPersona = parts[6].trim();                                    //Xerrades acaba aqui
+                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
+                }
+                else if (parts[8] == null){
+                    boolean audioguies = Boolean.parseBoolean(parts[6].trim());            
+                    boolean adaptCegues = Boolean.parseBoolean(parts[7].trim());            //Visites acaba aqui   
+                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
+                }
+                else{
+                    int dia_t = Integer.parseInt(parts[6].trim());            
+                    int durada = Integer.parseInt(parts[7].trim()); 
+                    int capacitat = Integer.parseInt(parts[8].trim());
+                    int usuarisApuntats = Integer.parseInt(parts[9].trim());
+                    int sumaVal = Integer.parseInt(parts[10].trim());
+                    int nVal = Integer.parseInt(parts[11].trim());                          //Tallers acaba aqui
+                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+                }
+
+                this.agregar(aux);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado: " + nomarxiu);
@@ -182,27 +197,13 @@ public class LlistaActivitats extends Llista<Activitats>{
     }
 
     /**
-     * Mètode que afegeix una activitat a la llista i alhora la guarda en l'arxiu
+     * Mètode que afegeix la còpia d'una activitat a la última posició disponible de la llista 
      * @param a - activitat a afegir
      */
     public void agregar(Activitats a){
         if(nElem < llista.length){
-            boolean afegit = false;
-            while (!afegit){
-                try{
-                    if(!contiene(a) && llista.length > nElem){
-                        llista[nElem] = a.copia();
-                        nElem++;
-                        guardarArxiu(a);
-                        afegit = true;
-                    }
-                }catch(RuntimeException e){
-                    System.out.println(e.getMessage());
-                    System.out.println("Aquesta activitat ja hi és");
-                    /*Implementar llegir una altra activitat (comentari genis)*/
-                    //SERIA NECESSARI DEMANAR UNA ALTRA VEGADA UNA ACTIVITAT? L'USUARI POT TORNAR A CRIDAR I JA ESTA, NO?
-                }
-            }
+            llista[nElem] = a.copia();
+            nElem++;
         }
     }
 
@@ -224,22 +225,21 @@ public class LlistaActivitats extends Llista<Activitats>{
      * Mètode per guardar una activitat a l'arxiu Llista_activitats.txt
      * @param a activitat a guardar
      */
-    public void guardarArxiu(Activitats a){
-        String nomArxiu = "Llista_activitats.txt";
-        String rutaAbsoluta = new File("src", nomArxiu).getAbsolutePath();
-        
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta, true))){
-            bw.write(a.getCodi() + "," + a.getNom() + "," + a.getLloc() + "," + a.getDia() + "," + a.getEntitatCrea() + "," + a.getCodiPostal() + "," + a.atributsExtra());
-            bw.newLine();
-            System.out.println("Guardat!\n");
-            bw.flush();
+    public void guardarArxiu(){
+        String nomarxiu = "Llista_activitats.txt";
+        String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
+
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
+            for(int i = 0; i <nElem-1; i++){
+                bw.write(llista[i].getCodi() + "," + llista[i].getNom() + "," + llista[i].getLloc() + "," + llista[i].getDia() + "," + llista[i].getEntitatCrea() + "," + llista[i].getCodiPostal() + "," + llista[i].atributsExtra());
+                bw.newLine();
+                System.out.println("Guardat\n");
+            }
             bw.close();
         }
         catch (IOException e){
             System.out.println("Error\n");
         }
-        
-
 
     }
 
