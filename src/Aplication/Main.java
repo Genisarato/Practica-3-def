@@ -1,3 +1,9 @@
+/*
+ * Programadors:
+ * Judith Mateu Domingo - judith.mateu@estudiants.urv.cat
+ * Jan Torres Rodriguez - jan.torres@estudiants.urv.cat
+ */
+
 package Aplication;
 
 import java.util.Scanner;
@@ -5,11 +11,20 @@ import java.util.Scanner;
 import Classes.Entitats;
 import Classes.Usuaris;
 import Classes.Llista;
-//Autors: Judith Mateu Domingo
+
 public class Main {
 	public static void main(String[] args){
 	int opcio;
 	Scanner teclat = new Scanner(System.in);
+	LlistaActivitats llisA = new LlistaActivitats(100);
+	LlistaEntitats llisE = new LlistaEntitats(100);
+	LlistaUsuaris llisU = new LlistaUsuaris(100);
+	LlistaReserves llisR = new LlistaReserves(100);
+	llisA.llegirfitxer("Llista_activitats.txt");
+	//llisE.llegirfitxer("Llista_entitats.txt");
+	//llisU.llegirfitxer("Llista_usuaris.txt");
+	//llisR.llegirfitxer("Llista_reserves.ser");
+
 	do{
 		printfMenu();
 		do { // comprovem que no fiqui un valor fora del rang
@@ -19,30 +34,36 @@ public class Main {
 			// Mostrar les dades de qualsevol llista que tingueu definida.
 			case 1:
 				System.out.print("\nHas escollit mostrar les dades de qualsevol llista que tingueu definida.");
+				op1();
 				break;
 			//Obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.
 			case 2:
 				System.out.println("\nHas escollit obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
+				op2();
 				break;
 
 			// Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.
 			case 3:
 				System.out.println("\nHas escollit obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
+				op3();
 				break;
 
 			// Obtenir i mostrar la llista dels tallers que tenen places disponibles.
 			case 4:
 				System.out.println("\nHas escollit obtenir i mostrar la llista dels tallers que tenen places disponibles.");
+				op4();
 				break;
 
 			// Afegir una nova activitat
 			case 5:
 				System.out.println("\nHas escollit afegir una nova activitat");
+				op5();
 				break;
 
 			// Registrar la petició d’un usuari per reservar un taller.
 			case 6:
 				System.out.println("\nHas escollit registrar la petició d’un usuari per reservar un taller.");
+				op6();
 				//fet
 				/*Crea una reserva  */
 				break;
@@ -50,6 +71,7 @@ public class Main {
 			// Mostrar els usuaris que s’han apuntat a un taller.
 			case 7:
 				System.out.println("\nHas escollit mostrar els usuaris que s’han apuntat a un taller.");
+				op7();
 				//genis
 				//fet
 				break;
@@ -57,6 +79,7 @@ public class Main {
 			// Calcular l’usuari que s’ha apuntat a més tallers.
 			case 8:
 				System.out.println("\nHas escollit calcular l’usuari que s’ha apuntat a més tallers.");
+				op8();
 				//genis
 				//fet
 				break;
@@ -64,29 +87,33 @@ public class Main {
 			// Registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop
 			// s’ha fet.
 			case 9:
-				System.out.println(
-						"\nHas escollit registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
+				System.out.println("\nHas escollit registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
+				op9();
 				break;
 			// Calcular la nota mitja que ha rebut un taller.
 			case 10:
 				System.out.println("\nHas escollit calcular la nota mitja que ha rebut un taller.");
+				op10();
 				break;
 			// Quin és el taller que ha tingut més èxit?
 			case 11:
 				System.out.println("\nHas escollit quin és el taller que ha tingut més èxit?");
+				op11();
 				break;
 			// Obtenir i mostrar les dades de la llista de visites ofertes per una entitat
 			case 12:
-				System.out.println(
-						"\nHas escollit obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
+				System.out.println("\nHas escollit obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
+				op12();
 				break;
 			// Mostrar les dades de les xerrades que farà una persona concreta.
 			case 13:
 				System.out.println("\nHas escollit mostrar les dades de les xerrades que farà una persona concreta.");
+				op13();
 				break;
 			// Donar de baixa un taller sempre que no hi hagi usuaris apuntats.
 			case 14:
 				System.out.println("\nHas escollit donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
+				op14();
 				break;
 			// Sortir del programa
 			case 15:
@@ -102,7 +129,7 @@ public class Main {
         System.out.println("\nIntrodueix el número de la operació que vulguis realitzar\n");
 		System.out.println("\n\t1. Mostrar les dades de qualsevol llista que tingueu definida.\n");
 		System.out.println("\t2. Obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
-		System.out.println("\t3. Mostrar el conjunt de mesures d’una província entre una franja de dates");
+		System.out.println("\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
 		System.out.println("\t4. Obtenir i mostrar la llista dels tallers que tenen places disponibles.");
 		System.out.println("\t5. Afegir una nova activitat ");
 		System.out.println("\t6. Registrar la petició d’un usuari per reservar un taller.");
@@ -118,4 +145,161 @@ public class Main {
 		System.out.print("\n\tIndica opcio: ");
 	}
 
+	// FETS: 1, 2, 3, 4, 5, 10, 11, 12, 13, 14
+	// FALTEN: 6, 7, 8, 9
+
+	private static void op1(){
+		System.out.println("Introdueix el número de la llista que vols veure.\n\t1- Usuaris\n\t2- Entitats\n\t3- Activitats\n\t4- Reserves");
+		switch (Integer.parseInt(teclat.nextLine())){
+			case 1:
+				System.out.println(llisU);
+				break;
+			case 2:
+				System.out.println(llisE);
+				break;
+			case3:
+				System.out.println(llisA);
+				break;
+			case 4:
+				System.out.println(llisR);
+				break;
+			default:
+				System.out.println("Introdueix un número vàlid");
+				op1();
+		}
+	}
+
+	private static void op2(){
+		String nomE;
+
+		System.out.println("Introdueix el nom de la entitat: ");
+		System.out.println(llisA.mateixaEntitat(teclat.nextLine()));				//S'imprimeix la subllista resultant
+	}
+
+	private static void op3(){
+		System.out.println("Introdueix el dia");
+		System.out.println(llisA.mateixDia(Integer.parseInt(teclat.nextLine())));
+	}
+
+	private static void op4(){
+		System.out.println(llisA.tallersDisp());
+	}
+
+	private static void op5(){
+		String tipus, nom, lloc, entitatCrea;
+		int dia, codiPostal;
+		Activitats aux;
+
+		do{
+			System.out.println("Quin tipus d'activitat vols afegir?");
+			tipus = teclat.nextLine();
+		} while(!(tipus.equalsIgnoreCase("Xerrada")) && !(tipus.equalsIgnoreCase("Xerrades")) && !(tipus.equalsIgnoreCase("Visita")) && !(tipus.equalsIgnoreCase("Visites")) && !(tipus.equalsIgnoreCase("Taller")) && !(tipus.equalsIgnoreCase("Tallers")));
+
+		System.out.println("Introdueix les dades de l'activitat que vols afegir.\n\tNom: ");
+		nom = teclat.nextLine();
+		System.out.println("\n\tLloc: ");
+		lloc = teclat.nextLine();
+		System.out.println("\n\tDia: ");
+		dia = Integer.parseInt(teclat.nextLine());
+		System.out.println("\n\tNom de l'entitat que l'ha creat: ");
+		entitatCrea = teclat.nextLine();
+		System.out.println("\n\tCodi Postal: ");
+		codiPostal = Integer.parseInt(teclat.nextLine());
+		if (tipus.equalsIgnoreCase("Xerrada") || tipus.equalsIgnoreCase("Xerrades")){
+			System.out.println("\n\tNom de la persona que fa la xerrada: ")
+			String nomPersona = teclat.nextLine();
+			aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, nomPersona);
+		}
+		else if (tipus.equalsIgnoreCase("Visita") || tipus.equalsIgnoreCase("Visites")){
+			boolean audioguies, adaptCegues;
+
+			System.out.println("\n\tTé audioguies? Contesta si o no: ");
+			if (teclat.nextLine().equalsIgnoreCase("No")) audioguies = false;
+			else audioguies = true;
+			System.out.println("\n\tEstà adaptat per a persones cegues? Contesta si o no: ");
+			if (teclat.nextLine().equalsIgnoreCase("No")) adaptCegues = false;
+			else adaptCegues = true;
+
+			aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, audioguies, adaptCegues);
+		}
+		else{
+			System.out.println("\n\tA quina hora és?: ");
+			int hora = Integer.parseInt(teclat.nextLine());
+			System.out.println("\n\tQuina durada té?: ");
+			int durada = Integer.parseInt(teclat.nextLine());
+			System.out.println("\n\tQuantes persones s'hi poden inscriure?: ");
+			int capacitat = Integer.parseInt(teclat.nextLine());
+			
+			aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, hora, durada, capacitat, 0, 0, 0);
+		}
+		llisA.agregar(aux);
+	}
+	//6.Registrar la petició d’un usuari per reservar un taller
+	private static void op6(){
+		Reserves r;
+		Usuaris u;
+		String nom, mail, codi;
+		int codiPostal;
+
+		System.out.println("\nIntrodueix les dades de l'usuari.\nNom: ");
+		nom = teclat.nextLine();
+		System.out.println("\nMail: ");
+		mail = teclat.nextLine();
+		System.out.println("\nCodi postal: ");
+		codiPostal = Integer.parseInt(teclat.nextLine());
+
+		System.out.println("\nA quin taller es vol inscriure? Introdueix el seu codi: ");
+		codi = teclat.nextLine();
+
+		u = new Usuaris(nom, mail, codiPostal);
+		r = new Reserves(u, llisA.trobaTaller(codi));
+		System.out.println("\nReserva realitzada!");
+	}
+
+	//7. Mostrar els usuaris que s’han apuntat a un taller.")
+	private static void op7(){
+		System.out.println("\n" + llisR.usuarisTaller());
+	}
+
+	//8.Calcular l’usuari que s’ha apuntat a més tallers.")
+	private static void op8(){
+		System.out.println("L'usuari que s'ha apuntat a més tallers és " + llisR.usuarimesapuntat());
+	}
+
+	//9. Registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
+    private static void op9(){ //FALTA MÈTODE A RESERVES
+		System.out.println("");
+		System.out.println("Introdueix la nota que li poses al taller: ");
+		float nota = Float.parseFloat(teclat.nextLine());
+
+	}
+
+	//10. Calcular la nota mitja que ha rebut un taller.");
+    private static void op10(){
+		System.out.println("Introdueix el nom del taller: ");
+		String nom = teclat.nextLine();
+		System.out.println("La nota mitjana del taller és de " + llisA.notaMitjanaTaller(nom));
+	}
+
+	//11. Quin és el taller que ha tingut més èxit? C");
+    private static void op11(){
+		System.out.println("El taller que ha tingut més èxit ha estat:\n" + llisA.tallerExit());
+	}
+	
+	//12. Obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
+    private static void op12(){
+		System.out.println(llisA.visitesMateixaEntitat());
+	}
+
+	//13. Mostrar les dades de les xerrades que farà una persona concreta.");
+    private static void op13(){
+		System.out.println(llisA.xerradesMateixaPersona());
+	}
+	
+	//14. Donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
+	private static void op14(){
+		System.out.println("Introdueix el codi del taller: ");					//FEM SERVIR EL CODI?
+		if (llisA.eliminarTaller(teclat.nextLine())) System.out.println("S'ha eliminat amb èxit!");
+		else System.out.println("No s'ha pogut eliminar.");
+	}
 }

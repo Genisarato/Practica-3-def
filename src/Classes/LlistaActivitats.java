@@ -110,6 +110,31 @@ public class LlistaActivitats extends Llista<Activitats>{
         }
         return aux;
     }
+
+    public float notaMitjanaTaller(String nom){ //identificar taller pel nom????
+        Boolean trobat = false;
+        int i;
+        float resultat = 0.0;
+        for (i = 0; i < nElem-1 && !trobat; i++){
+            if (llista[i].getNom().equalsIgnoreCase(nom)){ 
+                trobat = true;
+                resultat = llista[i].mitjanaValoracions();
+            }
+        }
+        return resultat;
+    }
+
+    public Tallers trobaTaller(String codi){
+        Tallers t;
+        Boolean trobat = false;
+        for (i = 0; i < nElem-1; i++){
+            if (llista[i].getCodi.equalsIgnoreCase(codi)){
+                trobat = true;
+                t = llista[i];
+            }
+        }
+        return t.copia();
+    }
     
     //CONVERTIR A BOOLEAN PER A RETORNAR ALGO PER A SABER SI S'HA POGUT ELIMINAR O NO?
     /**
@@ -152,8 +177,7 @@ public class LlistaActivitats extends Llista<Activitats>{
      * JA QUE ES DONA PER SUPOSAT QUE NO DONA MAI MÉS GRAN QUE LA LENGTH.
      * SI ES FA DESPRÉS POT OCASIONAR PROBLEMES
      */
-     public void llegirfitxer(){
-        String nomarxiu = "Llista_activitats.txt";
+     public void llegirfitxer(String nomarxiu){
         File file = new File("src", nomarxiu);
         Activitats aux;
 
@@ -179,13 +203,13 @@ public class LlistaActivitats extends Llista<Activitats>{
                     aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
                 }
                 else{
-                    int dia_t = Integer.parseInt(parts[6].trim());            
+                    int hora = Integer.parseInt(parts[6].trim());            
                     int durada = Integer.parseInt(parts[7].trim()); 
                     int capacitat = Integer.parseInt(parts[8].trim());
                     int usuarisApuntats = Integer.parseInt(parts[9].trim());
                     int sumaVal = Integer.parseInt(parts[10].trim());
                     int nVal = Integer.parseInt(parts[11].trim());                          //Tallers acaba aqui
-                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
                 }
 
                 this.agregar(aux);

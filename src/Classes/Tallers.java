@@ -9,13 +9,14 @@ package Classes;
 /*Els tallers es fan en una hora concreta del dia, i tenen una durada determinada. Tenen també
 una capacitat fixada, i els usuaris s’hi ha de registrar*/
 public class Tallers extends Activitats {
-    private int hora, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal;
+    private int hora, hora, durada, capacitat, usuarisApuntats, nVal;
+    float sumaVal;
 
     // Otros atributos y métodos...
 
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, int dia_t, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, int hora, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
         super(nom, lloc, dia, entitatCrea, codiPostal);
-        this.dia_t = dia_t;
+        this.hora = hora;
         this.durada = durada;
         this.capacitat = capacitat;
         this.usuarisApuntats = usuarisApuntats;
@@ -23,9 +24,9 @@ public class Tallers extends Activitats {
         this.nVal = nVal;
         
     }
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, int dia_t, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, int hora, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
         super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
-        this.dia_t = dia_t;
+        this.hora = hora;
         this.durada = durada;
         this.capacitat = capacitat;
         this.usuarisApuntats = usuarisApuntats;
@@ -53,7 +54,7 @@ public class Tallers extends Activitats {
 
     //No es mira si la valoració es fa quan ja ha passat el taller. S'hauria de fer? Suposo que no, perque no tenim manera de saber el dia actual per l'usuari, no? (punt 9 del main)
 
-    public void afegirValoracio(int valoracion) {
+    public void afegirValoracio(float valoracion) {
         sumaVal = sumaVal + valoracion;
         nVal++;
     }
@@ -76,12 +77,12 @@ public class Tallers extends Activitats {
 
     
     public String atributsExtra(){
-        return (dia_t + "," + durada + "," + capacitat + "," + usuarisApuntats + "," + sumaVal + "," + nVal);
+        return (hora + "," + "," + durada + "," + capacitat + "," + usuarisApuntats + "," + sumaVal + "," + nVal);
     }
     
     @Override
     public Tallers copia(){
-        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, true, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, true, hora, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal);
         return (Tallers)aux;
     }
 
