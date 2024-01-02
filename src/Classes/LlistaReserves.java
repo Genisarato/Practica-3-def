@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.sound.midi.SysexMessage;
+
 /*Authors: Genís Aragonès Torralbo */
 
 public class LlistaReserves extends Llista<Reserves>{
@@ -204,6 +206,16 @@ public class LlistaReserves extends Llista<Reserves>{
         return usuarimesapuntat;
 
         
+    }
+
+    public void valorartaller(float valoracio, Reserves reservaValorada){
+        try{
+            comprovaReserva(reservaValorada);
+           reservaValorada.getTallers().afegirValoracio(valoracio);
+        }
+        catch(Excepcions e){
+            System.out.println(e.getMessage());
+        }
     }
 
     }

@@ -45,8 +45,9 @@ public class Reserves {
     }
 
     public Reserves copia(){
-    return new Reserves(this.usuari, this.taller);
+        return new Reserves(this.usuari, this.taller);
     }
+    
     private boolean tallerple(Tallers taller){
         boolean ple = false;
         //Implementar en la classe tallers el mètode public void places lliures() -> FET
@@ -56,6 +57,6 @@ public class Reserves {
     }
 
     public boolean esIgual(Reserves reserva){
-            return(this.getUsuari().igual(reserva.getUsuari()) && this.getTallers().igual(reserva.getTallers()));
+            return(this.getUsuari().igual(this.getUsuari()) && this.getTallers().igual(this.getTallers()));
     }
 }
