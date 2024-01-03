@@ -3,7 +3,6 @@ Laboratori Experimenta;Tarragona;11;ICIQ;43007;ICI101;11;2;24;0;0;0
 Python basic;Tarragona;6;ETSE;43005;ETS102;Xavier Ascó
 Fotografia principiants;Cambrils;9;PicturesTorres;43850;PIC103;18;1,5;15;0;0;0
 Museu Nacional d'Arqueologia;Tarragona;21;Ajuntament de Tarragona;43003;AJU104;no;sí
-
 Visita al Museu d'Art Contemporani;Cambrils;18;MAC;43850;MAC111;no;sí
 Dansa Contemporània;Vila-seca;14;DanceMoves;43480;DAN112;18,25;1,5;22;0;0;0
 Fotografia Avançada;Tarragona;18;ClickMasters;43004;CLI113;16,75;2,5;15;0;0;0
@@ -24,7 +23,3 @@ Disseny de Videojocs;Cambrils;3;GameDevHub;43850;GAM127;15;2;10;0;0;0
 Art en Paper Maché;Salou;12;CreArt;43840;CRE128;14,5;2;20;0;0;0
 Lideratge Empresarial;La Pineda;17;BusinessLeaders;43481;BUS129;Isabel Llautó
 Sostenibilitat Energètica;Tarragona;11;ICIQ;43007;ICI130;11,00;2;24;0;0;0
-
-TALLERS: nom, lloc, dia, entitatCrea, codiPostal, codi, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal
-XERRADES: nom, lloc, dia, entitatCrea, codiPostal, codi, nomPersona
-VISITES: nom, lloc, dia, entitatCrea, codiPostal, codi, audioguies, adaptCegues

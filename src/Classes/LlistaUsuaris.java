@@ -67,14 +67,13 @@ public class LlistaUsuaris extends Llista<Usuaris>{
      * SI NO POT OCASIONAR PROBLEMES A LA LLISTA
      * 
      */
-    public void llegirfitxer(){
-        String nomarxiu= "Llista_usuaris.txt";
+    public void llegirfitxer(String nomarxiu){
         File file = new File("src", nomarxiu);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String llegit = scanner.nextLine();
                 //pasaallista();
-                String[] parts = llegit.split(",");
+                String[] parts = llegit.split(";");
                 String nom = parts[0].trim();
                 String mail = parts[1].trim();
                 int codi = Integer.parseInt(parts[2].trim());

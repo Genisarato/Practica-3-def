@@ -2,7 +2,6 @@ ETSE;etseurv@admin.cat;672456380
 PicturesTorres;picturestorres@foto.com;977253462
 ICIQ;iciqurv@admin.cat;672958671
 Proide;proide@lasalletgn.cat;606856742
-
 TechInnovate;techinnovate@yahoo.es;912345678
 GreenEco;greeneco@yahoo.com;611223344
 DesignCraft;designcraft@hotmail.es;965432789

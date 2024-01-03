@@ -196,28 +196,27 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
      public void llegirfitxer(String nomarxiu){
         File file = new File("src", nomarxiu);
-        Activitats aux;
-
+        
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String linia = scanner.nextLine();
-                String[] parts = linia.split(",");
-            
-                String codi = parts[0].trim();
-                String nom = parts[1].trim();
-                String lloc = parts[2].trim();
-                int dia = Integer.parseInt(parts[3].trim());
-                String entitatCrea = parts[4].trim();
-                int codiPostal = Integer.parseInt(parts[5].trim());                         //Els atributs comuns acaben aqui
+                String[] parts = linia.split(";");
+                String nom = parts[0].trim();
+                String lloc = parts[1].trim();
+                int dia = Integer.parseInt(parts[2].trim());
+                String entitatCrea = parts[3].trim();  
+                int codiPostal = Integer.parseInt(parts[4].trim());   
+                String codi = parts[5].trim();
+                 //Els atributs comuns acaben aqui
 
                 if (parts[7] == null){
                     String nomPersona = parts[6].trim();                                    //Xerrades acaba aqui
-                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
+                    Xerrades aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
                 }
                 else if (parts[8] == null){
                     boolean audioguies = Boolean.parseBoolean(parts[6].trim());            
                     boolean adaptCegues = Boolean.parseBoolean(parts[7].trim());            //Visites acaba aqui   
-                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
+                    Visites aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
                 }
                 else{
                     int hora = Integer.parseInt(parts[6].trim());            
@@ -226,7 +225,7 @@ public class LlistaActivitats extends Llista<Activitats>{
                     int usuarisApuntats = Integer.parseInt(parts[9].trim());
                     int sumaVal = Integer.parseInt(parts[10].trim());
                     int nVal = Integer.parseInt(parts[11].trim());                          //Tallers acaba aqui
-                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+                    Tallers aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
                 }
 
                 this.agregar(aux);

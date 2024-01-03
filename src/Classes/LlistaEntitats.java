@@ -52,13 +52,13 @@ public class LlistaEntitats extends Llista<Entitats>{
      * JA QUE ES DONA PER SUPOSAT QUE NO DONA MAI MÉS GRAN QUE LA LENGTH.
      * SI ES FA DESPRÉS POT OCASIONAR PROBLEMES
      */
-    public void llegirfitxer(){
-        String nomarxiu = "Llista_entitats.txt";
+    public void llegirfitxer(String nomarxiu){
+       
         File file = new File("src", nomarxiu);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String llegit = scanner.nextLine();
-                String[] parts = llegit.split(",");
+                String[] parts = llegit.split(";");
                 String nom = parts[0].trim();
                 String mail = parts[1].trim();
                 int telef = Integer.parseInt(parts[2].trim());

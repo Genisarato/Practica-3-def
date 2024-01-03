@@ -24,7 +24,7 @@ import Classes.Tallers;
 
 public class Main {
 	public static void main(String[] args){
-	int opcio;
+	int opcio = 0;
 	Scanner teclat = new Scanner(System.in);
 	LlistaActivitats llisA = new LlistaActivitats(100);
 	LlistaEntitats llisE = new LlistaEntitats(100);
@@ -33,8 +33,11 @@ public class Main {
 	llisA.llegirfitxer("Llista_activitats.txt");
 	llisE.llegirfitxer("Llista_entitats.txt");
 	llisU.llegirfitxer("Llista_usuaris.txt");
-	//llisR.llegirfitxer("Llista_reserves.ser");
-
+	llisR.llegirfitxer("Llista_reserves.ser");
+	/**
+	 * Mtodes comprovats
+	 */
+	System.out.println("\neippp");
 	do{
 		printfMenu();
 		do { // comprovem que no fiqui un valor fora del rang
@@ -98,7 +101,7 @@ public class Main {
 			// s’ha fet.
 			case 9:
 				System.out.println("\nHas escollit registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
-				op9();
+				op9(llisR, teclat);
 				break;
 			// Calcular la nota mitja que ha rebut un taller.
 			case 10:
@@ -113,12 +116,12 @@ public class Main {
 			// Obtenir i mostrar les dades de la llista de visites ofertes per una entitat
 			case 12:
 				System.out.println("\nHas escollit obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
-				op12(llisA);
+				op12(llisA, teclat);
 				break;
 			// Mostrar les dades de les xerrades que farà una persona concreta.
 			case 13:
 				System.out.println("\nHas escollit mostrar les dades de les xerrades que farà una persona concreta.");
-				op13(llisA);
+				op13(llisA, teclat);
 				break;
 			// Donar de baixa un taller sempre que no hi hagi usuaris apuntats.
 			case 14:
@@ -179,7 +182,7 @@ public class Main {
 	}
 
 	private static void op2(LlistaActivitats llisA, Scanner teclat){
-		String nomE;
+		//String nomE;
 		System.out.println("Introdueix el nom de la entitat: ");
 		System.out.println(llisA.mateixaEntitat(teclat.nextLine()));				//S'imprimeix la subllista resultant
 	}
@@ -266,7 +269,9 @@ public class Main {
 
 	//7. Mostrar els usuaris que s’han apuntat a un taller.")
 	private static void op7(LlistaReserves llisR, Scanner teclat){
-		System.out.println("\n" + llisR.usuarisTaller());
+		System.out.println("Quin taller vols buscar\n");
+		String nom = teclat.nextLine();
+		//System.out.println("\n" + llisR.usuarisTaller(taller));
 	}
 
 	//8.Calcular l’usuari que s’ha apuntat a més tallers.")
@@ -275,10 +280,12 @@ public class Main {
 	}
 
 	//9. Registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
-    private static void op9(LlistaActivitats llisA, Scanner teclat){ //FALTA MÈTODE A RESERVES
+    private static void op9(LlistaReserves llisR, Scanner teclat){ //FALTA MÈTODE A RESERVES
 		System.out.println("");
 		System.out.println("Introdueix la nota que li poses al taller: ");
-		float nota = Float.parseFloat(teclat.nextLine());
+		float nota;
+		nota = Float.parseFloat(teclat.nextLine());
+		//llisR.valorartaller(nota, reservaValorada);
 
 	}
 
@@ -295,13 +302,19 @@ public class Main {
 	}
 	
 	//12. Obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
-    private static void op12(LlistaActivitats llisA){
-		System.out.println(llisA.visitesMateixaEntitat());
+    private static void op12(LlistaActivitats llisA, Scanner teclat){
+		String nom;
+		System.out.println("Introdueix la entitat que vols buscar");
+		nom = teclat.nextLine();
+		System.out.println(llisA.visitesMateixaEntitat(nom));
 	}
 
 	//13. Mostrar les dades de les xerrades que farà una persona concreta.");
-    private static void op13(LlistaActivitats llisA){
-		System.out.println(llisA.xerradesMateixaPersona());
+    private static void op13(LlistaActivitats llisA, Scanner teclat){
+		String nom;
+		System.out.println("Quina persona vols buscar");
+		nom = teclat.nextLine();
+		System.out.println(llisA.xerradesMateixaPersona(nom));
 	}
 	
 	//14. Donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
