@@ -1,8 +1,30 @@
-TRE100,Tres en raya,Salou,5,Proide,43840
-LAB101,Laboratori Experimenta,Tarragona,11,ICIQ,43007
-PYT102,Python basic, Tarragona,6,ETSE,43005
-FOT103,Fotografia principiants, Cambrils,9,PicturesTorres,43850
+Tres en raya;Salou;5;Proide;43840;PRO100;17;0,5;8;0;0;0
+Laboratori Experimenta;Tarragona;11;ICIQ;43007;ICI101;11;2;24;0;0;0
+Python basic;Tarragona;6;ETSE;43005;ETS102;Xavier Ascó
+Fotografia principiants;Cambrils;9;PicturesTorres;43850;PIC103;18;1,5;15;0;0;0
+Museu Nacional d'Arqueologia;Tarragona;21;Ajuntament de Tarragona;43003;AJU104;no;sí
 
-TALLERS: nom, lloc, dia, entitatCrea, codiPostal, codi, dia_t, durada, capacitat, usuarisApuntats, sumaVal, nVal
+Visita al Museu d'Art Contemporani;Cambrils;18;MAC;43850;MAC111;no;sí
+Dansa Contemporània;Vila-seca;14;DanceMoves;43480;DAN112;18,25;1,5;22;0;0;0
+Fotografia Avançada;Tarragona;18;ClickMasters;43004;CLI113;16,75;2,5;15;0;0;0
+Economia Circular;Valls;8;GreenEco;43800;GRE114;MartaRecicla
+Ciberseguretat;Salou;5;CyberGuard;43840;CYB115;Albert Vall
+Astrofotografia;La Canonja;28;AstroPhotoClub;43110;AST116;21,00;2,5;12;0;0;0
+Ruta Cultural pel Barri Antic;Tarragona;6;HeritageTGN;43003;HER117;sí;sí
+Robòtica Avançada;Reus;8;TarragonaTech;43201;TAR118;14,00;2;15;0;0;0
+Els Secrets de la Fotografia;Tarragona;12;PixelPerfect;43007;PIX119;Laura Giralt
+Lideratge Empresarial;La Pineda;17;BusinessLeaders;43481;BUS120;Isabel Llautó
+Cuina Creativa;Reus;9;GourmetArt;43202;GOU121;19,5;1,5;12;0;0;0
+Passejada Nocturna pel Parc Natural;Mont-roig del Camp;11;NatureNight;43300;NAT122;no;sí
+Descoberta dels Monuments Romànics;Reus;8;RomanHistory;43206;ROM123;no;sí
+Programació Web Avançada;Reus;7;CodeMasters;43203;COD124;17,5;2;15;0;0;0
+Circuit de Vins del Priorat;Falset;20;WineLovers;43730;WIN125;no;sí
+Observació d'Ocells al Delta de l'Ebre;Amposta;14;BirdWatchers;43870;BIR126;sí;no
+Disseny de Videojocs;Cambrils;3;GameDevHub;43850;GAM127;15;2;10;0;0;0
+Art en Paper Maché;Salou;12;CreArt;43840;CRE128;14,5;2;20;0;0;0
+Lideratge Empresarial;La Pineda;17;BusinessLeaders;43481;BUS129;Isabel Llautó
+Sostenibilitat Energètica;Tarragona;11;ICIQ;43007;ICI130;11,00;2;24;0;0;0
+
+TALLERS: nom, lloc, dia, entitatCrea, codiPostal, codi, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal
 XERRADES: nom, lloc, dia, entitatCrea, codiPostal, codi, nomPersona
 VISITES: nom, lloc, dia, entitatCrea, codiPostal, codi, audioguies, adaptCegues

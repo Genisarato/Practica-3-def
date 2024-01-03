@@ -11,6 +11,7 @@ package Classes;
 public abstract class Activitats {
     protected String codi, nom, lloc, entitatCrea;
     protected int codiPostal, dia;
+    public Object getCodi;
     private static int nAct = 100;
 
     /**
@@ -129,5 +130,7 @@ public abstract class Activitats {
 
     public abstract String atributsExtra();
     public abstract Activitats copia();
+
+
 
 }

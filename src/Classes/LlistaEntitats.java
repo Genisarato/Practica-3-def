@@ -18,7 +18,10 @@ public class LlistaEntitats extends Llista<Entitats>{
         llista = new Entitats[1000];
     }
 
-     /*Mètode afegir pasant tot per paràmetre
+     public LlistaEntitats(int i) {
+    }
+
+    /*Mètode afegir pasant tot per paràmetre
      * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
      * @param nom entitat
      * @param mail
@@ -153,6 +156,8 @@ public class LlistaEntitats extends Llista<Entitats>{
         }
         return conte;
     }
+
+
 
 
     

@@ -26,6 +26,7 @@ public class LlistaActivitats extends Llista<Activitats>{
         return nElem;
     }
 
+
     /**
      * Mètode que troba totes les activitats que ha fet una entitat
      * @param ent - entitat de la que en volem saber les activitats
@@ -114,27 +115,43 @@ public class LlistaActivitats extends Llista<Activitats>{
     public float notaMitjanaTaller(String nom){ //identificar taller pel nom????
         Boolean trobat = false;
         int i;
-        float resultat = 0.0;
+        float resultat = (float) 0.0;
         for (i = 0; i < nElem-1 && !trobat; i++){
             if (llista[i].getNom().equalsIgnoreCase(nom)){ 
                 trobat = true;
-                resultat = llista[i].mitjanaValoracions();
+                resultat = ((Tallers) llista[i]).mitjanaValoracions();
             }
         }
         return resultat;
     }
 
-    public Tallers trobaTaller(String codi){
+    /*public Tallers trobaTaller(String codi){
         Tallers t;
         Boolean trobat = false;
-        for (i = 0; i < nElem-1; i++){
-            if (llista[i].getCodi.equalsIgnoreCase(codi)){
+        for (int i = 0; i < nElem-1; i++){
+            if (((String) llista[i].getCodi).equalsIgnoreCase(codi)){
                 trobat = true;
-                t = llista[i];
+                t = (Tallers) llista[i].copia();
             }
         }
-        return t.copia();
+        return t;
+    }*/
+    public Tallers trobaTaller(String codi) {
+        Tallers t = null; // Inicializamos t a null
+        boolean trobat = false;
+    
+        for (int i = 0; i < nElem; i++) {
+            // Corregimos getCodi a getCodi()
+            if (((String) llista[i].getCodi()).equalsIgnoreCase(codi)) {
+                trobat = true;
+                t = (Tallers) llista[i].copia(); // Asumiendo que la clase Tallers tiene un método copia()
+                break; // Terminamos el bucle al encontrar el taller
+            }
+        }
+    
+        return t;
     }
+    
     
     //CONVERTIR A BOOLEAN PER A RETORNAR ALGO PER A SABER SI S'HA POGUT ELIMINAR O NO?
     /**

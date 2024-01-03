@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import javax.sound.midi.SysexMessage;
 
 /*Authors: Genís Aragonès Torralbo */
 
@@ -20,6 +19,9 @@ public class LlistaReserves extends Llista<Reserves>{
     public LlistaReserves(){
         super();
         llista = new Reserves[1000];
+    }
+
+    public LlistaReserves(int i) {
     }
 
     /*Métode de afegir una reserva comprovant que la reserva no estigui feta sino directament la descarta
