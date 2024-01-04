@@ -76,7 +76,7 @@ public class Main {
 			// Registrar la petició d’un usuari per reservar un taller.
 			case 6:
 				System.out.println("\nHas escollit registrar la petició d’un usuari per reservar un taller.");
-				op6(llisA, teclat);
+				op6(llisA, llisR, teclat);
 				//fet
 				/*Crea una reserva  */
 				break;
@@ -84,7 +84,7 @@ public class Main {
 			// Mostrar els usuaris que s’han apuntat a un taller.
 			case 7:
 				System.out.println("\nHas escollit mostrar els usuaris que s’han apuntat a un taller.");
-				op7(llisR, teclat);
+				op7(llisA, llisR, teclat);
 				//genis
 				//fet
 				break;
@@ -246,7 +246,7 @@ public class Main {
 		llisA.agregar(aux);
 	}
 	//6.Registrar la petició d’un usuari per reservar un taller
-	private static void op6(LlistaActivitats llisA, Scanner teclat){
+	private static void op6(LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat){
 		Reserves r;
 		Usuaris u;
 		String nom, mail, codi;
@@ -264,14 +264,17 @@ public class Main {
 
 		u = new Usuaris(nom, mail, codiPostal);
 		r = new Reserves(u, llisA.trobaTaller(codi));
+		llisR.agregar(r);
 		System.out.println("\nReserva realitzada!");
 	}
 
 	//7. Mostrar els usuaris que s’han apuntat a un taller.")
-	private static void op7(LlistaReserves llisR, Scanner teclat){
+	private static void op7(LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat){
 		System.out.println("Quin taller vols buscar\n");
-		String nom = teclat.nextLine();
-		//System.out.println("\n" + llisR.usuarisTaller(taller));
+		String codi = teclat.nextLine();
+		Tallers t = llisA.trobaTaller(codi);
+		System.out.println("\n" + llisR.usuarisTaller(t));
+
 	}
 
 	//8.Calcular l’usuari que s’ha apuntat a més tallers.")
@@ -281,11 +284,13 @@ public class Main {
 
 	//9. Registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
     private static void op9(LlistaReserves llisR, Scanner teclat){ //FALTA MÈTODE A RESERVES
-		System.out.println("");
+
+		System.out.println("Introdueix la nota que li poses al taller: ");
+		String reserva = (teclat.nextLine());
 		System.out.println("Introdueix la nota que li poses al taller: ");
 		float nota;
 		nota = Float.parseFloat(teclat.nextLine());
-		//llisR.valorartaller(nota, reservaValorada);
+		llisR.valorartaller(nota, reserva);
 
 	}
 

@@ -1,4 +1,4 @@
-Tres en raya;Salou;5;Proide;43840;PRO100;17;0,5;8;0;0;0
+Tres en raya;Salou;5;Proide;43840;PRO100;17;0.5;8;0;0;0
 Laboratori Experimenta;Tarragona;11;ICIQ;43007;ICI101;11;2;24;0;0;0
 Python basic;Tarragona;6;ETSE;43005;ETS102;Xavier Ascó
 Fotografia principiants;Cambrils;9;PicturesTorres;43850;PIC103;18;1,5;15;0;0;0

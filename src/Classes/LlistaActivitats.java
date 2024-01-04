@@ -128,6 +128,7 @@ public class LlistaActivitats extends Llista<Activitats>{
     /*public Tallers trobaTaller(String codi){
         Tallers t;
         Boolean trobat = false;
+        
         for (int i = 0; i < nElem-1; i++){
             if (((String) llista[i].getCodi).equalsIgnoreCase(codi)){
                 trobat = true;
@@ -136,16 +137,16 @@ public class LlistaActivitats extends Llista<Activitats>{
         }
         return t;
     }*/
-    public Tallers trobaTaller(String codi) {
+   public Tallers trobaTaller(String codi) {
         Tallers t = null; // Inicializamos t a null
         boolean trobat = false;
     
-        for (int i = 0; i < nElem; i++) {
+        for (int i = 0; i < nElem-1 && !trobat; i++) {
             // Corregimos getCodi a getCodi()
             if (((String) llista[i].getCodi()).equalsIgnoreCase(codi)) {
                 trobat = true;
                 t = (Tallers) llista[i].copia(); // Asumiendo que la clase Tallers tiene un método copia()
-                break; // Terminamos el bucle al encontrar el taller
+                // Terminamos el bucle al encontrar el taller
             }
         }
     
@@ -196,7 +197,8 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
      public void llegirfitxer(String nomarxiu){
         File file = new File("src", nomarxiu);
-        
+        Activitats aux;
+        //Scanner scanner = new Scanner(file);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String linia = scanner.nextLine();
@@ -211,28 +213,30 @@ public class LlistaActivitats extends Llista<Activitats>{
 
                 if (parts[7] == null){
                     String nomPersona = parts[6].trim();                                    //Xerrades acaba aqui
-                    Xerrades aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
+                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
                 }
                 else if (parts[8] == null){
                     boolean audioguies = Boolean.parseBoolean(parts[6].trim());            
                     boolean adaptCegues = Boolean.parseBoolean(parts[7].trim());            //Visites acaba aqui   
-                    Visites aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
+                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
                 }
                 else{
-                    int hora = Integer.parseInt(parts[6].trim());            
-                    int durada = Integer.parseInt(parts[7].trim()); 
+                    float hora = Float.parseFloat(parts[6].trim());            
+                    float durada = Float.parseFloat(parts[7].trim()); 
                     int capacitat = Integer.parseInt(parts[8].trim());
                     int usuarisApuntats = Integer.parseInt(parts[9].trim());
                     int sumaVal = Integer.parseInt(parts[10].trim());
                     int nVal = Integer.parseInt(parts[11].trim());                          //Tallers acaba aqui
-                    Tallers aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
                 }
 
                 this.agregar(aux);
             }
+        scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Archivo no encontrado: " + nomarxiu);
-        }
+           System.out.println("Archivo no encontrado: " + nomarxiu);
+        } 
+        
 
     }
 

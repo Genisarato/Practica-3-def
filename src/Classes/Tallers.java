@@ -9,8 +9,8 @@ package Classes;
 /*Els tallers es fan en una hora concreta del dia, i tenen una durada determinada. Tenen també
 una capacitat fixada, i els usuaris s’hi ha de registrar*/
 public class Tallers extends Activitats {
-    private int hora, durada, capacitat, usuarisApuntats, nVal;
-    float sumaVal;
+    private float hora, durada, sumaVal;
+    private int  capacitat, usuarisApuntats, nVal;
 
     // Otros atributos y métodos...
 
@@ -24,10 +24,10 @@ public class Tallers extends Activitats {
         this.nVal = nVal;
         
     }
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, int hora, int durada, int capacitat, int usuarisApuntats, float sumaVal2, int nVal){
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, float hora2, float durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal){
         super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
-        this.hora = hora;
-        this.durada = durada;
+        this.hora = hora2;
+        this.durada = durada2;
         this.capacitat = capacitat;
         this.usuarisApuntats = usuarisApuntats;
         this.sumaVal = sumaVal2;
@@ -35,11 +35,11 @@ public class Tallers extends Activitats {
         
     }
 
-    public int getHora() {
+    public float getHora() {
         return hora;
     }
 
-    public int getDurada() {
+    public float getDurada() {
         return durada;
     }
 
