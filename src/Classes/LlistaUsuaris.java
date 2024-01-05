@@ -17,12 +17,9 @@ public class LlistaUsuaris extends Llista<Usuaris>{
     
     private Usuaris[] llista;
     /*Constructor*/
-    public LlistaUsuaris(){
+    public LlistaUsuaris(int capacitat){
         super();
-        llista = new Usuaris[1000];
-    }
-
-    public LlistaUsuaris(int i) {
+        llista = new Usuaris[capacitat];
     }
 
     /*Mètode afegir pasant tot per paràmetre i comprovant que no hi ha cap nickname igual,

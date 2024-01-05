@@ -13,12 +13,9 @@ public class LlistaEntitats extends Llista<Entitats>{
     private Entitats[] llista;
 
     /*Constructor*/
-    public LlistaEntitats(){
+    public LlistaEntitats(int capacitat){
         super();
-        llista = new Entitats[1000];
-    }
-
-     public LlistaEntitats(int i) {
+        llista = new Entitats[capacitat];
     }
 
     /*Mètode afegir pasant tot per paràmetre

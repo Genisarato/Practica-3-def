@@ -11,14 +11,13 @@ import java.util.Scanner;
 
 public class LlistaActivitats extends Llista<Activitats>{
     private Activitats[] llista;
-    private int nElem;
 
     
     public LlistaActivitats(int capacitat){
         super();
         llista = new Activitats[capacitat];
-        nElem = 0;
     }
+    
     /**
     * Retorna el tamaño actual de la estructura de datos.
     **/
@@ -211,11 +210,11 @@ public class LlistaActivitats extends Llista<Activitats>{
                 String codi = parts[5].trim();
                  //Els atributs comuns acaben aqui
 
-                if (parts[7] == null){
+                if (parts[7].equalsIgnoreCase("-1")){
                     String nomPersona = parts[6].trim();                                    //Xerrades acaba aqui
                     aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
                 }
-                else if (parts[8] == null){
+                else if (parts[8].equalsIgnoreCase("-1")){
                     boolean audioguies = Boolean.parseBoolean(parts[6].trim());            
                     boolean adaptCegues = Boolean.parseBoolean(parts[7].trim());            //Visites acaba aqui   
                     aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
@@ -225,7 +224,7 @@ public class LlistaActivitats extends Llista<Activitats>{
                     float durada = Float.parseFloat(parts[7].trim()); 
                     int capacitat = Integer.parseInt(parts[8].trim());
                     int usuarisApuntats = Integer.parseInt(parts[9].trim());
-                    int sumaVal = Integer.parseInt(parts[10].trim());
+                    float sumaVal = Float.parseFloat(parts[10].trim());
                     int nVal = Integer.parseInt(parts[11].trim());                          //Tallers acaba aqui
                     aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
                 }
@@ -235,7 +234,10 @@ public class LlistaActivitats extends Llista<Activitats>{
         scanner.close();
         } catch (FileNotFoundException e) {
            System.out.println("Archivo no encontrado: " + nomarxiu);
-        } 
+        }  
+        catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("error" + e);
+        }
         
 
     }

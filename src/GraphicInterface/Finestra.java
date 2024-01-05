@@ -1,4 +1,4 @@
-package Aplication;
+package GraphicInterface;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -16,12 +16,9 @@ public class LlistaReserves extends Llista<Reserves>{
 
     /*Constructor
      */
-    public LlistaReserves(){
+    public LlistaReserves(int capacitat){
         super();
-        llista = new Reserves[1000];
-    }
-
-    public LlistaReserves(int i) {
+        llista = new Reserves[capacitat];
     }
 
     /*Métode de afegir una reserva comprovant que la reserva no estigui feta sino directament la descarta
@@ -188,7 +185,7 @@ public class LlistaReserves extends Llista<Reserves>{
     //Métode que retorna una llista de usuaris que estan apuntats a un taller en específic
     //@param taller
     public LlistaUsuaris usuarisTaller(Tallers taller){
-        LlistaUsuaris usuaris = new LlistaUsuaris();
+        LlistaUsuaris usuaris = new LlistaUsuaris(nElem);
         for(int i = 0; i< nElem; i++){
             if(llista[i].getTallers().equals(taller))usuaris.agregar(llista[i].getUsuari());
         }

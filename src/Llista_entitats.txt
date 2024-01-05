@@ -32,5 +32,3 @@ ArtInspire;artinspire@hotmail.es;977889900
 ScienceExplorers;scienceexplorers@gmail.com;966112233
 HealthyLiving;healthyliving@yahoo.com;611889900
 AdventureSeekers;adventureseekers@gmail.com;966445566
-
-Entitats: nom, mail, telefon

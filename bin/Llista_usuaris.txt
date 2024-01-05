@@ -1,7 +1,6 @@
 Rogerx;rogerx@gmail.com;43001
 XavierSanchez;zsanchez@gmai.com;43007
 MariaVentura;mv@hotmail.com;43851
-
 CipherXplorer;cipher.x@outlook.com;43011
 NebulaTraveler;nebula.traveller@protonmail.ch;43520
 QuantumInnovator;quantum.innovator@gmail.co.uk;43725
@@ -32,5 +31,3 @@ IkerQuantumNomad;iker.quantum.nomad@icloud.com;43845
 CodeByteCarla;code.byte.carla@yandex.ru;43235
 QuantumPolymathX;quantum.polymath.x@fastmail.fm;43725
 CryptoGalacticSilvia;crypto.galactic.silvia@inbox.lv;43430
-
-Usuaris: nickname, correu electronic, codi postal 

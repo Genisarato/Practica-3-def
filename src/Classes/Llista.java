@@ -2,9 +2,9 @@ package Classes;
 
 
 public abstract class Llista<T> {
-
     protected int nElem;
-    public  Llista(){
+
+    public Llista(){
         nElem = 0;
     }
 
