@@ -9,12 +9,12 @@ package Aplication;
 import java.util.Scanner;
 
 import Classes.Activitats;
-import Classes.Entitats;
+//import Classes.Entitats;
 import Classes.Usuaris;
 import Classes.Visites;
 import Classes.Xerrades;
 import GraphicInterface.Finestra;
-import Classes.Llista;
+//import Classes.Llista;
 import Classes.LlistaActivitats;
 import Classes.LlistaEntitats;
 import Classes.LlistaReserves;
@@ -36,11 +36,6 @@ public class Main {
 		llisE.llegirfitxer("Llista_entitats.txt");
 		llisU.llegirfitxer("Llista_usuaris.txt");
 		llisR.llegirfitxer();
-
-		Tallers a = new Tallers("Tres en raya", "Salou", 5, "Proide", 43840, "PRO100", false, 17, 0.5f, 8, 0, 0, 0);
-		Usuaris u = new Usuaris("Rogerx", "rogerx@gmail.com", 43001);
-		Reserves r = new Reserves(u, a);
-		llisR.agregar(r);
 		/**
 		 * Mtodes comprovats
 		 */
@@ -133,15 +128,19 @@ public class Main {
 					break;
 				// Mostrar les dades de les xerrades que farà una persona concreta.
 				case 13:
-					System.out.println("\nHas escollit mostrar les dades de les xerrades que farà una persona concreta.");
+					System.out
+							.println("\nHas escollit mostrar les dades de les xerrades que farà una persona concreta.");
 					op13(llisA, teclat);
 					break;
 				// Donar de baixa un taller sempre que no hi hagi usuaris apuntats.
 				case 14:
-					System.out.println("\nHas escollit donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
+					System.out
+							.println("\nHas escollit donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
 					op14(llisA, teclat);
 					break;
 				// Sortir del programa
+				case 15:
+					op15(teclat, llisA, llisE, llisR, llisU);
 			}
 		} while (opcio != 15);
 		System.out.println("Has sortit del programa amb èxit!");
@@ -150,10 +149,9 @@ public class Main {
 	// Mostrar el menú d'opcions
 	private static void printfMenu() {
 		System.out.println("\nIntrodueix el número de la operació que vulguis realitzar\n");
-		System.out.println("\n\t1. Mostrar les dades de qualsevol llista que tingueu definida.\n");
+		System.out.println("\t1. Mostrar les dades de qualsevol llista que tingueu definida.");
 		System.out.println("\t2. Obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
-		System.out.println(
-				"\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
+		System.out.println("\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
 		System.out.println("\t4. Obtenir i mostrar la llista dels tallers que tenen places disponibles.");
 		System.out.println("\t5. Afegir una nova activitat ");
 		System.out.println("\t6. Registrar la petició d’un usuari per reservar un taller.");
@@ -308,9 +306,16 @@ public class Main {
 		String codiReserva = (teclat.nextLine());
 		System.out.println("Introdueix la nota que li poses al taller: ");
 		float nota = Float.parseFloat(teclat.nextLine());
-		llisA.trobaTaller(llisR.valorarTaller(nota, llisR.trobaReserva(codiReserva))).afegirValoracio(nota);		//nota es pot arribar a treure de valorarTaller
-		//llisA.trobaTaller retorna el taller al qual hem d'afegir una valoracio
-		//llisR.valorarTaller actualitza el boolea de la reserva per a posar-lo a true (que s'ha valorat) i retorna el codi del taller que es vol valorar
+		llisA.trobaTaller(llisR.valorarTaller(nota, llisR.trobaReserva(codiReserva))).afegirValoracio(nota); // nota es
+																												// pot
+																												// arribar
+																												// a
+																												// treure
+																												// de
+																												// valorarTaller
+		// llisA.trobaTaller retorna el taller al qual hem d'afegir una valoracio
+		// llisR.valorarTaller actualitza el boolea de la reserva per a posar-lo a true
+		// (que s'ha valorat) i retorna el codi del taller que es vol valorar
 	}
 
 	// 10. Calcular la nota mitja que ha rebut un taller.");
@@ -349,5 +354,58 @@ public class Main {
 			System.out.println("S'ha eliminat amb èxit!");
 		else
 			System.out.println("No s'ha pogut eliminar.");
+	}
+
+	public static void op15(Scanner teclat, LlistaActivitats llisA, LlistaEntitats llisE, LlistaReserves llisR, LlistaUsuaris llisU) {
+		int save;
+		int[] llistesGuardades = new int[5];
+		boolean guardarMes = false, coincideix = false;
+		System.out.println("\nQuines llistes vols guardar?\n\t1- Totes les llistes\n\t2- Llista Entitats\n\t3- Llista Usuaris\n\t4- Llista Activitats\n\t5- Llista Reserves");
+		do{
+			do { // comprovem que no fiqui un valor fora del rang
+				save = Integer.parseInt(teclat.nextLine());
+				if (llistesGuardades[0] != 0){
+					for (int i = 0; i < llistesGuardades.length && !coincideix; i++){
+						if (save == llistesGuardades[i]) coincideix = true;
+					}
+				}
+			} while ((save < 0 && save > 4) || coincideix);
+			switch (save) {
+				case 1:
+					llisA.guardarArxiu();
+					llisU.guardarArxiu();
+					llisE.guardarArxiu();
+					llisR.guardarArxiu();
+					guardarMes = false;
+					break;
+				case 2:
+					llisE.guardarArxiu();
+					guardarMes = guardarLlista(teclat);
+					break;
+				case 3:
+					llisU.guardarArxiu();
+					guardarMes = guardarLlista(teclat);
+					break;
+				case 4:
+					llisA.guardarArxiu();
+					guardarMes = guardarLlista(teclat);
+					break;
+				case 5:
+					llisR.guardarArxiu();
+					guardarMes = guardarLlista(teclat);
+					break;
+			}
+		} while(guardarMes);
+	}
+
+	private static boolean guardarLlista(Scanner teclat){
+		boolean guardarMes = true;
+		String resposta;
+
+		System.out.println("\nVols guardar alguna llista més?");
+		resposta = teclat.nextLine();
+
+		if (resposta.equalsIgnoreCase("No")) guardarMes = false;
+		return guardarMes;
 	}
 }

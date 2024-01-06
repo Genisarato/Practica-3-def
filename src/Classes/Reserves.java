@@ -1,7 +1,9 @@
 package Classes;
 
-public class Reserves {
+import java.io.Serializable;
 
+public class Reserves implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String codiReserva;
     private Usuaris usuari;
     private String codiTaller;

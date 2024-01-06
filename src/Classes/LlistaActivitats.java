@@ -131,7 +131,7 @@ public class LlistaActivitats extends Llista<Activitats>{
             // Corregimos getCodi a getCodi()
             if (((String) llista[i].getCodi()).equalsIgnoreCase(codi)) {
                 trobat = true;
-                t = (Tallers) llista[i].copia(); 
+                t = (Tallers) llista[i];    //No es fa servir copia() perquè ens interessa tenir la instància original en el cas que s'hagi de modificar 
                 // Terminamos el bucle al encontrar el taller
             }
         }
@@ -262,7 +262,7 @@ public class LlistaActivitats extends Llista<Activitats>{
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
             for(int i = 0; i <nElem-1; i++){
-                bw.write(llista[i].getCodi() + "," + llista[i].getNom() + "," + llista[i].getLloc() + "," + llista[i].getDia() + "," + llista[i].getEntitatCrea() + "," + llista[i].getCodiPostal() + "," + llista[i].atributsExtra());
+                bw.write(llista[i].getCodi() + "," + llista[i].getNom() + "," + llista[i].getLloc() + "," + llista[i].getDia() + "," + llista[i].getEntitatCrea() + "," + llista[i].getCodiPostal() + "," + llista[i].atributsExtra() + ";-1"); //-1 és el sentinella
                 bw.newLine();
                 System.out.println("Guardat\n");
             }
@@ -274,7 +274,6 @@ public class LlistaActivitats extends Llista<Activitats>{
 
     }
 
-    //es necessari aquest mètode??
     //DE VERITAT ES TANCA L'ARXIU? NO ES FA SERVIR .close() ENLLOC. S'HAURIA DE DESCOMENTAR EL NOU try?
     public void vaciar(){
         String nomArxiu = "Llista_activitats.txt";
@@ -312,7 +311,7 @@ public class LlistaActivitats extends Llista<Activitats>{
     @Override
     public String toString() {
         String text = "";
-        for (int i = 0; i < nElem-1; i++){
+        for (int i = 0; i < nElem; i++){
             text = text + llista[i] + "\n";
         }
         return text;

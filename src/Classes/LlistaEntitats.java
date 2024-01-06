@@ -72,7 +72,7 @@ public class LlistaEntitats extends Llista<Entitats>{
     /*Mètode auxiliar per afegir una entitat de l'arxiu llista_entitats.txt a la llista sense copiar al arxiu per no tenir duplicats.
      * També es podria fer dins al bucle de llegirfitxer, era per fer-ho més elegant :) 
      */
-    private void afegirsensecopiar(Entitats entitats){
+    private void afegirsensecopiar(Entitats entitats){          //ES POT ELIMINAR??
         llista[nElem] = entitats.copia();
         nElem++;
     }

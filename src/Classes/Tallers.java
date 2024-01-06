@@ -73,6 +73,9 @@ public class Tallers extends Activitats {
         return capacitat > usuarisApuntats;
     }
 
+    public String adaptarHora(float horari){
+        return (String)((int)horari + ":" + (int)(horari % 1 * 60));
+    }
     
     public String atributsExtra(){
         return (hora + "," + "," + durada + "," + capacitat + "," + usuarisApuntats + "," + sumaVal + "," + nVal);
@@ -82,6 +85,10 @@ public class Tallers extends Activitats {
     public Tallers copia(){
         Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, true, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
         return (Tallers)aux;
+    }
+
+    public String toString(){
+        return (super.toString() + "\nA les " + adaptarHora(hora) + "h, amb una durada de " + adaptarHora(durada) + "h.\nTé capacitat per a " + capacitat + " persones, i hi ha " + usuarisApuntats + " usuaris apuntats.");
     }
 
 }

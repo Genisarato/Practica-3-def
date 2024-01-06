@@ -23,4 +23,13 @@ public class Visites extends Activitats {
         Activitats aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, audioguies, adaptCegues);
         return (Visites)aux;
     }
+    
+    public String adaptarBool(boolean b){
+        String hoEs = "Sí";
+        if(!b) hoEs = "No";
+        return hoEs;
+    }
+    public String toString () {
+        return (super.toString() +"\n" + adaptarBool(audioguies) + " té audioguies, " + adaptarBool(adaptCegues) + " està adaptat per a cegs");
+    }
 }

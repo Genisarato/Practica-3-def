@@ -25,4 +25,8 @@ public class Xerrades extends Activitats {
         Activitats aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, nomPersona);
         return (Xerrades)aux;
     }
+
+    public String toString () {
+        return (super.toString() + "\nLa persona que farà la xerrada és: " + nomPersona);
+    }
 }

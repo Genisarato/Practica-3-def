@@ -124,7 +124,7 @@ public abstract class Activitats {
     }
 
     public String toString () {
-        return ("\nNOM: "+nom+" LLOC: "+lloc+" AMB CODI POSTAL "+codiPostal+" EL DIA "+dia+" DE NOVEMBRE DE 2023.\nENTITAT QUE L'HA CREAT: "+entitatCrea+" AMB EL CODI "+codi);
+        return ("\nNom: "+nom+" Lloc: "+lloc+" amb codi postal "+codiPostal+" el dia "+dia+" de novembre de 2023.\nEntitat que l'ha creat: "+entitatCrea+" amb el codi "+codi);
     }
 
     public abstract String atributsExtra();

@@ -153,7 +153,7 @@ public class LlistaReserves extends Llista<Reserves>{
      * 
      */
     public void llegirfitxer() { 
-        String nomarxiu = "Llista_reserves.ser";
+        String nomarxiu = "src/Llista_reserves.ser";
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomarxiu))) {
             boolean fin = false;
             while (!fin) {
@@ -227,10 +227,7 @@ public class LlistaReserves extends Llista<Reserves>{
                 r = llista[i];
             }
         }
-        return r.copia();
+        return r;   //No es fa servir copia() perque ens interessa retornar la reserva que hi ha dins la llista i modificar-la, no modificar una còpia aliena
     }
 
 }
-   
-    
-
