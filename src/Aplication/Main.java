@@ -35,9 +35,9 @@ public class Main {
 		llisA.llegirfitxer("Llista_activitats.txt");
 		llisE.llegirfitxer("Llista_entitats.txt");
 		llisU.llegirfitxer("Llista_usuaris.txt");
-		llisR.llegirfitxer("Llista_reserves.ser");
+		llisR.llegirfitxer();
 
-		Tallers a = new Tallers("Tres en raya", "Salou", 5, "Proide", 43840, "PRO100", 17, 0.5f, 8, 0, 0, 0);
+		Tallers a = new Tallers("Tres en raya", "Salou", 5, "Proide", 43840, "PRO100", false, 17, 0.5f, 8, 0, 0, 0);
 		Usuaris u = new Usuaris("Rogerx", "rogerx@gmail.com", 43001);
 		Reserves r = new Reserves(u, a);
 		llisR.agregar(r);
@@ -113,7 +113,7 @@ public class Main {
 				case 9:
 					System.out.println(
 							"\nHas escollit registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
-					op9(llisR, teclat);
+					op9(llisA, llisR, teclat);
 					break;
 				// Calcular la nota mitja que ha rebut un taller.
 				case 10:
@@ -173,7 +173,7 @@ public class Main {
 	private static void op1(LlistaUsuaris llisU, LlistaEntitats llisE, LlistaActivitats llisA, LlistaReserves llisR,
 			Scanner teclat) {
 		System.out.println(
-				"Introdueix el número de la llista que vols veure.\n\t1- Usuaris\n\t2- Entitats\n\t3- Activitats\n\t4- Reserves");
+				"\nIntrodueix el número de la llista que vols veure.\n\t1- Usuaris\n\t2- Entitats\n\t3- Activitats\n\t4- Reserves");
 		switch (Integer.parseInt(teclat.nextLine())) {
 			case 1:
 				System.out.println(llisU);

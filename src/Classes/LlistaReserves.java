@@ -152,7 +152,8 @@ public class LlistaReserves extends Llista<Reserves>{
      * SI NO POT OCASIONAR PROBLEMES A LA LLISTA
      * 
      */
-    public void llegirfitxer(String nomarxiu) {
+    public void llegirfitxer() { 
+        String nomarxiu = "Llista_reserves.ser";
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomarxiu))) {
             boolean fin = false;
             while (!fin) {

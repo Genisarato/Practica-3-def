@@ -212,9 +212,8 @@ public class LlistaActivitats extends Llista<Activitats>{
                     int usuarisApuntats = Integer.parseInt(parts[9].trim());
                     float sumaVal = Float.parseFloat(parts[10].trim());
                     int nVal = Integer.parseInt(parts[11].trim());                          //Tallers acaba aqui
-                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
                 }
-
                 this.agregar(aux);
             }
         scanner.close();
