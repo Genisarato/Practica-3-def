@@ -1,62 +1,66 @@
 package Classes;
 
-import java.util.Random;
-
 public class Reserves {
 
-    private int codiReserva;
+    private String codiReserva;
     private Usuaris usuari;
-    private Tallers taller;
+    private String codiTaller;
+    public boolean valorada;
+    private static int index = 1;
 
 
     public Reserves(Usuaris u, Tallers taller) {
-        if(!tallerple(taller)){
-            Random codi = new Random();
-            codiReserva = codi.nextInt();
+        if(taller.placesLliures()){
             usuari = u.copia();
-            taller = taller.copia();
-            //implementar en la classe tallers el mètode public tallers copia()
+            codiTaller = taller.getCodi();
+            taller.apuntarUsuari();
+            codiReserva = Integer.toString(index) + codiTaller;
+            augmentarIndex();
+            valorada = false;
         }
         //implementar excepcion taller ple
+    }
 
+    public Reserves(Usuaris u, String codiTaller, String codiReserva, boolean valorada){
+        usuari = u.copia();
+        this.codiTaller = codiTaller;
+        this.codiReserva = codiReserva;
+        this.valorada = valorada;
+    }
+
+    public static void augmentarIndex(){
+        index++;
     }
 
     public Usuaris getUsuari(){
-        return(usuari.copia());
+        return (usuari.copia());
     }
 
-    public Tallers getTallers(){
-        return(taller.copia());
+    public String getCodiTaller(){
+        return codiTaller;
     }
 
-    public int getCodiReserva(){
-        return(codiReserva);
+    public String getCodiReserva(){
+        return (codiReserva);
+    }
+
+    public boolean getValorada(){
+        return valorada;
     }
 
     public void setUsuari(Usuaris usuari){
         this.usuari = usuari.copia();
     }
 
-    public void setTaller(Tallers taller){
-        if(!tallerple(taller)){
-            this.taller = taller.copia();
-        }
-        //implementar exepcion taller ple
-    }
-
-    public Reserves copia(){
-        return new Reserves(this.usuari, this.taller);
-    }
-    
-    private boolean tallerple(Tallers taller){
-        boolean ple = false;
-        //Implementar en la classe tallers el mètode public void places lliures() -> FET
-        if(!taller.placesLliures()) ple = true;
-        return ple;
-
+    public void valorar(){
+        this.valorada = true;
     }
 
     public boolean esIgual(Reserves reserva){
-            return(this.getUsuari().igual(this.getUsuari()) && this.getTallers().igual(this.getTallers()));
+            return (this.codiReserva.equalsIgnoreCase(reserva.getCodiReserva()));
+    }
+
+    public Reserves copia(){
+        return new Reserves(this.usuari, this.codiTaller, this.codiReserva, this.valorada);
     }
 }

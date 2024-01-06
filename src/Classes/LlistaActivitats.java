@@ -111,12 +111,11 @@ public class LlistaActivitats extends Llista<Activitats>{
         return aux;
     }
 
-    public float notaMitjanaTaller(String nom){ //identificar taller pel nom????
+    public float notaMitjanaTaller(String codi){ //identificar taller pel nom????
         Boolean trobat = false;
-        int i;
         float resultat = (float) 0.0;
-        for (i = 0; i < nElem-1 && !trobat; i++){
-            if (llista[i].getNom().equalsIgnoreCase(nom)){ 
+        for (int i = 0; i < nElem-1 && !trobat; i++){
+            if (llista[i].getCodi().equalsIgnoreCase(codi)){ 
                 trobat = true;
                 resultat = ((Tallers) llista[i]).mitjanaValoracions();
             }
@@ -124,18 +123,6 @@ public class LlistaActivitats extends Llista<Activitats>{
         return resultat;
     }
 
-    /*public Tallers trobaTaller(String codi){
-        Tallers t;
-        Boolean trobat = false;
-        
-        for (int i = 0; i < nElem-1; i++){
-            if (((String) llista[i].getCodi).equalsIgnoreCase(codi)){
-                trobat = true;
-                t = (Tallers) llista[i].copia();
-            }
-        }
-        return t;
-    }*/
    public Tallers trobaTaller(String codi) {
         Tallers t = null; // Inicializamos t a null
         boolean trobat = false;
@@ -144,7 +131,7 @@ public class LlistaActivitats extends Llista<Activitats>{
             // Corregimos getCodi a getCodi()
             if (((String) llista[i].getCodi()).equalsIgnoreCase(codi)) {
                 trobat = true;
-                t = (Tallers) llista[i].copia(); // Asumiendo que la clase Tallers tiene un método copia()
+                t = (Tallers) llista[i].copia(); 
                 // Terminamos el bucle al encontrar el taller
             }
         }
@@ -197,7 +184,6 @@ public class LlistaActivitats extends Llista<Activitats>{
      public void llegirfitxer(String nomarxiu){
         File file = new File("src", nomarxiu);
         Activitats aux;
-        //Scanner scanner = new Scanner(file);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String linia = scanner.nextLine();
@@ -212,12 +198,12 @@ public class LlistaActivitats extends Llista<Activitats>{
 
                 if (parts[7].equalsIgnoreCase("-1")){
                     String nomPersona = parts[6].trim();                                    //Xerrades acaba aqui
-                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
+                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, nomPersona);
                 }
                 else if (parts[8].equalsIgnoreCase("-1")){
                     boolean audioguies = Boolean.parseBoolean(parts[6].trim());            
                     boolean adaptCegues = Boolean.parseBoolean(parts[7].trim());            //Visites acaba aqui   
-                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
+                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, audioguies, adaptCegues); 
                 }
                 else{
                     float hora = Float.parseFloat(parts[6].trim());            
@@ -226,7 +212,7 @@ public class LlistaActivitats extends Llista<Activitats>{
                     int usuarisApuntats = Integer.parseInt(parts[9].trim());
                     float sumaVal = Float.parseFloat(parts[10].trim());
                     int nVal = Integer.parseInt(parts[11].trim());                          //Tallers acaba aqui
-                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
                 }
 
                 this.agregar(aux);
@@ -236,7 +222,7 @@ public class LlistaActivitats extends Llista<Activitats>{
            System.out.println("Archivo no encontrado: " + nomarxiu);
         }  
         catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("error" + e);
+            System.out.println("Fora de Rang: " + e);
         }
         
 

@@ -140,7 +140,7 @@ public class LlistaReserves extends Llista<Reserves>{
      */
     private void comprovaReserva(Reserves reserva) throws Excepcions{
         for(int i = 0; i< nElem; i++){
-            if(llista[i].esIgual(reserva)) throw new Excepcions("La reserva ja està feta");
+            if(llista[i].esIgual(reserva) && llista[i].getValorada() == reserva.getValorada()) throw new Excepcions("La reserva ja està feta");
         }
     }
 
@@ -153,9 +153,9 @@ public class LlistaReserves extends Llista<Reserves>{
      * 
      */
     public void llegirfitxer(String nomarxiu) {
-
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomarxiu))) {
-            while (true) {
+            boolean fin = false;
+            while (!fin) {
                 try {
                     Object obj = ois.readObject();
 
@@ -164,7 +164,7 @@ public class LlistaReserves extends Llista<Reserves>{
                         afegirsensecopiar(reserva);
                     }
                 } catch (EOFException e) {
-                    break; // Fin del archivo
+                    fin = true; // Fin del archivo
                 }
             }
             System.out.println("Cargado\n");
@@ -187,7 +187,7 @@ public class LlistaReserves extends Llista<Reserves>{
     public LlistaUsuaris usuarisTaller(Tallers taller){
         LlistaUsuaris usuaris = new LlistaUsuaris(nElem);
         for(int i = 0; i< nElem; i++){
-            if(llista[i].getTallers().equals(taller))usuaris.agregar(llista[i].getUsuari());
+            if (llista[i].getCodiTaller().equalsIgnoreCase(taller.getCodi())) usuaris.agregar(llista[i].getUsuari());
         }
         return usuaris;
     }
@@ -201,22 +201,35 @@ public class LlistaReserves extends Llista<Reserves>{
                 usuarimesapuntat = llista[i].getUsuari().copia();
             }
         }
-        return usuarimesapuntat;
-
-        
+        return usuarimesapuntat;   
     }
 
-    public void valorartaller(float valoracio, Reserves reservaValorada){
+
+    public String valorarTaller(float valoracio, Reserves reserva){
         try{
-            comprovaReserva(reservaValorada);
-           reservaValorada.getTallers().afegirValoracio(valoracio);
+            comprovaReserva(reserva);
+            //reservaValorada.getTallers().afegirValoracio(valoracio);
+            reserva.valorar();
         }
         catch(Excepcions e){
             System.out.println(e.getMessage());
         }
+        return reserva.getCodiTaller();
     }
 
+    public Reserves trobaReserva(String codiReserva){
+        boolean trobat = false;
+        Reserves r = null;
+        for (int i = 0; i < nElem-1 && !trobat; i++){
+            if (llista[i].getCodiReserva().equalsIgnoreCase(codiReserva)){
+                trobat = true;
+                r = llista[i];
+            }
+        }
+        return r.copia();
     }
+
+}
    
     
 

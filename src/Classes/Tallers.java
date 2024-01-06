@@ -12,8 +12,6 @@ public class Tallers extends Activitats {
     private float hora, durada, sumaVal;
     private int  capacitat, usuarisApuntats, nVal;
 
-    // Otros atributos y métodos...
-
     public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, int hora, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
         super(nom, lloc, dia, entitatCrea, codiPostal);
         this.hora = hora;
@@ -24,15 +22,14 @@ public class Tallers extends Activitats {
         this.nVal = nVal;
         
     }
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, float hora2, float durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal){
-        super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, float hora2, float durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal){
+        super(nom, lloc, dia, entitatCrea, codiPostal, codi);
         this.hora = hora2;
         this.durada = durada2;
         this.capacitat = capacitat;
         this.usuarisApuntats = usuarisApuntats;
         this.sumaVal = sumaVal2;
         this.nVal = nVal;
-        
     }
 
     public float getHora() {
@@ -52,7 +49,9 @@ public class Tallers extends Activitats {
         return usuarisApuntats;
     }
 
-    //No es mira si la valoració es fa quan ja ha passat el taller. S'hauria de fer? Suposo que no, perque no tenim manera de saber el dia actual per l'usuari, no? (punt 9 del main)
+    public void apuntarUsuari(){
+        usuarisApuntats++;
+    }
 
     public void afegirValoracio(float valoracion) {
         sumaVal = sumaVal + valoracion;
@@ -65,9 +64,7 @@ public class Tallers extends Activitats {
 
     @Override
     public float proporcioTallers() {
-        float proporcio = 0;
-        proporcio = (float) usuarisApuntats / capacitat;
-        return proporcio;
+        return (float)(usuarisApuntats / capacitat);
     }
 
     @Override
@@ -82,13 +79,8 @@ public class Tallers extends Activitats {
     
     @Override
     public Tallers copia(){
-        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, true, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
         return (Tallers)aux;
-    }
-
-    public boolean igual(Tallers tallers) {
-        
-        return false;
     }
 
 }

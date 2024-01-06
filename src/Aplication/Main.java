@@ -36,6 +36,11 @@ public class Main {
 		llisE.llegirfitxer("Llista_entitats.txt");
 		llisU.llegirfitxer("Llista_usuaris.txt");
 		llisR.llegirfitxer("Llista_reserves.ser");
+
+		Tallers a = new Tallers("Tres en raya", "Salou", 5, "Proide", 43840, "PRO100", 17, 0.5f, 8, 0, 0, 0);
+		Usuaris u = new Usuaris("Rogerx", "rogerx@gmail.com", 43001);
+		Reserves r = new Reserves(u, a);
+		llisR.agregar(r);
 		/**
 		 * Mtodes comprovats
 		 */
@@ -128,14 +133,12 @@ public class Main {
 					break;
 				// Mostrar les dades de les xerrades que farà una persona concreta.
 				case 13:
-					System.out
-							.println("\nHas escollit mostrar les dades de les xerrades que farà una persona concreta.");
+					System.out.println("\nHas escollit mostrar les dades de les xerrades que farà una persona concreta.");
 					op13(llisA, teclat);
 					break;
 				// Donar de baixa un taller sempre que no hi hagi usuaris apuntats.
 				case 14:
-					System.out
-							.println("\nHas escollit donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
+					System.out.println("\nHas escollit donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
 					op14(llisA, teclat);
 					break;
 				// Sortir del programa
@@ -143,7 +146,6 @@ public class Main {
 		} while (opcio != 15);
 		System.out.println("Has sortit del programa amb èxit!");
 	}
-	// Obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.
 
 	// Mostrar el menú d'opcions
 	private static void printfMenu() {
@@ -167,9 +169,6 @@ public class Main {
 		System.out.println("\t15. Sortir de l'aplicació");
 		System.out.print("\n\tIndica opcio: ");
 	}
-
-	// FETS: 1, 2, 3, 4, 5, 10, 11, 12, 13, 14
-	// FALTEN: 6, 7, 8, 9
 
 	private static void op1(LlistaUsuaris llisU, LlistaEntitats llisE, LlistaActivitats llisA, LlistaReserves llisR,
 			Scanner teclat) {
@@ -303,15 +302,15 @@ public class Main {
 
 	// 9. Registrar la nota que un usuari que s’ha apuntat a un taller li dona un
 	// cop s’ha fet.");
-	private static void op9(LlistaReserves llisR, Scanner teclat) { // FALTA MÈTODE A RESERVES
+	private static void op9(LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat) {
 
+		System.out.println("Introdueix el codi de reserva (amb forma 00AAA000) : ");
+		String codiReserva = (teclat.nextLine());
 		System.out.println("Introdueix la nota que li poses al taller: ");
-		String reserva = (teclat.nextLine());
-		System.out.println("Introdueix la nota que li poses al taller: ");
-		float nota;
-		nota = Float.parseFloat(teclat.nextLine());
-		/* llisR.valorartaller(nota, reserva); */
-
+		float nota = Float.parseFloat(teclat.nextLine());
+		llisA.trobaTaller(llisR.valorarTaller(nota, llisR.trobaReserva(codiReserva))).afegirValoracio(nota);		//nota es pot arribar a treure de valorarTaller
+		//llisA.trobaTaller retorna el taller al qual hem d'afegir una valoracio
+		//llisR.valorarTaller actualitza el boolea de la reserva per a posar-lo a true (que s'ha valorat) i retorna el codi del taller que es vol valorar
 	}
 
 	// 10. Calcular la nota mitja que ha rebut un taller.");
