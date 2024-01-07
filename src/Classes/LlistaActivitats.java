@@ -34,10 +34,17 @@ public class LlistaActivitats extends Llista<Activitats>{
     public LlistaActivitats mateixaEntitat(String ent){
         LlistaActivitats aux = new LlistaActivitats(nElem);
 
-        for (int i = 0; i < nElem-1; i++){
+        for (int i = 0; i < nElem; i++){
             if (llista[i].getEntitatCrea().equalsIgnoreCase(ent)) aux.agregar(llista[i]);
         }
         return aux;
+    }
+    
+    public void mateixaActivitat(Activitats a) throws Excepcions{
+        for (int i = 0; i < nElem; i++){
+            if (llista[i].getNom().equalsIgnoreCase(a.getNom()) && llista[i].getEntitatCrea().equalsIgnoreCase(a.getEntitatCrea())) throw new Excepcions("L'activitat ja existeix"); //Comprovem que el nom no estigui ja a la llista
+            
+        }
     }
 
     /**
@@ -47,7 +54,7 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
     public LlistaActivitats visitesMateixaEntitat(String ent){
         LlistaActivitats aux = new LlistaActivitats(nElem);
-        for (int i = 0; i < nElem-1; i++){
+        for (int i = 0; i < nElem; i++){
             if (llista[i] instanceof Visites){
                 if (llista[i].getEntitatCrea().equalsIgnoreCase(ent)) aux.agregar(llista[i]);
             }
@@ -62,7 +69,7 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
     public LlistaActivitats mateixDia(int dia){
         LlistaActivitats aux = new LlistaActivitats(nElem);
-        for (int i = 0; i < nElem-1; i++){
+        for (int i = 0; i < nElem; i++){
             if (llista[i].diaIgual(dia)) aux.agregar(llista[i]);
         }
         return aux;
@@ -75,7 +82,7 @@ public class LlistaActivitats extends Llista<Activitats>{
     public LlistaActivitats tallersDisp(){
         LlistaActivitats aux = new LlistaActivitats(nElem);
         
-        for (int i = 0; i < nElem-1; i++){
+        for (int i = 0; i < nElem; i++){
             if (llista[i].placesLliures()) aux.agregar(llista[i]);
         }
         return aux;
@@ -103,7 +110,7 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
     public LlistaActivitats xerradesMateixaPersona(String nom){
         LlistaActivitats aux = new LlistaActivitats(nElem);
-        for (int i = 0; i < nElem-1; i++){
+        for (int i = 0; i < nElem; i++){
             if (llista[i] instanceof Xerrades){
                 if (llista[i].getPersona().equalsIgnoreCase(nom)) aux.agregar(llista[i]);
             }
@@ -114,7 +121,7 @@ public class LlistaActivitats extends Llista<Activitats>{
     public float notaMitjanaTaller(String codi){ //identificar taller pel nom????
         Boolean trobat = false;
         float resultat = (float) 0.0;
-        for (int i = 0; i < nElem-1 && !trobat; i++){
+        for (int i = 0; i < nElem && !trobat; i++){
             if (llista[i].getCodi().equalsIgnoreCase(codi)){ 
                 trobat = true;
                 resultat = ((Tallers) llista[i]).mitjanaValoracions();
@@ -127,7 +134,7 @@ public class LlistaActivitats extends Llista<Activitats>{
         Tallers t = null; // Inicializamos t a null
         boolean trobat = false;
     
-        for (int i = 0; i < nElem-1 && !trobat; i++) {
+        for (int i = 0; i < nElem && !trobat; i++) {
             // Corregimos getCodi a getCodi()
             if (((String) llista[i].getCodi()).equalsIgnoreCase(codi)) {
                 trobat = true;
@@ -147,10 +154,10 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
     /*public void eliminarTaller(String codi){
         boolean trobat = false;
-        for (int i = 0; i < nElem-1 && !trobat; i++){
+        for (int i = 0; i < nElem && !trobat; i++){
             if (llista[i].getCodi().equalsIgnoreCase(codi)){
                 if (llista[i].getUsuarisApuntats() == 0){
-                    for (int j = i; j < nElem-1; j++){
+                    for (int j = i; j < nElem; j++){
                         llista[j] = llista[j+1];
                     }
                     nElem--;
@@ -162,10 +169,10 @@ public class LlistaActivitats extends Llista<Activitats>{
     /*Versió amb boolean per a saber si s'ha eliminat o no.*/ 
     public boolean eliminarTaller(String codi){
         boolean trobat = false;
-        for (int i = 0; i < nElem-1 && !trobat; i++){
+        for (int i = 0; i < nElem && !trobat; i++){
             if (llista[i].getCodi().equalsIgnoreCase(codi)){
                 if (llista[i].getUsuarisApuntats() == 0){
-                    for (int j = i; j < nElem-1; j++){
+                    for (int j = i; j < nElem; j++){
                         llista[j] = llista[j+1];
                     }
                     nElem--;
@@ -198,16 +205,16 @@ public class LlistaActivitats extends Llista<Activitats>{
 
                 if (parts[7].equalsIgnoreCase("-1")){
                     String nomPersona = parts[6].trim();                                    //Xerrades acaba aqui
-                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, nomPersona);
+                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
                 }
                 else if (parts[8].equalsIgnoreCase("-1")){
                     boolean audioguies = Boolean.parseBoolean(parts[6].trim());            
                     boolean adaptCegues = Boolean.parseBoolean(parts[7].trim());            //Visites acaba aqui   
-                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, audioguies, adaptCegues); 
+                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
                 }
                 else{
-                    float hora = Float.parseFloat(parts[6].trim());            
-                    float durada = Float.parseFloat(parts[7].trim()); 
+                    String hora = parts[6].trim();            
+                    String durada = parts[7].trim(); 
                     int capacitat = Integer.parseInt(parts[8].trim());
                     int usuarisApuntats = Integer.parseInt(parts[9].trim());
                     float sumaVal = Float.parseFloat(parts[10].trim());
@@ -232,9 +239,15 @@ public class LlistaActivitats extends Llista<Activitats>{
      * @param a - activitat a afegir
      */
     public void agregar(Activitats a){
-        if(nElem < llista.length){
-            llista[nElem] = a.copia();
-            nElem++;
+        try{
+            mateixaActivitat(a);
+            if(nElem < llista.length){
+                llista[nElem] = a.copia();
+                nElem++;
+            }
+        }
+        catch (Excepcions e){
+            System.out.println(e.getMessage());
         }
     }
 
@@ -245,7 +258,7 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
     public boolean contiene(Activitats a){
         boolean present = false;
-        for (int i = 0; i < nElem-1 && !present; i++){  
+        for (int i = 0; i < nElem && !present; i++){  
             if (llista[i].getCodi().equalsIgnoreCase(a.getCodi())) present = true;
 
         }
@@ -261,11 +274,11 @@ public class LlistaActivitats extends Llista<Activitats>{
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
-            for(int i = 0; i <nElem-1; i++){
-                bw.write(llista[i].getCodi() + "," + llista[i].getNom() + "," + llista[i].getLloc() + "," + llista[i].getDia() + "," + llista[i].getEntitatCrea() + "," + llista[i].getCodiPostal() + "," + llista[i].atributsExtra() + ";-1"); //-1 és el sentinella
+            for(int i = 0; i < nElem; i++){
                 bw.newLine();
-                System.out.println("Guardat\n");
+                bw.write(llista[i].getNom() + ";" + llista[i].getLloc() + ";" + llista[i].getDia() + ";" + llista[i].getEntitatCrea() + ";" + llista[i].getCodiPostal() + ";" + llista[i].getCodi() + ";" +  llista[i].atributsExtra() + ";-1"); //-1 és el sentinella
             }
+            System.out.println("Guardat\n");
             bw.close();
         }
         catch (IOException e){
@@ -296,9 +309,9 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
     public void eliminar(Activitats a){
         boolean trobat = false;
-        for (int i = 0; i < nElem-1 && !trobat; i++){
+        for (int i = 0; i < nElem && !trobat; i++){
             if(llista[i].getCodi().equalsIgnoreCase(a.getCodi())){
-                for (int j = i; j < nElem-1; j++){
+                for (int j = i; j < nElem; j++){
                     llista[j] = llista[j+1];
                 }
                 nElem--;

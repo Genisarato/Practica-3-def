@@ -8,7 +8,6 @@ public class Reserves implements Serializable{
     private Usuaris usuari;
     private String codiTaller;
     public boolean valorada;
-    private static int index = 1;
 
 
     public Reserves(Usuaris u, Tallers taller) {
@@ -16,8 +15,8 @@ public class Reserves implements Serializable{
             usuari = u.copia();
             codiTaller = taller.getCodi();
             taller.apuntarUsuari();
-            codiReserva = Integer.toString(index) + codiTaller;
-            augmentarIndex();
+            u.updateapuntats();
+            codiReserva = Integer.toString(taller.getUsuarisApuntats()) + codiTaller;
             valorada = false;
         }
         //implementar excepcion taller ple
@@ -28,10 +27,6 @@ public class Reserves implements Serializable{
         this.codiTaller = codiTaller;
         this.codiReserva = codiReserva;
         this.valorada = valorada;
-    }
-
-    public static void augmentarIndex(){
-        index++;
     }
 
     public Usuaris getUsuari(){
@@ -65,4 +60,15 @@ public class Reserves implements Serializable{
     public Reserves copia(){
         return new Reserves(this.usuari, this.codiTaller, this.codiReserva, this.valorada);
     }
+
+    public String adaptarBool (Boolean b){
+        String hoEs = "Si";
+        if (!b) hoEs = "No";
+        return hoEs;
+    }
+    
+    public String toString () {
+        return ("\n Usuari: " + usuari + "\nCodi taller que s'ha apuntat: " + codiTaller + " Codi Reserva: " +codiReserva+ ". Ha valorat el taller: " +adaptarBool(valorada));
+    }
+
 }

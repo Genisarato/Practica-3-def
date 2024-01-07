@@ -1,3 +1,2 @@
-Tres en raya;Salou;5;Proide;43840;PRO100;17.25;0.5;8;0;0;0;-1
-Python basic;Tarragona;6;ETSE;43005;ETS101;Xavier Ascó;-1
-Museu Nacional d'Arqueologia;Tarragona;21;Ajuntament de Tarragona;43003;AJU102;no;si;-1
+Museu Nacional d'Arqueologia;Tarragona;21;Ajuntament de Tarragona;43003;Aju100;No,No;-1
+Tres en raya;Salou;5;Proide;43840;Pro100;17:15;0:30;8;0;0.0;0;-1

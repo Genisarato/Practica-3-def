@@ -162,7 +162,7 @@ public class LlistaReserves extends Llista<Reserves>{
 
                     if (obj instanceof Reserves) {
                         Reserves reserva = (Reserves) obj;
-                        afegirsensecopiar(reserva);
+                        agregar(reserva);
                     }
                 } catch (EOFException e) {
                     fin = true; // Fin del archivo
@@ -177,11 +177,11 @@ public class LlistaReserves extends Llista<Reserves>{
 
     /*Mètode auxiliar per afegir un usuari de l'arxiu llista_usuaris.txt a la llista sense copiar al arxiu per no tenir duplicats.
      * També es podria fer dins al bucle de llegirfitxer, era per fer-ho més elegant :) 
-     */
+     *
     private void afegirsensecopiar(Reserves reserva){
                 llista[nElem] = reserva.copia();
                 nElem++;
-    }
+    }*/
 
     //Métode que retorna una llista de usuaris que estan apuntats a un taller en específic
     //@param taller
@@ -221,7 +221,7 @@ public class LlistaReserves extends Llista<Reserves>{
     public Reserves trobaReserva(String codiReserva){
         boolean trobat = false;
         Reserves r = null;
-        for (int i = 0; i < nElem-1 && !trobat; i++){
+        for (int i = 0; i < nElem && !trobat; i++){
             if (llista[i].getCodiReserva().equalsIgnoreCase(codiReserva)){
                 trobat = true;
                 r = llista[i];

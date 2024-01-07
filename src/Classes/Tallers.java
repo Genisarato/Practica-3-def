@@ -9,10 +9,11 @@ package Classes;
 /*Els tallers es fan en una hora concreta del dia, i tenen una durada determinada. Tenen també
 una capacitat fixada, i els usuaris s’hi ha de registrar*/
 public class Tallers extends Activitats {
-    private float hora, durada, sumaVal;
-    private int  capacitat, usuarisApuntats, nVal;
+    private float sumaVal;
+    private int capacitat, usuarisApuntats, nVal;
+    private String hora, durada;
 
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, int hora, int durada, int capacitat, int usuarisApuntats, int sumaVal, int nVal){
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String hora, String durada, int capacitat, int usuarisApuntats, float sumaVal, int nVal){
         super(nom, lloc, dia, entitatCrea, codiPostal);
         this.hora = hora;
         this.durada = durada;
@@ -22,22 +23,21 @@ public class Tallers extends Activitats {
         this.nVal = nVal;
         
     }
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, float hora2, float durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal){
-        super(nom, lloc, dia, entitatCrea, codiPostal, codi);
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, String hora2, String durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal){
+        super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
         this.hora = hora2;
         this.durada = durada2;
         this.capacitat = capacitat;
         this.usuarisApuntats = usuarisApuntats;
         this.sumaVal = sumaVal2;
         this.nVal = nVal;
-        if (!esCopia) incrementarAct();
     }
 
-    public float getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public float getDurada() {
+    public String getDurada() {
         return durada;
     }
 
@@ -73,12 +73,15 @@ public class Tallers extends Activitats {
         return capacitat > usuarisApuntats;
     }
 
-    public String adaptarHora(float horari){
-        return (String)((int)horari + ":" + (int)(horari % 1 * 60));
+    public float adaptarHora(String horari){
+        String[] parts = horari.split(":");
+        int hores = Integer.parseInt(parts[0]);
+        float mins = (float)(Integer.parseInt(parts[1]) / 60);
+        return (float)(hores + mins);
     }
     
     public String atributsExtra(){
-        return (hora + "," + "," + durada + "," + capacitat + "," + usuarisApuntats + "," + sumaVal + "," + nVal);
+        return (hora + ";" + durada + ";" + capacitat + ";" + usuarisApuntats + ";" + sumaVal + ";" + nVal);
     }
     
     @Override
@@ -88,7 +91,7 @@ public class Tallers extends Activitats {
     }
 
     public String toString(){
-        return (super.toString() + "\nA les " + adaptarHora(hora) + "h, amb una durada de " + adaptarHora(durada) + "h.\nTé capacitat per a " + capacitat + " persones, i hi ha " + usuarisApuntats + " usuaris apuntats.");
+        return (super.toString() + "\nA les " + hora + "h, amb una durada de " + durada + "h.\nTé capacitat per a " + capacitat + " persones, i hi ha " + usuarisApuntats + " usuaris apuntats.");
     }
 
 }

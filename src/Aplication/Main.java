@@ -39,7 +39,7 @@ public class Main {
 		/**
 		 * Mtodes comprovats
 		 */
-		System.out.println("\neippp");
+
 		do {
 			printfMenu();
 			do { // comprovem que no fiqui un valor fora del rang
@@ -81,15 +81,15 @@ public class Main {
 
 				// Registrar la petició d’un usuari per reservar un taller.
 				case 6:
-					System.out.println("\nHas escollit registrar la petició d’un usuari per reservar un taller.");
-					op6(llisA, llisR, teclat);
+					System.out.println("\nHas escollit registrar la petició d'un usuari per reservar un taller.");
+					op6(llisU, llisA, llisR, teclat);
 					// fet
 					/* Crea una reserva */
 					break;
 
 				// Mostrar els usuaris que s’han apuntat a un taller.
 				case 7:
-					System.out.println("\nHas escollit mostrar els usuaris que s’han apuntat a un taller.");
+					System.out.println("\nHas escollit mostrar els usuaris que s'han apuntat a un taller.");
 					op7(llisA, llisR, teclat);
 					// genis
 					// fet
@@ -97,7 +97,7 @@ public class Main {
 
 				// Calcular l’usuari que s’ha apuntat a més tallers.
 				case 8:
-					System.out.println("\nHas escollit calcular l’usuari que s’ha apuntat a més tallers.");
+					System.out.println("\nHas escollit calcular l'usuari que s'ha apuntat a més tallers.");
 					op8(llisR, teclat);
 					// genis
 					// fet
@@ -107,7 +107,7 @@ public class Main {
 				// s’ha fet.
 				case 9:
 					System.out.println(
-							"\nHas escollit registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
+							"\nHas escollit registrar la nota que un usuari que s'ha apuntat a un taller li dona un cop s'ha fet.");
 					op9(llisA, llisR, teclat);
 					break;
 				// Calcular la nota mitja que ha rebut un taller.
@@ -150,17 +150,16 @@ public class Main {
 	private static void printfMenu() {
 		System.out.println("\nIntrodueix el número de la operació que vulguis realitzar\n");
 		System.out.println("\t1. Mostrar les dades de qualsevol llista que tingueu definida.");
-		System.out.println("\t2. Obtenir i mostrar la llista d’activitats que ofereix una entitat concreta.");
+		System.out.println("\t2. Obtenir i mostrar la llista d'activitats que ofereix una entitat concreta.");
 		System.out.println("\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
 		System.out.println("\t4. Obtenir i mostrar la llista dels tallers que tenen places disponibles.");
 		System.out.println("\t5. Afegir una nova activitat ");
-		System.out.println("\t6. Registrar la petició d’un usuari per reservar un taller.");
-		System.out.println("\t7. Mostrar els usuaris que s’han apuntat a un taller.");
-		System.out.println("\t8. Calcular l’usuari que s’ha apuntat a més tallers.");
-		System.out
-				.println("\t9. Registrar la nota que un usuari que s’ha apuntat a un taller li dona un cop s’ha fet.");
+		System.out.println("\t6. Registrar la petició d'un usuari per reservar un taller.");
+		System.out.println("\t7. Mostrar els usuaris que s'han apuntat a un taller.");
+		System.out.println("\t8. Calcular l'usuari que s'ha apuntat a més tallers.");
+		System.out.println("\t9. Registrar la nota que un usuari que s'ha apuntat a un taller li dona un cop s'ha fet.");
 		System.out.println("\t10. Calcular la nota mitja que ha rebut un taller.");
-		System.out.println("\t11. Quin és el taller que ha tingut més èxit? C");
+		System.out.println("\t11. Quin és el taller que ha tingut més èxit?");
 		System.out.println("\t12. Obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
 		System.out.println("\t13. Mostrar les dades de les xerrades que farà una persona concreta.");
 		System.out.println("\t14. Donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
@@ -213,21 +212,21 @@ public class Main {
 		Activitats aux;
 
 		do {
-			System.out.println("Quin tipus d'activitat vols afegir?");
+			System.out.println("Quin tipus d'activitat vols afegir?(Visites, Tallers, Xerrades)");
 			tipus = teclat.nextLine();
 		} while (!(tipus.equalsIgnoreCase("Xerrada")) && !(tipus.equalsIgnoreCase("Xerrades"))
 				&& !(tipus.equalsIgnoreCase("Visita")) && !(tipus.equalsIgnoreCase("Visites"))
 				&& !(tipus.equalsIgnoreCase("Taller")) && !(tipus.equalsIgnoreCase("Tallers")));
 
-		System.out.println("Introdueix les dades de l'activitat que vols afegir.\n\tNom: ");
+		System.out.println("Introdueix les dades de l'activitat que vols afegir.\n\tNom:");
 		nom = teclat.nextLine();
-		System.out.println("\n\tLloc: ");
+		System.out.println("\n\tLloc:");
 		lloc = teclat.nextLine();
-		System.out.println("\n\tDia: ");
+		System.out.println("\n\tDia:");
 		dia = Integer.parseInt(teclat.nextLine());
 		System.out.println("\n\tNom de l'entitat que l'ha creat: ");
 		entitatCrea = teclat.nextLine();
-		System.out.println("\n\tCodi Postal: ");
+		System.out.println("\n\tCodi Postal:");
 		codiPostal = Integer.parseInt(teclat.nextLine());
 		if (tipus.equalsIgnoreCase("Xerrada") || tipus.equalsIgnoreCase("Xerrades")) {
 			System.out.println("\n\tNom de la persona que fa la xerrada: ");
@@ -249,10 +248,10 @@ public class Main {
 
 			aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, audioguies, adaptCegues);
 		} else {
-			System.out.println("\n\tA quina hora és?: ");
-			int hora = Integer.parseInt(teclat.nextLine());
+			System.out.println("\n\tA quina hora és?: (separa la hora i els minuts amb :)");
+			String hora = teclat.nextLine();
 			System.out.println("\n\tQuina durada té?: ");
-			int durada = Integer.parseInt(teclat.nextLine());
+			String durada = teclat.nextLine();
 			System.out.println("\n\tQuantes persones s'hi poden inscriure?: ");
 			int capacitat = Integer.parseInt(teclat.nextLine());
 
@@ -262,7 +261,7 @@ public class Main {
 	}
 
 	// 6.Registrar la petició d’un usuari per reservar un taller
-	private static void op6(LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat) {
+	private static void op6(LlistaUsuaris llisU, LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat) {
 		Reserves r;
 		Usuaris u;
 		String nom, mail, codi;
@@ -279,6 +278,7 @@ public class Main {
 		codi = teclat.nextLine();
 
 		u = new Usuaris(nom, mail, codiPostal);
+		llisU.agregar(u);
 		r = new Reserves(u, llisA.trobaTaller(codi));
 		llisR.agregar(r);
 		System.out.println("\nReserva realitzada!");
@@ -286,7 +286,7 @@ public class Main {
 
 	// 7. Mostrar els usuaris que s’han apuntat a un taller.")
 	private static void op7(LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat) {
-		System.out.println("Quin taller vols buscar\n");
+		System.out.println("Quin taller vols buscar? (Introdueix el codi d'activitat)\n");
 		String codi = teclat.nextLine();
 		Tallers t = llisA.trobaTaller(codi);
 		System.out.println("\n" + llisR.usuarisTaller(t));
