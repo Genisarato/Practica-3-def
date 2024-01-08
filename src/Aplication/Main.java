@@ -260,7 +260,7 @@ public class Main {
 	// 6.Registrar la petició d’un usuari per reservar un taller
 	private static void op6(LlistaUsuaris llisU, LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat) {
 		Reserves r;
-		Usuaris u;
+		Usuaris u = null;
 		String nom, mail, codi;
 		int codiPostal;
 
@@ -274,11 +274,20 @@ public class Main {
 		System.out.println("\nA quin taller es vol inscriure? Introdueix el seu codi: ");
 		codi = teclat.nextLine();
 
-		u = new Usuaris(nom, mail, codiPostal);
-		llisU.agregar(u);
-		r = new Reserves(u, llisA.trobaTaller(codi));
-		llisR.agregar(r);
-		System.out.println("\nReserva realitzada!");
+		if (!llisU.nicknameigual(nom)){ 
+			u = new Usuaris(nom, mail, codiPostal);
+			llisU.agregar(u);
+		}
+		else{
+			u = llisU.trobaUsuari(nom, mail, codiPostal);
+		}
+
+		if (llisA.trobaTaller(codi) == null) System.out.println("L'activitat que has introduit no es tracta d'un taller.");
+		else{
+			r = new Reserves(u, llisA.trobaTaller(codi));
+			llisR.agregar(r);
+			System.out.println("\nReserva realitzada!");
+		}
 	}
 
 	// 7. Mostrar els usuaris que s’han apuntat a un taller.")

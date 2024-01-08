@@ -88,8 +88,8 @@ public class LlistaEntitats extends Llista<Entitats>{
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
             for(int i = 0; i <nElem; i++){
-                bw.write(llista[i].getNom() + "," + llista[i].getMail() + "," +llista[i].getTelef());
-                bw.newLine();
+                bw.write(llista[i].getNom() + ";" + llista[i].getMail() + ";" +llista[i].getTelef());
+                if (i != nElem - 1) bw.newLine();
             }
             System.out.println("Guardat\n");
             bw.close();

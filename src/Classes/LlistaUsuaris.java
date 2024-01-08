@@ -50,11 +50,11 @@ public class LlistaUsuaris extends Llista<Usuaris>{
 
     /*Mètode auxiliar per afegir un usuari de l'arxiu llista_usuaris.txt a la llista sense copiar al arxiu per no tenir duplicats.
      * També es podria fer dins al bucle de llegirfitxer, era per fer-ho més elegant :) 
-     */
+     *
     private void afegirsensecopiar(Usuaris usuari){
                 llista[nElem] = usuari.copia();
                 nElem++;
-    }
+    }*/
 
     /* Mètode que llegeix el contingut del fitxer llista_usuaris.txt 
     *  ATENCIO: AQUEST MÈTODE SEMPRE S'HA DE FER ABANS DE COMENÇAR AMB EL PROGAMA
@@ -74,8 +74,9 @@ public class LlistaUsuaris extends Llista<Usuaris>{
                 String nom = parts[0].trim();
                 String mail = parts[1].trim();
                 int codi = Integer.parseInt(parts[2].trim());
-                Usuaris usuari = new Usuaris(nom, mail, codi);
-                this.afegirsensecopiar(usuari);
+                int tallerApuntats = Integer.parseInt(parts[3].trim());
+                Usuaris usuari = new Usuaris(nom, mail, codi, tallerApuntats);
+                this.agregar(usuari);
                 
             }
         } catch (FileNotFoundException e) {
@@ -93,7 +94,13 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         if(nElem < llista.length){
             boolean afegit = false;
             while (!afegit){
-                try{
+                if (!nicknameigual(n.getNickname())){
+                    llista[nElem] = n.copia();
+                    nElem++;
+                    afegit = true;
+                }
+
+                /*try{
                     nicknameigual(n.getNickname());
                     llista[nElem] = n.copia();
                     nElem++;
@@ -101,11 +108,11 @@ public class LlistaUsuaris extends Llista<Usuaris>{
                 }catch(RuntimeException e){
                     System.out.println(e.getMessage());
                     System.out.println("Introdueix un altre nickname");
-                    /*Implementar llegir un altre nickname i el setNickname*/
-                }
+                    //Implementar llegir un altre nickname i el setNickname
+                }*/
             }
+        }
     }
-}
 
     public int tamano(){
         return nElem;
@@ -143,8 +150,8 @@ public class LlistaUsuaris extends Llista<Usuaris>{
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
             for(int i = 0; i <nElem; i++){
-                bw.write(llista[i].getNickname() + "," + llista[i].getMail() + "," +llista[i].getCodiPostal());
-                bw.newLine();
+                bw.write(llista[i].getNickname() + ";" + llista[i].getMail() + ";" +llista[i].getCodiPostal() + ";" + llista[i].getTallerApuntats());
+                if (i != nElem - 1) bw.newLine();
             }
             System.out.println("Guardat\n");
             bw.close();
@@ -165,10 +172,10 @@ public class LlistaUsuaris extends Llista<Usuaris>{
     }
 
     /*Mètode que comprova que el nickname no està a la llista*/
-    private boolean nicknameigual(String nom){
+    public boolean nicknameigual(String nom){
         boolean trobat = false;
         for(int i = 0; i<nElem; i++){
-            if(llista[i].getNickname().equalsIgnoreCase(nom)) throw new RuntimeException("El nickname está usat.");
+            if(llista[i].getNickname().equalsIgnoreCase(nom)) trobat = true; //throw new RuntimeException("El nickname está usat.");
         }
        return trobat;   
     }
@@ -185,7 +192,18 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         }
     }
 
-
+    public Usuaris trobaUsuari(String nom, String mail, int codiPostal){
+        boolean trobat = false;
+        int i;
+        Usuaris u = null;
+        for (i = 0; i < nElem && !trobat; i++){
+            if ((llista[i].getNickname().equalsIgnoreCase(nom)) && (llista[i].getMail().equalsIgnoreCase(mail)) && (llista[i].getCodiPostal() == codiPostal)){
+                trobat = true;
+                u = llista[i];
+            }
+        }
+        return u;
+    }
 
     public void imprimir() {
         System.out.println(toString());

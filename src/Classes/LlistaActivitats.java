@@ -160,7 +160,7 @@ public class LlistaActivitats extends Llista<Activitats>{
         boolean trobat = false;
     
         for (int i = 0; i < nElem && !trobat; i++) {
-            if (((String) llista[i].getCodi()).equalsIgnoreCase(codi)) {
+            if (((String) llista[i].getCodi()).equalsIgnoreCase(codi) && llista[i] instanceof Tallers) {
                 trobat = true;
                 t = (Tallers) llista[i];    //No es fa servir copia() perquè ens interessa tenir la instància original en el cas que s'hagi de modificar 
                 // Terminamos el bucle al encontrar el taller
@@ -299,8 +299,8 @@ public class LlistaActivitats extends Llista<Activitats>{
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
             for(int i = 0; i < nElem; i++){
-                bw.newLine();
                 bw.write(llista[i].getNom() + ";" + llista[i].getLloc() + ";" + llista[i].getDia() + ";" + llista[i].getEntitatCrea() + ";" + llista[i].getCodiPostal() + ";" + llista[i].getCodi() + ";" +  llista[i].atributsExtra() + ";-1"); //-1 és el sentinella
+                if (i != nElem - 1) bw.newLine();
             }
             System.out.println("Guardat\n");
             bw.close();

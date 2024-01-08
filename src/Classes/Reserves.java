@@ -68,7 +68,7 @@ public class Reserves implements Serializable{
     }
     
     public String toString () {
-        return ("\n Usuari: " + usuari + "\nCodi taller que s'ha apuntat: " + codiTaller + " Codi Reserva: " +codiReserva+ ". Ha valorat el taller: " +adaptarBool(valorada));
+        return ("\nUsuari: " + usuari + "\nCodi taller que s'ha apuntat: " + codiTaller + " Codi Reserva: " +codiReserva+ ". Ha valorat el taller: " +adaptarBool(valorada));
     }
 
 }

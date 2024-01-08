@@ -17,6 +17,13 @@ public class Usuaris implements Serializable{
      * @param mail
      * @param codiPostal
      */
+    public Usuaris(String nom, String mail, int codiPostal, int tallerApuntats){
+        nickname = nom;
+        this.mail = mail;
+        this.codiPostal = codiPostal;
+        tallerapuntats = tallerApuntats;
+    }
+
     public Usuaris(String nom, String mail, int codiPostal){
         nickname = nom;
         this.mail = mail;
@@ -39,6 +46,10 @@ public class Usuaris implements Serializable{
         return codiPostal;
     }
 
+    public int getTallerApuntats(){
+        return tallerapuntats;
+    }
+
     public void setNickname(String nickname){
         this.nickname = nickname;
     }
@@ -52,7 +63,7 @@ public class Usuaris implements Serializable{
     }
     /*Mètode copia */
     public Usuaris copia(){
-        return new Usuaris(nickname, mail, codiPostal);
+        return new Usuaris(nickname, mail, codiPostal, tallerapuntats);
     }
 
     public boolean igual(Usuaris n){
