@@ -145,8 +145,8 @@ public class LlistaUsuaris extends Llista<Usuaris>{
             for(int i = 0; i <nElem; i++){
                 bw.write(llista[i].getNickname() + "," + llista[i].getMail() + "," +llista[i].getCodiPostal());
                 bw.newLine();
-                System.out.println("Guardat\n");
             }
+            System.out.println("Guardat\n");
             bw.close();
         }
         catch (IOException e){

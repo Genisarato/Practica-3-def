@@ -35,13 +35,10 @@ public class Main {
 		llisA.llegirfitxer("Llista_activitats.txt");
 		llisE.llegirfitxer("Llista_entitats.txt");
 		llisU.llegirfitxer("Llista_usuaris.txt");
-		llisR.llegirfitxer();
-		/**
-		 * Mtodes comprovats
-		 */
+		llisR.llegirfitxer("src/Llista_reserves.ser");
 
 		do {
-			printfMenu();
+				printfMenu();
 			do { // comprovem que no fiqui un valor fora del rang
 				opcio = Integer.parseInt(teclat.nextLine());
 			} while (opcio < 0 && opcio > 15);
@@ -117,7 +114,7 @@ public class Main {
 					break;
 				// Quin és el taller que ha tingut més èxit?
 				case 11:
-					System.out.println("\nHas escollit quin és el taller que ha tingut més èxit?");
+					System.out.println("\nHas escollit quin és el taller que ha tingut més èxit.");
 					op11(llisA);
 					break;
 				// Obtenir i mostrar les dades de la llista de visites ofertes per una entitat
@@ -302,7 +299,7 @@ public class Main {
 	// cop s’ha fet.");
 	private static void op9(LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat) {
 
-		System.out.println("Introdueix el codi de reserva (amb forma 00AAA000) : ");
+		System.out.println("Introdueix el codi de reserva (amb forma 0AAA000) : ");
 		String codiReserva = (teclat.nextLine());
 		System.out.println("Introdueix la nota que li poses al taller: ");
 		float nota = Float.parseFloat(teclat.nextLine());
@@ -320,31 +317,39 @@ public class Main {
 
 	// 10. Calcular la nota mitja que ha rebut un taller.");
 	private static void op10(LlistaActivitats llisA, Scanner teclat) {
-		System.out.println("Introdueix el nom del taller: ");
+		System.out.println("Introdueix el codi del taller (amb forma AAA000): ");
 		String nom = teclat.nextLine();
 		System.out.println("La nota mitjana del taller és de " + llisA.notaMitjanaTaller(nom));
 	}
 
 	// 11. Quin és el taller que ha tingut més èxit? C");
 	private static void op11(LlistaActivitats llisA) {
-		System.out.println("El taller que ha tingut més èxit ha estat:\n" + llisA.tallerExit());
+		if (llisA.hiHaTallers()) System.out.println("El taller que ha tingut més èxit ha estat:\n" + llisA.tallerExit());
 	}
 
 	// 12. Obtenir i mostrar les dades de la llista de visites ofertes per una
 	// entitat");
 	private static void op12(LlistaActivitats llisA, Scanner teclat) {
 		String nom;
-		System.out.println("Introdueix la entitat que vols buscar");
+		System.out.println("Introdueix l'entitat que vols buscar");
 		nom = teclat.nextLine();
-		System.out.println(llisA.visitesMateixaEntitat(nom));
+		if (llisA.hiHaVisites()){
+			if (llisA.visitesMateixaEntitat(nom) == null) System.out.println("No hi ha cap visita d'aquesta llista.");
+			else System.out.println(llisA.visitesMateixaEntitat(nom));
+		}
+		else System.out.println("La llista no conte visites.");
 	}
 
 	// 13. Mostrar les dades de les xerrades que farà una persona concreta.");
 	private static void op13(LlistaActivitats llisA, Scanner teclat) {
 		String nom;
-		System.out.println("Quina persona vols buscar");
+		System.out.println("Quina persona vols buscar?: ");
 		nom = teclat.nextLine();
-		System.out.println(llisA.xerradesMateixaPersona(nom));
+		if (llisA.hiHaXerrades()){
+			if (llisA.xerradesMateixaPersona(nom) == null) System.out.println("No hi ha cap xerrada d'aquesta persona.");
+			else System.out.println(llisA.xerradesMateixaPersona(nom));
+		}
+		else System.out.println("La llista no conte xerrades.");
 	}
 
 	// 14. Donar de baixa un taller sempre que no hi hagi usuaris apuntats.");

@@ -94,9 +94,10 @@ public class LlistaActivitats extends Llista<Activitats>{
      */
     public Tallers tallerExit (){ //
         int tallerSup = 0;
-        for(int i= 0; i<nElem-1; i++){
-            if(llista[i] instanceof Tallers){ 
-                if (llista[i].proporcioTallers() > llista[tallerSup].proporcioTallers()) tallerSup = i;
+        for(int i = 0; i < nElem; i++){
+            if(llista[i] instanceof Tallers){
+                if (tallerSup == 0) tallerSup = i;
+                else if (llista[i].proporcioTallers() > llista[tallerSup].proporcioTallers()) tallerSup = i;
             }
         }
         return (Tallers)llista[tallerSup];
@@ -118,7 +119,31 @@ public class LlistaActivitats extends Llista<Activitats>{
         return aux;
     }
 
-    public float notaMitjanaTaller(String codi){ //identificar taller pel nom????
+    public boolean hiHaVisites(){
+        boolean trobat = false;
+        for (int i = 0; i < nElem && !trobat; i++){
+            if (llista[i] instanceof Visites) trobat = true;
+        }
+        return trobat;
+    }
+
+    public boolean hiHaTallers(){
+        boolean trobat = false;
+        for (int i = 0; i < nElem && !trobat; i++){
+            if (llista[i] instanceof Tallers) trobat = true;
+        }
+        return trobat;
+    }
+
+    public boolean hiHaXerrades(){
+        boolean trobat = false;
+        for (int i = 0; i < nElem && !trobat; i++){
+            if (llista[i] instanceof Xerrades) trobat = true;
+        }
+        return trobat;
+    }
+
+    public float notaMitjanaTaller(String codi){ 
         Boolean trobat = false;
         float resultat = (float) 0.0;
         for (int i = 0; i < nElem && !trobat; i++){
@@ -135,7 +160,6 @@ public class LlistaActivitats extends Llista<Activitats>{
         boolean trobat = false;
     
         for (int i = 0; i < nElem && !trobat; i++) {
-            // Corregimos getCodi a getCodi()
             if (((String) llista[i].getCodi()).equalsIgnoreCase(codi)) {
                 trobat = true;
                 t = (Tallers) llista[i];    //No es fa servir copia() perquè ens interessa tenir la instància original en el cas que s'hagi de modificar 

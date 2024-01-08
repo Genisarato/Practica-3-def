@@ -66,7 +66,6 @@ public class LlistaEntitats extends Llista<Entitats>{
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado: " + nomarxiu);
         }
-
     }
 
     /*Mètode auxiliar per afegir una entitat de l'arxiu llista_entitats.txt a la llista sense copiar al arxiu per no tenir duplicats.
@@ -91,8 +90,8 @@ public class LlistaEntitats extends Llista<Entitats>{
             for(int i = 0; i <nElem; i++){
                 bw.write(llista[i].getNom() + "," + llista[i].getMail() + "," +llista[i].getTelef());
                 bw.newLine();
-                System.out.println("Guardat\n");
             }
+            System.out.println("Guardat\n");
             bw.close();
         }
         catch (IOException e){

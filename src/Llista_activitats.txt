@@ -1,2 +1,3 @@
-Museu Nacional d'Arqueologia;Tarragona;21;Ajuntament de Tarragona;43003;Aju100;No,No;-1
-Tres en raya;Salou;5;Proide;43840;Pro100;17:15;0:30;8;0;0.0;0;-1
+
+Museu Nacional d'Arqueologia;Tarragona;21;Ajuntament de Tarragona;43003;Aju100;No;No;-1
+Tres en raya;Salou;5;Proide;43840;Pro100;17:15;0:30;8;1;0.0;0;-1
