@@ -205,6 +205,10 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         return u;
     }
 
+    public void actualitzarApuntats(Usuaris u){
+        u.updateapuntats();
+    }
+
     public void imprimir() {
         System.out.println(toString());
     }

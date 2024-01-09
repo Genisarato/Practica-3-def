@@ -33,6 +33,10 @@ public class Reserves implements Serializable{
         return (usuari.copia());
     }
 
+    public Usuaris getUsuariOriginal(){
+        return usuari;
+    }
+
     public String getCodiTaller(){
         return codiTaller;
     }

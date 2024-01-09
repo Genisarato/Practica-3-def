@@ -65,7 +65,7 @@ public class Tallers extends Activitats {
 
     @Override
     public float proporcioTallers() {
-        return (float)(usuarisApuntats / capacitat);
+        return (float)(usuarisApuntats/capacitat);
     }
 
     @Override

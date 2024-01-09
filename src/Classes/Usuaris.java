@@ -50,6 +50,10 @@ public class Usuaris implements Serializable{
         return tallerapuntats;
     }
 
+    public String getUsuari(){
+        return nickname;
+    }
+
     public void setNickname(String nickname){
         this.nickname = nickname;
     }
