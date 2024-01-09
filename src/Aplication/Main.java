@@ -24,7 +24,9 @@ import Classes.Tallers;
 
 public class Main {
 	public static void main(String[] args) {
-		Finestra finestra1 = new Finestra("Jaumeburro");
+		Finestra finestra1 = new Finestra("Acrivitats del dia");
+		finestra1.revalidate();
+		finestra1.repaint();
 		finestra1.setVisible(true);
 		int opcio = 0;
 		Scanner teclat = new Scanner(System.in);
@@ -38,7 +40,7 @@ public class Main {
 		llisR.llegirfitxer("src/Llista_reserves.ser");
 
 		do {
-				printfMenu();
+			printfMenu();
 			do { // comprovem que no fiqui un valor fora del rang
 				opcio = Integer.parseInt(teclat.nextLine());
 			} while (opcio < 0 && opcio > 15);
@@ -148,13 +150,15 @@ public class Main {
 		System.out.println("\nIntrodueix el número de la operació que vulguis realitzar\n");
 		System.out.println("\t1. Mostrar les dades de qualsevol llista que tingueu definida.");
 		System.out.println("\t2. Obtenir i mostrar la llista d'activitats que ofereix una entitat concreta.");
-		System.out.println("\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
+		System.out.println(
+				"\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
 		System.out.println("\t4. Obtenir i mostrar la llista dels tallers que tenen places disponibles.");
 		System.out.println("\t5. Afegir una nova activitat ");
 		System.out.println("\t6. Registrar la petició d'un usuari per reservar un taller.");
 		System.out.println("\t7. Mostrar els usuaris que s'han apuntat a un taller.");
 		System.out.println("\t8. Calcular l'usuari que s'ha apuntat a més tallers.");
-		System.out.println("\t9. Registrar la nota que un usuari que s'ha apuntat a un taller li dona un cop s'ha fet.");
+		System.out
+				.println("\t9. Registrar la nota que un usuari que s'ha apuntat a un taller li dona un cop s'ha fet.");
 		System.out.println("\t10. Calcular la nota mitja que ha rebut un taller.");
 		System.out.println("\t11. Quin és el taller que ha tingut més èxit?");
 		System.out.println("\t12. Obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
@@ -274,16 +278,16 @@ public class Main {
 		System.out.println("\nA quin taller es vol inscriure? Introdueix el seu codi: ");
 		codi = teclat.nextLine();
 
-		if (!llisU.nicknameigual(nom)){ 
+		if (!llisU.nicknameigual(nom)) {
 			u = new Usuaris(nom, mail, codiPostal);
 			llisU.agregar(u);
-		}
-		else{
+		} else {
 			u = llisU.trobaUsuari(nom, mail, codiPostal);
 		}
 
-		if (llisA.trobaTaller(codi) == null) System.out.println("L'activitat que has introduit no es tracta d'un taller.");
-		else{
+		if (llisA.trobaTaller(codi) == null)
+			System.out.println("L'activitat que has introduit no es tracta d'un taller.");
+		else {
 			r = new Reserves(u, llisA.trobaTaller(codi));
 			llisR.agregar(r);
 			System.out.println("\nReserva realitzada!");
@@ -333,7 +337,8 @@ public class Main {
 
 	// 11. Quin és el taller que ha tingut més èxit? C");
 	private static void op11(LlistaActivitats llisA) {
-		if (llisA.hiHaTallers()) System.out.println("El taller que ha tingut més èxit ha estat:\n" + llisA.tallerExit());
+		if (llisA.hiHaTallers())
+			System.out.println("El taller que ha tingut més èxit ha estat:\n" + llisA.tallerExit());
 	}
 
 	// 12. Obtenir i mostrar les dades de la llista de visites ofertes per una
@@ -342,11 +347,13 @@ public class Main {
 		String nom;
 		System.out.println("Introdueix l'entitat que vols buscar");
 		nom = teclat.nextLine();
-		if (llisA.hiHaVisites()){
-			if (llisA.visitesMateixaEntitat(nom) == null) System.out.println("No hi ha cap visita d'aquesta llista.");
-			else System.out.println(llisA.visitesMateixaEntitat(nom));
-		}
-		else System.out.println("La llista no conte visites.");
+		if (llisA.hiHaVisites()) {
+			if (llisA.visitesMateixaEntitat(nom) == null)
+				System.out.println("No hi ha cap visita d'aquesta llista.");
+			else
+				System.out.println(llisA.visitesMateixaEntitat(nom));
+		} else
+			System.out.println("La llista no conte visites.");
 	}
 
 	// 13. Mostrar les dades de les xerrades que farà una persona concreta.");
@@ -354,11 +361,13 @@ public class Main {
 		String nom;
 		System.out.println("Quina persona vols buscar?: ");
 		nom = teclat.nextLine();
-		if (llisA.hiHaXerrades()){
-			if (llisA.xerradesMateixaPersona(nom) == null) System.out.println("No hi ha cap xerrada d'aquesta persona.");
-			else System.out.println(llisA.xerradesMateixaPersona(nom));
-		}
-		else System.out.println("La llista no conte xerrades.");
+		if (llisA.hiHaXerrades()) {
+			if (llisA.xerradesMateixaPersona(nom) == null)
+				System.out.println("No hi ha cap xerrada d'aquesta persona.");
+			else
+				System.out.println(llisA.xerradesMateixaPersona(nom));
+		} else
+			System.out.println("La llista no conte xerrades.");
 	}
 
 	// 14. Donar de baixa un taller sempre que no hi hagi usuaris apuntats.");
@@ -370,17 +379,20 @@ public class Main {
 			System.out.println("No s'ha pogut eliminar.");
 	}
 
-	public static void op15(Scanner teclat, LlistaActivitats llisA, LlistaEntitats llisE, LlistaReserves llisR, LlistaUsuaris llisU) {
+	public static void op15(Scanner teclat, LlistaActivitats llisA, LlistaEntitats llisE, LlistaReserves llisR,
+			LlistaUsuaris llisU) {
 		int save;
 		int[] llistesGuardades = new int[5];
 		boolean guardarMes = false, coincideix = false;
-		System.out.println("\nQuines llistes vols guardar?\n\t1- Totes les llistes\n\t2- Llista Entitats\n\t3- Llista Usuaris\n\t4- Llista Activitats\n\t5- Llista Reserves");
-		do{
+		System.out.println(
+				"\nQuines llistes vols guardar?\n\t1- Totes les llistes\n\t2- Llista Entitats\n\t3- Llista Usuaris\n\t4- Llista Activitats\n\t5- Llista Reserves");
+		do {
 			do { // comprovem que no fiqui un valor fora del rang
 				save = Integer.parseInt(teclat.nextLine());
-				if (llistesGuardades[0] != 0){
-					for (int i = 0; i < llistesGuardades.length && !coincideix; i++){
-						if (save == llistesGuardades[i]) coincideix = true;
+				if (llistesGuardades[0] != 0) {
+					for (int i = 0; i < llistesGuardades.length && !coincideix; i++) {
+						if (save == llistesGuardades[i])
+							coincideix = true;
 					}
 				}
 			} while ((save < 0 && save > 4) || coincideix);
@@ -409,17 +421,18 @@ public class Main {
 					guardarMes = guardarLlista(teclat);
 					break;
 			}
-		} while(guardarMes);
+		} while (guardarMes);
 	}
 
-	private static boolean guardarLlista(Scanner teclat){
+	private static boolean guardarLlista(Scanner teclat) {
 		boolean guardarMes = true;
 		String resposta;
 
 		System.out.println("\nVols guardar alguna llista més?");
 		resposta = teclat.nextLine();
 
-		if (resposta.equalsIgnoreCase("No")) guardarMes = false;
+		if (resposta.equalsIgnoreCase("No"))
+			guardarMes = false;
 		return guardarMes;
 	}
 }
