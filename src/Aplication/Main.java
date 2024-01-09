@@ -24,9 +24,8 @@ import Classes.Tallers;
 
 public class Main {
 	public static void main(String[] args) {
-		Finestra finestra1 = new Finestra("Acrivitats del dia");
-		finestra1.revalidate();
-		finestra1.repaint();
+
+		Finestra finestra1 = new Finestra("Setmana de la Ciència");
 		finestra1.setVisible(true);
 		int opcio = 0;
 		Scanner teclat = new Scanner(System.in);
@@ -290,17 +289,20 @@ public class Main {
 		else {
 			r = new Reserves(u, llisA.trobaTaller(codi));
 			llisR.agregar(r);
+			llisU.actualitzarApuntats(u);
 			System.out.println("\nReserva realitzada!");
 		}
 	}
 
 	// 7. Mostrar els usuaris que s’han apuntat a un taller.")
 	private static void op7(LlistaActivitats llisA, LlistaReserves llisR, Scanner teclat) {
-		System.out.println("Quin taller vols buscar? (Introdueix el codi d'activitat)\n");
+		System.out.println("Quin taller vols buscar? (Introdueix el codi en forma 0AAA000)\n");
 		String codi = teclat.nextLine();
 		Tallers t = llisA.trobaTaller(codi);
-		System.out.println("\n" + llisR.usuarisTaller(t));
-
+		if (t == null)
+			System.out.println("No existeix cap taller amb aquest codi");
+		else
+			System.out.println("\n" + llisR.usuarisTaller(t));
 	}
 
 	// 8.Calcular l’usuari que s’ha apuntat a més tallers.")

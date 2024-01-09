@@ -32,7 +32,7 @@ public class LlistaReserves extends Llista<Reserves> {
             try {
                 comprovaReserva(n);
                 llista[nElem] = n.copia();
-                n.getUsuari().updateapuntats();
+                n.getUsuariOriginal().updateapuntats();
                 nElem++;
             } catch (Excepcions e) {
                 System.out.println(e.getMessage());

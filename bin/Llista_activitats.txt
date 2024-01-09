@@ -1,2 +1,27 @@
-Museu Nacional d'Arqueologia;Tarragona;21;Ajuntament de Tarragona;43003;Aju100;No;No;-1
-Tres en raya;Salou;5;Proide;43840;Pro100;17:15;0:30;8;1;0.0;0;-1
+Tres en raya;Salou;5;Proide;43840;PRO100;17.25;0.5;8;0;0.0;0;-1
+Python basic;Tarragona;6;ETSE;43005;ETS101;Xavier Asco;-1
+Museu Nacional d'Arqueologia;Tarragona;21;Ajuntament de Tarragona;43003;AJU102;No;No;-1
+Programacio Web Avancada;Reus;7;CodeWorld;43203;COD124;17.5;2;15;0;0.0;0;-1
+Laboratori Experimenta;Tarragona;11;ICIQ;43007;ICI101;11;2;24;0;0.0;0;-1
+Fotografia principiants;Cambrils;9;PicturesTorres;43850;PIC103;18;1.5;15;0;0.0;0;-1
+Visita al Museu d'Art Contemporani;Cambrils;18;MAC;43850;MAC111;No;No;-1
+Dansa Contemporania;Vila-seca;14;DanceMoves;43480;DAN112;18.25;1.5;22;1;9.0;1;-1
+Fotografia Avancada;Tarragona;18;ClickMasters;43004;CLI113;16.75;2.5;15;0;0.0;0;-1
+Economia Circular;Valls;8;GreenEco;43800;GRE114;MartaRecicla;-1
+Ciberseguretat;Salou;5;CyberGuard;43840;CYB115;Albert Vall;-1
+Astrofotografia;La Canonja;28;AstroPhotoClub;43110;AST116;21.00;2.5;12;0;0.0;0;-1
+Ruta Cultural pel Barri Antic;Tarragona;6;HeritageTGN;43003;HER117;No;No;-1
+Robotica Avancada;Reus;8;TarragonaTech;43201;TAR118;14.00;2;15;0;0.0;0;-1
+Els Secrets de la Fotografia;Tarragona;12;PixelPerfect;43007;PIX119;Laura Giralt;-1
+Lideratge Empresarial;La Pineda;17;BusinessLeaders;43481;BUS120;Isabel Llauto;-1
+Cuina Creativa;Reus;9;GourmetArt;43202;GOU121;19.5;1.5;12;0;0.0;0;-1
+Passejada Nocturna pel Parc Natural;Mont-roig del Camp;11;NatureNight;43300;NAT122;No;si;-1
+Descoberta dels Monuments Romanics;Reus;8;RomanHistory;43206;ROM123;No;No;-1
+Programacio Web Avancada;Reus;7;CodeMasters;43203;COD124;17.5;2;15;0;0.0;0;-1
+Circuit de Vins del Priorat;Falset;20;WineLovers;43730;WIN125;No;No;-1
+Observacio d'Ocells al Delta de l'Ebre;Amposta;14;BirdWatchers;43870;BIR126;No;No;-1
+Disseny de Videojocs;Cambrils;3;GameDevHub;43850;GAM127;15;2;10;0;0.0;0;-1
+Art en Paper Mache;Salou;12;CreArt;43840;CRE128;14.5;2;20;0;0.0;0;-1
+Relacions Internacionals;La Pineda;17;BusinessLeaders;43481;BUS129;Isabel Llauto;-1
+Sostenibilitat Energetica;Tarragona;11;ICIQ;43007;ICI130;11.00;2;24;0;0.0;0;-1
+Benestar a la Llar;Tarragona;8;WellnessJourney;43001;Wel126;No;No;-1

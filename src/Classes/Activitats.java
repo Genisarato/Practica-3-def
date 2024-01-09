@@ -108,8 +108,8 @@ public abstract class Activitats {
         return this.dia == dia;
     }
 
-    public float proporcioTallers(){        //S'implementa el mètode real en la classe Tallers
-        return 0.0f;
+    public float proporcioTallers(){         //S'implementa el mètode real en la classe Tallers
+        return 0;
     }
 
     public boolean placesLliures(){         //S'implementa el mètode real en la classe Tallers
