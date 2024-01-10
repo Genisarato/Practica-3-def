@@ -93,10 +93,10 @@ public class LlistaActivitats extends Llista<Activitats>{
      * @return taller que ha tingut més èxit    
      */
     public Tallers tallerExit (){ //
-        int tallerSup = 0;
+        int tallerSup = -1;
         for(int i = 0; i < nElem; i++){
             if(llista[i] instanceof Tallers){
-                if (tallerSup == 0) tallerSup = i;
+                if (tallerSup == -1) tallerSup = i;
                 else if (llista[i].proporcioTallers() > llista[tallerSup].proporcioTallers()) tallerSup = i;
             }
         }

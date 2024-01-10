@@ -31,13 +31,21 @@ public class LlistaReserves extends Llista<Reserves> {
         if (nElem < llista.length) {
             try {
                 comprovaReserva(n);
-                llista[nElem] = n.copia();
                 n.getUsuariOriginal().updateapuntats();
+                llista[nElem] = n.copia();
                 nElem++;
             } catch (Excepcions e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public boolean reservaExistent(Reserves r){
+        boolean trobat = false;
+        for (int i = 0; i < nElem && !trobat; i++){
+            if (llista[i].esIgual(r)) trobat = true;
+        }
+        return trobat;
     }
 
     /*
@@ -53,8 +61,8 @@ public class LlistaReserves extends Llista<Reserves> {
             try {
                 Reserves copia = new Reserves(u, taller);
                 comprovaReserva(copia);
-                llista[nElem] = copia;
                 u.updateapuntats();
+                llista[nElem] = copia;
                 nElem++;
             } catch (Excepcions e) {
                 System.out.println(e.getMessage());
@@ -223,8 +231,8 @@ public class LlistaReserves extends Llista<Reserves> {
         int max = 0;
         Usuaris usuarimesapuntat = null;
         for (int i = 0; i < nElem; i++) {
-            if (llista[i].getUsuari().getTallerapuntats() > max) {
-                max = llista[i].getUsuari().getTallerapuntats();
+            if (llista[i].getUsuari().getTallerApuntats() > max) {
+                max = llista[i].getUsuari().getTallerApuntats();
                 usuarimesapuntat = llista[i].getUsuari().copia();
             }
         }

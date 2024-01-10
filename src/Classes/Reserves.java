@@ -41,6 +41,18 @@ public class Reserves implements Serializable{
         return codiTaller;
     }
 
+    public String getNickname(){
+        return usuari.getNickname();
+    }
+
+    public String getMail(){
+        return usuari.getMail();
+    }
+
+    public int getCodiPostal(){
+        return usuari.getCodiPostal();
+    }
+
     public String getCodiReserva(){
         return (codiReserva);
     }
@@ -58,7 +70,7 @@ public class Reserves implements Serializable{
     }
 
     public boolean esIgual(Reserves reserva){
-            return (this.codiReserva.equalsIgnoreCase(reserva.getCodiReserva()));
+        return (this.codiReserva.equalsIgnoreCase(reserva.getCodiReserva()) || ((usuari.igual(reserva.getUsuari()) && codiTaller == reserva.getCodiTaller())));
     }
 
     public Reserves copia(){

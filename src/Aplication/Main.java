@@ -9,6 +9,7 @@ package Aplication;
 import java.util.Scanner;
 
 import Classes.Activitats;
+//import Classes.Excepcions;
 //import Classes.Entitats;
 import Classes.Usuaris;
 import Classes.Visites;
@@ -288,9 +289,9 @@ public class Main {
 			System.out.println("L'activitat que has introduit no es tracta d'un taller.");
 		else {
 			r = new Reserves(u, llisA.trobaTaller(codi));
+			if (!llisR.reservaExistent(r)) llisU.actualitzarApuntats(u);
 			llisR.agregar(r);
-			llisU.actualitzarApuntats(u);
-			System.out.println("\nReserva realitzada!");
+			if (!llisR.reservaExistent(r)) System.out.println("\nReserva realitzada!");
 		}
 	}
 
@@ -341,6 +342,7 @@ public class Main {
 	private static void op11(LlistaActivitats llisA) {
 		if (llisA.hiHaTallers())
 			System.out.println("El taller que ha tingut més èxit ha estat:\n" + llisA.tallerExit());
+		else System.out.println("No hi ha tallers.");
 	}
 
 	// 12. Obtenir i mostrar les dades de la llista de visites ofertes per una
@@ -387,7 +389,7 @@ public class Main {
 		int[] llistesGuardades = new int[5];
 		boolean guardarMes = false, coincideix = false;
 		System.out.println(
-				"\nQuines llistes vols guardar?\n\t1- Totes les llistes\n\t2- Llista Entitats\n\t3- Llista Usuaris\n\t4- Llista Activitats\n\t5- Llista Reserves");
+				"\nQuines llistes vols guardar?\n\t1- Totes les llistes\n\t2- Llista Entitats\n\t3- Llista Usuaris\n\t4- Llista Activitats\n\t5- Llista Reserves\n\t6- Cap llista");
 		do {
 			do { // comprovem que no fiqui un valor fora del rang
 				save = Integer.parseInt(teclat.nextLine());

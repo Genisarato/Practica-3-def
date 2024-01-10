@@ -206,7 +206,13 @@ public class LlistaUsuaris extends Llista<Usuaris>{
     }
 
     public void actualitzarApuntats(Usuaris u){
-        u.updateapuntats();
+        boolean trobat = false;
+        for (int i = 0; i < nElem && !trobat; i++){
+            if (llista[i].igual(u)){
+                if (llista[i].getTallerApuntats() != u.getTallerApuntats()) llista[i].setTallerApuntats(u.getTallerApuntats());
+                trobat = true;
+            }
+        }
     }
 
     public void imprimir() {

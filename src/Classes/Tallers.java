@@ -6,6 +6,8 @@
 
 package Classes;
 
+import java.math.BigDecimal;
+
 /*Els tallers es fan en una hora concreta del dia, i tenen una durada determinada. Tenen també
 una capacitat fixada, i els usuaris s’hi ha de registrar*/
 public class Tallers extends Activitats {
@@ -65,7 +67,14 @@ public class Tallers extends Activitats {
 
     @Override
     public float proporcioTallers() {
-        return (float)(usuarisApuntats/capacitat);
+        float res;
+        if (usuarisApuntats == 0) res = 0;
+        else res = (float)usuarisApuntats/capacitat;
+        System.out.println(res);
+        System.out.println(usuarisApuntats);
+        System.out.println(capacitat);
+        System.out.println("\n\n\n");
+        return res;
     }
 
     @Override

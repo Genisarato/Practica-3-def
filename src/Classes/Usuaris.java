@@ -65,13 +65,18 @@ public class Usuaris implements Serializable{
     public void SetCodiPostal(int codi){
         this.codiPostal = codi;
     }
+
+    public void setTallerApuntats(int t){
+        tallerapuntats = t;
+    }
+    
     /*Mètode copia */
     public Usuaris copia(){
         return new Usuaris(nickname, mail, codiPostal, tallerapuntats);
     }
 
     public boolean igual(Usuaris n){
-        return(this.getNickname().equals(n.getNickname()) && this.getMail().equals(n.getMail()) && this.getCodiPostal() == n.getCodiPostal());
+        return(this.getNickname().equalsIgnoreCase(n.getNickname()) && this.getMail().equalsIgnoreCase(n.getMail()) && this.getCodiPostal() == n.getCodiPostal());
     }
 
     /*toString */
@@ -84,11 +89,6 @@ public class Usuaris implements Serializable{
     public void updateapuntats(){
         tallerapuntats = tallerapuntats + 1;
     }
-
-    public int getTallerapuntats(){
-        return tallerapuntats;
-    }
-
 
     //Fer exepcio al main per nickname igual 
 }
