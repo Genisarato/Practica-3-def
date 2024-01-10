@@ -289,6 +289,11 @@ public class Main {
 			System.out.println("L'activitat que has introduit no es tracta d'un taller.");
 		else {
 			r = new Reserves(u, llisA.trobaTaller(codi));
+			try{
+				llisR.agregar(r);
+			}
+			catch (Excepcions e){
+			}
 			if (!llisR.reservaExistent(r)) llisU.actualitzarApuntats(u);
 			llisR.agregar(r);
 			if (!llisR.reservaExistent(r)) System.out.println("\nReserva realitzada!");
