@@ -15,10 +15,18 @@ public class Visites extends Activitats {
         this.adaptCegues = adaptCegues;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String atributsExtra(){
         return (adaptarBool(audioguies) + ";" + adaptarBool(adaptCegues));
     }
 
+    
+    /** 
+     * @return Visites
+     */
     public Visites copia(){
         Activitats aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, true, audioguies, adaptCegues);
         return (Visites)aux;

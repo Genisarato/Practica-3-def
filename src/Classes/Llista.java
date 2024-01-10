@@ -9,7 +9,7 @@ public abstract class Llista<T> {
     }
 
     // Métodos abstractos que deben ser implementados por las subclases
-    public abstract void agregar(T elemento);
+    public abstract void agregar(T elemento) throws Excepcions;
     public abstract void eliminar(T elemento);
     public abstract boolean contiene(T elemento);
     public abstract int tamano();

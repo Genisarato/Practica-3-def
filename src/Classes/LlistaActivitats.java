@@ -40,6 +40,11 @@ public class LlistaActivitats extends Llista<Activitats>{
         return aux;
     }
     
+    
+    /** 
+     * @param a
+     * @throws Excepcions
+     */
     public void mateixaActivitat(Activitats a) throws Excepcions{
         for (int i = 0; i < nElem; i++){
             if (llista[i].getNom().equalsIgnoreCase(a.getNom()) && llista[i].getEntitatCrea().equalsIgnoreCase(a.getEntitatCrea())) throw new Excepcions("L'activitat ja existeix"); //Comprovem que el nom no estigui ja a la llista
@@ -97,7 +102,7 @@ public class LlistaActivitats extends Llista<Activitats>{
         for(int i = 0; i < nElem; i++){
             if(llista[i] instanceof Tallers){
                 if (tallerSup == -1) tallerSup = i;
-                else if (llista[i].proporcioTallers() > llista[tallerSup].proporcioTallers()) tallerSup = i;
+                else if (llista[i].proporcioTallers() > llista[tallerSup].proporcioTallers())tallerSup = i;
             }
         }
         return (Tallers)llista[tallerSup];
@@ -119,6 +124,10 @@ public class LlistaActivitats extends Llista<Activitats>{
         return aux;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean hiHaVisites(){
         boolean trobat = false;
         for (int i = 0; i < nElem && !trobat; i++){

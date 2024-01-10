@@ -35,14 +35,26 @@ public class Tallers extends Activitats {
         this.nVal = nVal;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getHora() {
         return hora;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getDurada() {
         return durada;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getcapacitat(){
         return capacitat;
     }
@@ -70,10 +82,6 @@ public class Tallers extends Activitats {
         float res;
         if (usuarisApuntats == 0) res = 0;
         else res = (float)usuarisApuntats/capacitat;
-        System.out.println(res);
-        System.out.println(usuarisApuntats);
-        System.out.println(capacitat);
-        System.out.println("\n\n\n");
         return res;
     }
 

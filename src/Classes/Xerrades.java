@@ -13,10 +13,18 @@ public class Xerrades extends Activitats {
         this.nomPersona = nomPersona;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPersona(){
         return nomPersona;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String atributsExtra(){
         return (nomPersona);
     }

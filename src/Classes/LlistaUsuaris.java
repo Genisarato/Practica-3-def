@@ -22,6 +22,12 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         llista = new Usuaris[capacitat];
     }
 
+    
+    /** 
+     * @param nom
+     * @param mail
+     * @param codi
+     */
     /*Mètode afegir pasant tot per paràmetre i comprovant que no hi ha cap nickname igual,
      * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
      * @param nom/nickanme
@@ -86,6 +92,10 @@ public class LlistaUsuaris extends Llista<Usuaris>{
     }
     
 
+    
+    /** 
+     * @param n
+     */
     /*Mètode afegir pasant un usuari directament que també comprova que no hi ha cap nickname igual,
      * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
      * @param usuari

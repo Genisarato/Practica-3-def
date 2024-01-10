@@ -108,6 +108,11 @@ public abstract class Activitats {
         return this.dia == dia;
     }
 
+    
+    /** 
+     * @param (
+     * @return float
+     */
     public float proporcioTallers(){         //S'implementa el mètode real en la classe Tallers
         return 0;
     }

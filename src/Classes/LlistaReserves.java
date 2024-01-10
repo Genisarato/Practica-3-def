@@ -21,13 +21,18 @@ public class LlistaReserves extends Llista<Reserves> {
         llista = new Reserves[capacitat];
     }
 
+    
+    /** 
+     * @param n
+     * @throws Excepcions
+     */
     /*
      * Métode de afegir una reserva comprovant que la reserva no estigui feta sino
      * directament la descarta
      * 
      * @param Reserva
      */
-    public void agregar(Reserves n) {
+    public void agregar(Reserves n) throws Excepcions{
         if (nElem < llista.length) {
             try {
                 comprovaReserva(n);
@@ -36,10 +41,16 @@ public class LlistaReserves extends Llista<Reserves> {
                 nElem++;
             } catch (Excepcions e) {
                 System.out.println(e.getMessage());
+                throw new Excepcions ("La reserva ja s'ha fet previament");
             }
         }
     }
 
+    
+    /** 
+     * @param r
+     * @return boolean
+     */
     public boolean reservaExistent(Reserves r){
         boolean trobat = false;
         for (int i = 0; i < nElem && !trobat; i++){

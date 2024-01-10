@@ -18,6 +18,12 @@ public class LlistaEntitats extends Llista<Entitats>{
         llista = new Entitats[capacitat];
     }
 
+    
+    /** 
+     * @param n
+     * @param telef
+     * @param mail
+     */
     /*Mètode afegir pasant tot per paràmetre
      * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
      * @param nom entitat
@@ -33,6 +39,10 @@ public class LlistaEntitats extends Llista<Entitats>{
         }
     }
 
+    
+    /** 
+     * @param n
+     */
     /*Mètode afegir pasant una entitat directament
      * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
      * @param entitat

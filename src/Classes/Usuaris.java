@@ -31,11 +31,19 @@ public class Usuaris implements Serializable{
         tallerapuntats = 0;
     }
 
+    
+    /** 
+     * @return String
+     */
     /*Getter del nickname */
     public String getNickname(){
         return nickname;
     }
 
+    
+    /** 
+     * @return String
+     */
     /*Getter del mail */
     public String getMail(){
         return mail;

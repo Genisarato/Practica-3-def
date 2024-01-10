@@ -29,10 +29,18 @@ public class Reserves implements Serializable{
         this.valorada = valorada;
     }
 
+    
+    /** 
+     * @return Usuaris
+     */
     public Usuaris getUsuari(){
         return (usuari.copia());
     }
 
+    
+    /** 
+     * @return Usuaris
+     */
     public Usuaris getUsuariOriginal(){
         return usuari;
     }
