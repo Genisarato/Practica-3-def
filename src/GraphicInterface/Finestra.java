@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -15,11 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 //Authors: Genís Aragonès Torralbo
-/*Falta implementar la funció dels botons que ho farà pau
- */
+
 public class Finestra extends JFrame {
+
+    private String numero;
 
     public Finestra(String titol) {
         this.setTitle(titol);
@@ -41,6 +44,17 @@ public class Finestra extends JFrame {
         JButton boto8 = new JButton(Integer.toString(8));
         JButton boto9 = new JButton(Integer.toString(9));
         JButton boto10 = new JButton(Integer.toString(10));
+
+        matriu.add(boto1);
+        matriu.add(boto2);
+        matriu.add(boto3);
+        matriu.add(boto4);
+        matriu.add(boto5);
+        matriu.add(boto6);
+        matriu.add(boto7);
+        matriu.add(boto8);
+        matriu.add(boto9);
+        matriu.add(boto10);
 
         JCheckBox checkBox1 = new JCheckBox("Opción 1");
         checkBox1.setOpaque(false);
@@ -82,16 +96,191 @@ public class Finestra extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
-        // Funcionament del botons
+        // Authors: Pau Forés Prats
+        // Part logica de la interficie gràfica
+
         ActionListener click = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-            }
+                String rutaArchivo = "src/Llista_activitats.txt";
 
+                try {
+
+                    Scanner scanner = new Scanner(new File(rutaArchivo));
+
+                    StringBuilder contenidoArchivo = new StringBuilder();
+
+                    while (scanner.hasNextLine()) {
+                        String linea = scanner.nextLine();
+                        String[] datos = linea.split(";");
+
+                        if (datos[2].equals(getNumero())) {
+                            contenidoArchivo.append(transformarLinea(linea)).append("\n");
+                        }
+                    }
+
+                    textsortida.setText(contenidoArchivo.toString());
+
+                    scanner.close();
+                } catch (FileNotFoundException e) {
+                    System.err.println("Error: Archivo no encontrado - " + e.getMessage());
+                }
+
+            }
         };
 
-        boto.addActionListener(click);
+        ActionListener num1 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("1");
+            }
+        };
+
+        ActionListener num2 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("2");
+            }
+        };
+
+        ActionListener num3 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("3");
+            }
+        };
+
+        ActionListener num4 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("4");
+            }
+        };
+
+        ActionListener num5 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("5");
+            }
+        };
+
+        ActionListener num6 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("6");
+            }
+        };
+
+        ActionListener num7 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("7");
+            }
+        };
+
+        ActionListener num8 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("8");
+            }
+        };
+
+        ActionListener num9 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("9");
+            }
+        };
+
+        ActionListener num10 = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                setNumero("10");
+            }
+        };
+
+        boto1.addActionListener(num1);
+        boto2.addActionListener(num2);
+        boto3.addActionListener(num3);
+        boto4.addActionListener(num4);
+        boto5.addActionListener(num5);
+        boto6.addActionListener(num6);
+        boto7.addActionListener(num7);
+        boto8.addActionListener(num8);
+        boto9.addActionListener(num9);
+        boto10.addActionListener(num10);
+
+        boto1.addActionListener(click);
+        boto2.addActionListener(click);
+        boto3.addActionListener(click);
+        boto4.addActionListener(click);
+        boto5.addActionListener(click);
+        boto6.addActionListener(click);
+        boto7.addActionListener(click);
+        boto8.addActionListener(click);
+        boto9.addActionListener(click);
+        boto10.addActionListener(click);
+
     }
+
+    public void setNumero(String num) {
+        this.numero = num;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String transformarLinea(String linea) {
+        String[] datos = linea.split(";");
+
+        if (datos.length >= 14) {
+            // Realiza las correcciones que desees en los datos
+            String actividad = "Actividad: " + datos[0];
+            String ubicacion = "Ubicación: " + datos[1];
+            String numero = "Número: " + datos[2];
+            String organizacion = "Organización: " + datos[3];
+            String codigoPostal = "Código postal: " + datos[4];
+            String codigoInterno = "Código interno: " + datos[5];
+            String precio = "Precio: " + datos[6];
+            String descuento = "Descuento: " + datos[7];
+            String duracion = "Duración: " + datos[8];
+            String nivel = "Nivel: " + datos[9];
+            String calificacion = "Calificación: " + datos[10];
+            String inscritos = "Inscritos: " + datos[11];
+            String observaciones = "Observaciones: " + datos[12];
+            String otroDato = "Otro dato: " + datos[13];
+
+            // Construye la cadena con el texto corregido
+            return actividad + "\n" +
+                    ubicacion + "\n" +
+                    numero + "\n" +
+                    organizacion + "\n" +
+                    codigoPostal + "\n" +
+                    codigoInterno + "\n" +
+                    precio + "\n" +
+                    descuento + "\n" +
+                    duracion + "\n" +
+                    nivel + "\n" +
+                    calificacion + "\n" +
+                    inscritos + "\n" +
+                    observaciones + "\n" +
+                    otroDato;
+        }
+
+        return linea;
+    }
+
 }

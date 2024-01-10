@@ -9,12 +9,10 @@ package Aplication;
 import java.util.Scanner;
 
 import Classes.Activitats;
-//import Classes.Entitats;
 import Classes.Usuaris;
 import Classes.Visites;
 import Classes.Xerrades;
 import GraphicInterface.Finestra;
-//import Classes.Llista;
 import Classes.LlistaActivitats;
 import Classes.LlistaEntitats;
 import Classes.LlistaReserves;
