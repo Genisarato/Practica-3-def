@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -23,6 +24,9 @@ import java.util.Scanner;
 public class Finestra extends JFrame {
 
     private String numero;
+    private Boolean Xerrada;
+    private Boolean Taller;
+    private Boolean Visita;
 
     public Finestra(String titol) {
         this.setTitle(titol);
@@ -117,7 +121,28 @@ public class Finestra extends JFrame {
                         String[] datos = linea.split(";");
 
                         if (datos[2].equals(getNumero())) {
-                            contenidoArchivo.append(transformarLinea(linea)).append("\n");
+                            if (getXerrada().equals(false) && getTaller().equals(false) && getVisita().equals(false))
+                                contenidoArchivo.append(linea).append("\n");
+                            else {
+                                if (getXerrada().equals(true)) {
+                                    if (datos[7].equalsIgnoreCase("-1")) {
+                                        contenidoArchivo.append(transformarLinea(linea)).append("\n");
+                                    }
+                                }
+                                if (getVisita().equals(true)) {
+                                    if (datos[8].equalsIgnoreCase("-1")) {
+                                        contenidoArchivo.append(transformarLinea(linea)).append("\n");
+                                    }
+                                }
+                                if (getTaller().equals(true)) {
+                                    if (datos[8].equalsIgnoreCase("-1") || datos[7].equalsIgnoreCase("-1"))
+                                        ;
+                                    else
+                                        contenidoArchivo.append(transformarLinea(linea)).append("\n");
+
+                                }
+                            }
+
                         }
                     }
 
@@ -128,6 +153,39 @@ public class Finestra extends JFrame {
                     System.err.println("Error: Archivo no encontrado - " + e.getMessage());
                 }
 
+            }
+        };
+
+        ActionListener Xerrada = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (checkBox1.isSelected())
+                    setXerrada(true);
+                else
+                    setXerrada(false);
+            }
+        };
+
+        ActionListener Visita = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (checkBox2.isSelected())
+                    setVisita(true);
+                else
+                    setVisita(false);
+            }
+        };
+
+        ActionListener Taller = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (checkBox3.isSelected())
+                    setTaller(true);
+                else
+                    setTaller(false);
             }
         };
 
@@ -211,6 +269,10 @@ public class Finestra extends JFrame {
             }
         };
 
+        checkBox1.addActionListener(Taller);
+        checkBox2.addActionListener(Visita);
+        checkBox3.addActionListener(Xerrada);
+
         boto1.addActionListener(num1);
         boto2.addActionListener(num2);
         boto3.addActionListener(num3);
@@ -243,6 +305,30 @@ public class Finestra extends JFrame {
         return numero;
     }
 
+    public void setXerrada(Boolean Xerrada) {
+        this.Xerrada = Xerrada;
+    }
+
+    public Boolean getXerrada() {
+        return Xerrada;
+    }
+
+    public void setTaller(Boolean Taller) {
+        this.Taller = Taller;
+    }
+
+    public Boolean getTaller() {
+        return Taller;
+    }
+
+    public void setVisita(Boolean Visita) {
+        this.Visita = Visita;
+    }
+
+    public Boolean getVisita() {
+        return Visita;
+    }
+
     public String transformarLinea(String linea) {
         String[] datos = linea.split(";");
 
@@ -264,19 +350,19 @@ public class Finestra extends JFrame {
             String otroDato = "Otro dato: " + datos[13];
 
             // Construye la cadena con el texto corregido
-            return actividad + "\n" +
-                    ubicacion + "\n" +
-                    numero + "\n" +
-                    organizacion + "\n" +
-                    codigoPostal + "\n" +
-                    codigoInterno + "\n" +
-                    precio + "\n" +
-                    descuento + "\n" +
-                    duracion + "\n" +
-                    nivel + "\n" +
-                    calificacion + "\n" +
-                    inscritos + "\n" +
-                    observaciones + "\n" +
+            return actividad +
+                    ubicacion +
+                    numero +
+                    organizacion +
+                    codigoPostal +
+                    codigoInterno +
+                    precio +
+                    descuento +
+                    duracion +
+                    nivel +
+                    calificacion +
+                    inscritos +
+                    observaciones +
                     otroDato;
         }
 

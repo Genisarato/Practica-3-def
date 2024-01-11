@@ -1,6 +1,5 @@
 package Classes;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,8 +20,7 @@ public class LlistaReserves extends Llista<Reserves> {
         llista = new Reserves[capacitat];
     }
 
-    
-    /** 
+    /**
      * @param n
      * @throws Excepcions
      */
@@ -32,7 +30,7 @@ public class LlistaReserves extends Llista<Reserves> {
      * 
      * @param Reserva
      */
-    public void agregar(Reserves n) throws Excepcions{
+    public void agregar(Reserves n) throws Excepcions {
         if (nElem < llista.length) {
             try {
                 comprovaReserva(n);
@@ -41,20 +39,20 @@ public class LlistaReserves extends Llista<Reserves> {
                 nElem++;
             } catch (Excepcions e) {
                 System.out.println(e.getMessage());
-                throw new Excepcions ("La reserva ja s'ha fet previament");
+                throw new Excepcions("La reserva ja s'ha fet previament");
             }
         }
     }
 
-    
-    /** 
+    /**
      * @param r
      * @return boolean
      */
-    public boolean reservaExistent(Reserves r){
+    public boolean reservaExistent(Reserves r) {
         boolean trobat = false;
-        for (int i = 0; i < nElem && !trobat; i++){
-            if (llista[i].esIgual(r)) trobat = true;
+        for (int i = 0; i < nElem && !trobat; i++) {
+            if (llista[i].esIgual(r))
+                trobat = true;
         }
         return trobat;
     }

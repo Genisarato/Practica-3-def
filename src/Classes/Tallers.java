@@ -6,8 +6,6 @@
 
 package Classes;
 
-import java.math.BigDecimal;
-
 /*Els tallers es fan en una hora concreta del dia, i tenen una durada determinada. Tenen també
 una capacitat fixada, i els usuaris s’hi ha de registrar*/
 public class Tallers extends Activitats {
@@ -15,7 +13,8 @@ public class Tallers extends Activitats {
     private int capacitat, usuarisApuntats, nVal;
     private String hora, durada;
 
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String hora, String durada, int capacitat, int usuarisApuntats, float sumaVal, int nVal){
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String hora, String durada,
+            int capacitat, int usuarisApuntats, float sumaVal, int nVal) {
         super(nom, lloc, dia, entitatCrea, codiPostal);
         this.hora = hora;
         this.durada = durada;
@@ -23,9 +22,11 @@ public class Tallers extends Activitats {
         this.usuarisApuntats = usuarisApuntats;
         this.sumaVal = sumaVal;
         this.nVal = nVal;
-        
+
     }
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, String hora2, String durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal){
+
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia,
+            String hora2, String durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal) {
         super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
         this.hora = hora2;
         this.durada = durada2;
@@ -35,36 +36,33 @@ public class Tallers extends Activitats {
         this.nVal = nVal;
     }
 
-    
-    /** 
+    /**
      * @return String
      */
     public String getHora() {
         return hora;
     }
 
-    
-    /** 
+    /**
      * @return String
      */
     public String getDurada() {
         return durada;
     }
 
-    
-    /** 
+    /**
      * @return int
      */
-    public int getcapacitat(){
+    public int getcapacitat() {
         return capacitat;
     }
 
     @Override
-    public int getUsuarisApuntats(){
+    public int getUsuarisApuntats() {
         return usuarisApuntats;
     }
 
-    public void apuntarUsuari(){
+    public void apuntarUsuari() {
         usuarisApuntats++;
     }
 
@@ -74,41 +72,45 @@ public class Tallers extends Activitats {
     }
 
     public float mitjanaValoracions() {
-        return (float)(sumaVal/nVal);
+        return (float) (sumaVal / nVal);
     }
 
     @Override
     public float proporcioTallers() {
         float res;
-        if (usuarisApuntats == 0) res = 0;
-        else res = (float)usuarisApuntats/capacitat;
+        if (usuarisApuntats == 0)
+            res = 0;
+        else
+            res = (float) usuarisApuntats / capacitat;
         return res;
     }
 
     @Override
-    public boolean placesLliures(){
+    public boolean placesLliures() {
         return capacitat > usuarisApuntats;
     }
 
-    public float adaptarHora(String horari){
+    public float adaptarHora(String horari) {
         String[] parts = horari.split(":");
         int hores = Integer.parseInt(parts[0]);
-        float mins = (float)(Integer.parseInt(parts[1]) / 60);
-        return (float)(hores + mins);
-    }
-    
-    public String atributsExtra(){
-        return (hora + ";" + durada + ";" + capacitat + ";" + usuarisApuntats + ";" + sumaVal + ";" + nVal);
-    }
-    
-    @Override
-    public Tallers copia(){
-        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, true, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
-        return (Tallers)aux;
+        float mins = (float) (Integer.parseInt(parts[1]) / 60);
+        return (float) (hores + mins);
     }
 
-    public String toString(){
-        return (super.toString() + "\nA les " + hora + "h, amb una durada de " + durada + "h.\nTé capacitat per a " + capacitat + " persones, i hi ha " + usuarisApuntats + " usuaris apuntats.");
+    public String atributsExtra() {
+        return (hora + ";" + durada + ";" + capacitat + ";" + usuarisApuntats + ";" + sumaVal + ";" + nVal);
+    }
+
+    @Override
+    public Tallers copia() {
+        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, true, hora, durada, capacitat,
+                usuarisApuntats, sumaVal, nVal);
+        return (Tallers) aux;
+    }
+
+    public String toString() {
+        return (super.toString() + "\nA les " + hora + "h, amb una durada de " + durada + "h.\nTé capacitat per a "
+                + capacitat + " persones, i hi ha " + usuarisApuntats + " usuaris apuntats.");
     }
 
 }
