@@ -203,12 +203,12 @@ public class LlistaReserves extends Llista<Reserves> {
                         Reserves reserva = (Reserves) obj;
                         agregar(reserva);
                     }
-                } catch (EOFException e) {
+                } catch (Exception e) {
                     fin = true; // Fin del archivo
                 }
             }
             System.out.println("Cargado\n");
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("Error al cargar el archivo serializado\n");
             e.printStackTrace();
         }
@@ -236,18 +236,6 @@ public class LlistaReserves extends Llista<Reserves> {
                 usuaris.agregar(llista[i].getUsuari());
         }
         return usuaris;
-    }
-
-    public Usuaris usuarimesapuntat() {
-        int max = 0;
-        Usuaris usuarimesapuntat = null;
-        for (int i = 0; i < nElem; i++) {
-            if (llista[i].getUsuari().getTallerApuntats() > max) {
-                max = llista[i].getUsuari().getTallerApuntats();
-                usuarimesapuntat = llista[i].getUsuari().copia();
-            }
-        }
-        return usuarimesapuntat;
     }
 
     public String valorarTaller(float valoracio, Reserves reserva) {

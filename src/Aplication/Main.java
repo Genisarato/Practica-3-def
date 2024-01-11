@@ -11,6 +11,7 @@ import java.util.Scanner;
 import Classes.Activitats;
 //import Classes.Excepcions;
 //import Classes.Entitats;
+import Classes.Excepcions;
 import Classes.Usuaris;
 import Classes.Visites;
 import Classes.Xerrades;
@@ -97,7 +98,7 @@ public class Main {
 				// Calcular l’usuari que s’ha apuntat a més tallers.
 				case 8:
 					System.out.println("\nHas escollit calcular l'usuari que s'ha apuntat a més tallers.");
-					op8(llisR, teclat);
+					op8(llisU, teclat);
 					// genis
 					// fet
 					break;
@@ -291,12 +292,12 @@ public class Main {
 			r = new Reserves(u, llisA.trobaTaller(codi));
 			try{
 				llisR.agregar(r);
+				if (!llisR.reservaExistent(r)) llisU.actualitzarApuntats(u);
+				llisR.agregar(r);
+				if (!llisR.reservaExistent(r)) System.out.println("\nReserva realitzada!");
 			}
 			catch (Excepcions e){
 			}
-			if (!llisR.reservaExistent(r)) llisU.actualitzarApuntats(u);
-			llisR.agregar(r);
-			if (!llisR.reservaExistent(r)) System.out.println("\nReserva realitzada!");
 		}
 	}
 
@@ -312,8 +313,8 @@ public class Main {
 	}
 
 	// 8.Calcular l’usuari que s’ha apuntat a més tallers.")
-	private static void op8(LlistaReserves llisR, Scanner teclat) {
-		System.out.println("L'usuari que s'ha apuntat a més tallers és " + llisR.usuarimesapuntat());
+	private static void op8(LlistaUsuaris llistaU, Scanner teclat) {
+		System.out.println("L'usuari que s'ha apuntat a més tallers és " + llistaU.usuarimesapuntat());
 	}
 
 	// 9. Registrar la nota que un usuari que s’ha apuntat a un taller li dona un

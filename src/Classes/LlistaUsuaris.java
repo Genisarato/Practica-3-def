@@ -225,6 +225,19 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         }
     }
 
+    public Usuaris usuarimesapuntat() {
+        int max = 0;
+        Usuaris usuarimesapuntat = null;
+        for (int i = 0; i < nElem; i++) {
+            if (llista[i].getTallerApuntats() > max) {
+                max = llista[i].getTallerApuntats();
+                usuarimesapuntat = llista[i].copia();
+            }
+        }
+        return usuarimesapuntat;
+    }
+
+
     public void imprimir() {
         System.out.println(toString());
     }
