@@ -65,16 +65,17 @@ public class LlistaReserves extends Llista<Reserves> {
      * 
      * @taller
      */
-    public void agregar(Usuaris u, Tallers taller) {
+    public void agregar(Usuaris u, Tallers taller) throws Excepcions {
         if (nElem < llista.length) {
             try {
                 Reserves copia = new Reserves(u, taller);
                 comprovaReserva(copia);
-                u.updateapuntats();
+                copia.getUsuariOriginal().updateapuntats();
                 llista[nElem] = copia;
                 nElem++;
             } catch (Excepcions e) {
                 System.out.println(e.getMessage());
+                throw new Excepcions("La reserva ja s'ha fet previament");
             }
         }
     }

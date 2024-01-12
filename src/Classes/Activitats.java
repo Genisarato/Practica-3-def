@@ -34,15 +34,15 @@ public abstract class Activitats {
 
     //En el cas de fer una copia d'una activitat, el codi entenc que no es pot tornar a generar (si es tornes a generar nAct hauria augmentat i el codi acabaria sent diferent), de manera que quan fem una copia duna activitat, li haurem de passar el codi, no?
     //el seguent constructor es nomes si acabem passant per passametre el codi de l'activitat a mes a mes de tota la info
-    public Activitats(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia){
+    public Activitats(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi){
         this.nom = nom;
         this.codi = codi;
         this.lloc = lloc;
         this.dia = dia;
         this.entitatCrea = entitatCrea;
         this.codiPostal = codiPostal;
-        if (!esCopia) incrementarAct();
     }
+    
     /**
     * Incrementa el valor de la variable nAct.
     * Aquest mètode s'encarrega d'augmentar en 1 la quantitat d'activitats (nAct). Cmoençant desde 100.
@@ -74,7 +74,18 @@ public abstract class Activitats {
     public String getCodi() {
         return codi;
     }
+    /**
+     * Getter
+     * @return nAct
+     */
+    public static int getnAct(){
+        return nAct;
+    }
 
+    public static void setnAct(int n){
+        nAct = n;
+        incrementarAct();
+    }
     /**
      * Getter
      * @return lloc
@@ -128,7 +139,7 @@ public abstract class Activitats {
     public int getUsuarisApuntats(){        //S'implementa el mètode real en la classe Tallers
         return 0;
     }
-
+    /*Mètode toString */
     public String toString () {
         return ("\nNom: "+nom+" Lloc: "+lloc+" amb codi postal "+codiPostal+" el dia "+dia+" de novembre de 2023.\nEntitat que l'ha creat: "+entitatCrea+" amb el codi "+codi);
     }

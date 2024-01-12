@@ -78,7 +78,7 @@ public class Reserves implements Serializable{
     }
 
     public boolean esIgual(Reserves reserva){
-        return (this.codiReserva.equalsIgnoreCase(reserva.getCodiReserva()) || ((usuari.igual(reserva.getUsuari()) && codiTaller == reserva.getCodiTaller())));
+        return (this.codiReserva.equalsIgnoreCase(reserva.getCodiReserva()) || ((usuari.igual(reserva.getUsuari()) && codiTaller.equalsIgnoreCase(reserva.getCodiTaller()))));
     }
 
     public Reserves copia(){

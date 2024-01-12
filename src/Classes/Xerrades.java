@@ -8,8 +8,8 @@ public class Xerrades extends Activitats {
         this.nomPersona = nomPersona;
     }
 
-    public Xerrades(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, String nomPersona){
-        super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
+    public Xerrades(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, String nomPersona){
+        super(nom, lloc, dia, entitatCrea, codiPostal, codi);
         this.nomPersona = nomPersona;
     }
 
@@ -30,7 +30,7 @@ public class Xerrades extends Activitats {
     }
     
     public Xerrades copia(){
-        Activitats aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, true, nomPersona);
+        Activitats aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, nomPersona);
         return (Xerrades)aux;
     }
 

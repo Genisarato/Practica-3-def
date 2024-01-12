@@ -234,16 +234,20 @@ public class LlistaActivitats extends Llista<Activitats>{
                 String entitatCrea = parts[3].trim();  
                 int codiPostal = Integer.parseInt(parts[4].trim());   
                 String codi = parts[5].trim();
+                String[] codiSeparat = codi.split("(?!^)");
+                String codiNumStr = codiSeparat[3]+codiSeparat[4]+codiSeparat[5];
+                int codiNumInt = Integer.parseInt(codiNumStr);
+                if (Activitats.getnAct() < codiNumInt) Activitats.setnAct(codiNumInt);  //Es va actualitzant el comptador d'activitats segons els codis que es va trobant
                  //Els atributs comuns acaben aqui
 
                 if (parts[7].equalsIgnoreCase("-1")){
                     String nomPersona = parts[6].trim();                                    //Xerrades acaba aqui
-                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, false, nomPersona);
+                    aux = new Xerrades(nom, lloc, dia, entitatCrea, codiPostal, codi, nomPersona);
                 }
                 else if (parts[8].equalsIgnoreCase("-1")){
                     boolean audioguies = Boolean.parseBoolean(parts[6].trim());            
                     boolean adaptCegues = Boolean.parseBoolean(parts[7].trim());            //Visites acaba aqui   
-                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, false, audioguies, adaptCegues); 
+                    aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, audioguies, adaptCegues); 
                 }
                 else{
                     String hora = parts[6].trim();            
@@ -252,7 +256,7 @@ public class LlistaActivitats extends Llista<Activitats>{
                     int usuarisApuntats = Integer.parseInt(parts[9].trim());
                     float sumaVal = Float.parseFloat(parts[10].trim());
                     int nVal = Integer.parseInt(parts[11].trim());                          //Tallers acaba aqui
-                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, false, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
+                    aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, hora, durada, capacitat, usuarisApuntats, sumaVal, nVal);
                 }
                 this.agregar(aux);
             }

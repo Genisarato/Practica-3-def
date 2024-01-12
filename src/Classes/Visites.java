@@ -9,8 +9,8 @@ public class Visites extends Activitats {
         this.adaptCegues = adaptCegues;
     }
 
-    public Visites(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia, boolean audioguies, boolean adaptCegues){
-        super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
+    public Visites(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean audioguies, boolean adaptCegues){
+        super(nom, lloc, dia, entitatCrea, codiPostal, codi);
         this.audioguies = audioguies;
         this.adaptCegues = adaptCegues;
     }
@@ -28,7 +28,7 @@ public class Visites extends Activitats {
      * @return Visites
      */
     public Visites copia(){
-        Activitats aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, true, audioguies, adaptCegues);
+        Activitats aux = new Visites(nom, lloc, dia, entitatCrea, codiPostal, codi, audioguies, adaptCegues);
         return (Visites)aux;
     }
     
@@ -38,6 +38,6 @@ public class Visites extends Activitats {
         return hoEs;
     }
     public String toString () {
-        return (super.toString() +"\n" + adaptarBool(audioguies) + " té audioguies, " + adaptarBool(adaptCegues) + " està adaptat per a cegs");
+        return (super.toString() +"\n" + adaptarBool(audioguies) + " té audioguies, " + adaptarBool(adaptCegues) + " està adaptat per a cecs");
     }
 }

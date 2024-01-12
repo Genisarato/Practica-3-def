@@ -31,15 +31,15 @@ public class Entitats {
     public String getMail(){
         return mail;
     }
-
+    /*Setter del nom*/
     public void SetNom(String nom){
         this.nom = nom;
     }
-
+    /*Setter del telef*/
     public void SetTelef(int telef){
         this.telef = telef;
     }
-
+    /*Setter del mail*/
     public void SetMail(String mail){
         this.mail = mail;
     }

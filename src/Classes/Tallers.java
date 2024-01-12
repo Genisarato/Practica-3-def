@@ -25,9 +25,9 @@ public class Tallers extends Activitats {
 
     }
 
-    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi, boolean esCopia,
+    public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi,
             String hora2, String durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal) {
-        super(nom, lloc, dia, entitatCrea, codiPostal, codi, esCopia);
+        super(nom, lloc, dia, entitatCrea, codiPostal, codi);
         this.hora = hora2;
         this.durada = durada2;
         this.capacitat = capacitat;
@@ -90,6 +90,10 @@ public class Tallers extends Activitats {
         return capacitat > usuarisApuntats;
     }
 
+    public void restaApuntat(){
+        usuarisApuntats--;
+    }
+
     public float adaptarHora(String horari) {
         String[] parts = horari.split(":");
         int hores = Integer.parseInt(parts[0]);
@@ -103,7 +107,7 @@ public class Tallers extends Activitats {
 
     @Override
     public Tallers copia() {
-        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, true, hora, durada, capacitat,
+        Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, hora, durada, capacitat,
                 usuarisApuntats, sumaVal, nVal);
         return (Tallers) aux;
     }
