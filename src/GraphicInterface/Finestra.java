@@ -24,9 +24,9 @@ import java.util.Scanner;
 public class Finestra extends JFrame {
 
     private String numero;
-    private Boolean Xerrada;
-    private Boolean Taller;
-    private Boolean Visita;
+    private Boolean Xerrada = false;
+    private Boolean Taller = false;
+    private Boolean Visita = false;
 
     public Finestra(String titol) {
         this.setTitle(titol);
@@ -121,26 +121,23 @@ public class Finestra extends JFrame {
                         String[] datos = linea.split(";");
 
                         if (datos[2].equals(getNumero())) {
-                            if (getXerrada().equals(false) && getTaller().equals(false) && getVisita().equals(false))
-                                contenidoArchivo.append(linea).append("\n");
-                            else {
-                                if (getXerrada().equals(true)) {
+                            if (getXerrada() || getTaller() || getVisita()) {
+                                if (getXerrada()) {
                                     if (datos[7].equalsIgnoreCase("-1")) {
-                                        contenidoArchivo.append(transformarLinea(linea)).append("\n");
+                                        contenidoArchivo.append(toTranscribir(datos)).append("\n");
                                     }
                                 }
-                                if (getVisita().equals(true)) {
+                                if (getVisita()) {
                                     if (datos[8].equalsIgnoreCase("-1")) {
-                                        contenidoArchivo.append(transformarLinea(linea)).append("\n");
+                                        contenidoArchivo.append(toTranscribir(datos)).append("\n");
                                     }
                                 }
-                                if (getTaller().equals(true)) {
-                                    if (datos[8].equalsIgnoreCase("-1") || datos[7].equalsIgnoreCase("-1"))
-                                        ;
-                                    else
-                                        contenidoArchivo.append(transformarLinea(linea)).append("\n");
-
+                                if (getTaller()) {
+                                    if (datos[12].equalsIgnoreCase("-1"))
+                                        contenidoArchivo.append(toTranscribir(datos)).append("\n");
                                 }
+                            } else {
+                                contenidoArchivo.append(toTranscribir(datos)).append("\n");
                             }
 
                         }
@@ -156,14 +153,18 @@ public class Finestra extends JFrame {
             }
         };
 
-        ActionListener Xerrada = new ActionListener() {
+        ActionListener Taller = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (checkBox1.isSelected())
-                    setXerrada(true);
-                else
-                    setXerrada(false);
+                setXerrada(checkBox1.isSelected());
+                if (checkBox1.isSelected()) {
+                    checkBox2.setEnabled(false);
+                    checkBox3.setEnabled(false);
+                } else {
+                    checkBox2.setEnabled(true);
+                    checkBox3.setEnabled(true);
+                }
             }
         };
 
@@ -171,21 +172,29 @@ public class Finestra extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (checkBox2.isSelected())
-                    setVisita(true);
-                else
-                    setVisita(false);
+                setXerrada(checkBox2.isSelected());
+                if (checkBox2.isSelected()) {
+                    checkBox1.setEnabled(false);
+                    checkBox3.setEnabled(false);
+                } else {
+                    checkBox1.setEnabled(true);
+                    checkBox3.setEnabled(true);
+                }
             }
         };
 
-        ActionListener Taller = new ActionListener() {
+        ActionListener Xerrada = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (checkBox3.isSelected())
-                    setTaller(true);
-                else
-                    setTaller(false);
+                setXerrada(checkBox3.isSelected());
+                if (checkBox3.isSelected()) {
+                    checkBox1.setEnabled(false);
+                    checkBox2.setEnabled(false);
+                } else {
+                    checkBox1.setEnabled(true);
+                    checkBox2.setEnabled(true);
+                }
             }
         };
 
@@ -329,44 +338,9 @@ public class Finestra extends JFrame {
         return Visita;
     }
 
-    public String transformarLinea(String linea) {
-        String[] datos = linea.split(";");
-
-        if (datos.length >= 14) {
-            // Realiza las correcciones que desees en los datos
-            String actividad = "Actividad: " + datos[0];
-            String ubicacion = "Ubicación: " + datos[1];
-            String numero = "Número: " + datos[2];
-            String organizacion = "Organización: " + datos[3];
-            String codigoPostal = "Código postal: " + datos[4];
-            String codigoInterno = "Código interno: " + datos[5];
-            String precio = "Precio: " + datos[6];
-            String descuento = "Descuento: " + datos[7];
-            String duracion = "Duración: " + datos[8];
-            String nivel = "Nivel: " + datos[9];
-            String calificacion = "Calificación: " + datos[10];
-            String inscritos = "Inscritos: " + datos[11];
-            String observaciones = "Observaciones: " + datos[12];
-            String otroDato = "Otro dato: " + datos[13];
-
-            // Construye la cadena con el texto corregido
-            return actividad +
-                    ubicacion +
-                    numero +
-                    organizacion +
-                    codigoPostal +
-                    codigoInterno +
-                    precio +
-                    descuento +
-                    duracion +
-                    nivel +
-                    calificacion +
-                    inscritos +
-                    observaciones +
-                    otroDato;
-        }
-
-        return linea;
+    public String toTranscribir(String[] datos) {
+        return ("\nNom: " + datos[0] + " Lloc: " + datos[1] + " amb codi postal " + datos[4] + " el dia " + datos[2]
+                + " de novembre de 2023.\nEntitat que l'ha creat: " + datos[3] + " amb el codi " + datos[5]);
     }
 
 }
