@@ -17,7 +17,6 @@ Lideratge Empresarial;La Pineda;17;BusinessLeaders;43481;BUS120;Isabel Llauto;-1
 Cuina Creativa;Reus;9;GourmetArt;43202;GOU121;19.5;1.5;12;0;0.0;0;-1
 Passejada Nocturna pel Parc Natural;Mont-roig del Camp;11;NatureNight;43300;NAT122;No;No;-1
 Descoberta dels Monuments Romanics;Reus;8;RomanHistory;43206;ROM123;No;No;-1
-Programacio Web Avancada;Reus;7;CodeMasters;43203;COD124;17.5;2;15;0;0.0;0;-1
 Circuit de Vins del Priorat;Falset;20;WineLovers;43730;WIN125;No;No;-1
 Observacio d'Ocells al Delta de l'Ebre;Amposta;14;BirdWatchers;43870;BIR126;No;No;-1
 Disseny de Videojocs;Cambrils;3;GameDevHub;43850;GAM127;15;2;10;0;0.0;0;-1

@@ -123,17 +123,15 @@ public class Finestra extends JFrame {
                         if (datos[2].equals(getNumero())) {
                             if (getXerrada() || getTaller() || getVisita()) {
                                 if (getXerrada()) {
-                                    if (datos[7].equalsIgnoreCase("-1")) {
+                                    if (datos.length == 8) {
                                         contenidoArchivo.append(toTranscribir(datos)).append("\n");
                                     }
-                                }
-                                if (getVisita()) {
-                                    if (datos[8].equalsIgnoreCase("-1")) {
+                                } else if (getVisita()) {
+                                    if (datos.length == 9) {
                                         contenidoArchivo.append(toTranscribir(datos)).append("\n");
                                     }
-                                }
-                                if (getTaller()) {
-                                    if (datos[12].equalsIgnoreCase("-1"))
+                                } else {
+                                    if (datos.length == 13)
                                         contenidoArchivo.append(toTranscribir(datos)).append("\n");
                                 }
                             } else {
@@ -157,7 +155,9 @@ public class Finestra extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setXerrada(checkBox1.isSelected());
+                setTaller(checkBox1.isSelected());
+                setVisita(false);
+                setXerrada(false);
                 if (checkBox1.isSelected()) {
                     checkBox2.setEnabled(false);
                     checkBox3.setEnabled(false);
@@ -172,7 +172,9 @@ public class Finestra extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setXerrada(checkBox2.isSelected());
+                setVisita(checkBox2.isSelected());
+                setTaller(false);
+                setXerrada(false);
                 if (checkBox2.isSelected()) {
                     checkBox1.setEnabled(false);
                     checkBox3.setEnabled(false);
@@ -188,6 +190,8 @@ public class Finestra extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 setXerrada(checkBox3.isSelected());
+                setVisita(false);
+                setTaller(false);
                 if (checkBox3.isSelected()) {
                     checkBox1.setEnabled(false);
                     checkBox2.setEnabled(false);
