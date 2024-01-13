@@ -6,9 +6,10 @@ public class Entitats {
     private int telef;
     private String mail;
 
-    /*Constructor
-     * @param nom
-     * @param telefon
+    /**
+     * Constructor
+     * @param n
+     * @param telef
      * @param mail
      */
     public Entitats(String n, int telef, String mail){
@@ -17,44 +18,74 @@ public class Entitats {
         this.mail = mail;
     }
 
-    /*Getter del nom */
+    /**
+     * Getter
+     * @return nom
+     */
     public String getNom(){
         return nom;
     }
 
-    /*Getter del telefon */
+    /**
+     * Getter
+     * @return telefon
+     */
     public int getTelef(){
         return telef;
     }
     
-    /*Getter del mail */
+    /**
+     * Getter
+     * @return mail
+     */
     public String getMail(){
         return mail;
     }
-    /*Setter del nom*/
+    
+    /**
+     * Setter
+     * @param nom
+     */
     public void SetNom(String nom){
         this.nom = nom;
     }
-    /*Setter del telef*/
+    
+    /**
+     * Setter
+     * @param telef
+     */
     public void SetTelef(int telef){
         this.telef = telef;
     }
-    /*Setter del mail*/
+    
+    /**
+     * Setter
+     * @param mail
+     */
     public void SetMail(String mail){
         this.mail = mail;
     }
 
-    /*Mètode copia */
+    /**
+     * Mètode copia
+     * @return copia d'una instància d'entitats
+     */
     public Entitats copia(){
         return (new Entitats(this.getNom(), this.getTelef(), this.getMail()));
     }
 
-    /*Mètode implementat de esIgual per si fa falta */
+    /**
+     * Mètode que comprova si dues instàncies d'entitats són iguals
+     * @param n
+     * @return true en el cas de siguin iguals i false quan no ho siguin
+     */
     public boolean esIgual(Entitats n){
         return(this.getNom().equals(n.getNom()) && this.telef == n.telef && this.getMail().equals(n.getMail()));
     }
 
-    /*Mètode toString */
+    /**
+     * toString
+     */
     public String toString(){
         String text;
         text = "La entitat en nom: " +nom+ ", amb numero de telefon: " +telef+ " i amb mail: " +mail;

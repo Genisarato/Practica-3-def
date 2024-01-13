@@ -1,4 +1,4 @@
-package GraphicInterface;
+package InterfGraf;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

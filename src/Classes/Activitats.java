@@ -6,8 +6,6 @@
 
 package Classes;
 
-//Crear get i set  per tal de poder obtenir els atributs de cada activitat i per si s'ha de modificar alguna dada
-
 public abstract class Activitats {
     protected String codi, nom, lloc, entitatCrea;
     protected int codiPostal, dia;
@@ -32,8 +30,15 @@ public abstract class Activitats {
         this.codiPostal = codiPostal;
     }
 
-    //En el cas de fer una copia d'una activitat, el codi entenc que no es pot tornar a generar (si es tornes a generar nAct hauria augmentat i el codi acabaria sent diferent), de manera que quan fem una copia duna activitat, li haurem de passar el codi, no?
-    //el seguent constructor es nomes si acabem passant per passametre el codi de l'activitat a mes a mes de tota la info
+    /**
+     * Constructor amb codi generat previament
+     * @param nom
+     * @param lloc
+     * @param dia
+     * @param entitatCrea
+     * @param codiPostal
+     * @param codi
+     */
     public Activitats(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi){
         this.nom = nom;
         this.codi = codi;
@@ -82,10 +87,6 @@ public abstract class Activitats {
         return nAct;
     }
 
-    public static void setnAct(int n){
-        nAct = n;
-        incrementarAct();
-    }
     /**
      * Getter
      * @return lloc
@@ -111,6 +112,15 @@ public abstract class Activitats {
     }
 
     /**
+     * Setter del comptador estàtic
+     * @param n
+     */
+    public static void setnAct(int n){
+        nAct = n;
+        incrementarAct();
+    }
+
+    /**
      * Mètode que compara si dos dies són iguals
      * @param dia
      * @return 1 o 0 segons si es tracta del mateix dia o no
@@ -118,35 +128,71 @@ public abstract class Activitats {
     public boolean diaIgual (int dia){
         return this.dia == dia;
     }
-
     
     /** 
-     * @param (
-     * @return float
+     * Mètode que s'implementa en Tallers
+     * @return 0 en el cas que l'activitat no sigui un taller
      */
     public float proporcioTallers(){         //S'implementa el mètode real en la classe Tallers
         return 0;
     }
 
+    /**
+     * Mètode que s'implementa en Tallers
+     * @return false en el cas que l'activitat no sigui un taller
+     */
     public boolean placesLliures(){         //S'implementa el mètode real en la classe Tallers
         return false;
     }
 
-    public String getPersona(){             //S'implementa el mètode real en la classe Xerrades
+    /**
+     * Getter de xerrades
+     * @return null en el cas que l'activitat no sigui una xerrada
+     */
+    public String getPersona(){             
         return null;
     }
 
+    /**
+     * Getter de tallers
+     * @return 0 en el cas que l'activitat no sigui un taller
+     */
     public int getUsuarisApuntats(){        //S'implementa el mètode real en la classe Tallers
         return 0;
     }
-    /*Mètode toString */
+
+    /**
+     * Getter de visites
+     * @return false si l'activitat no es una visita
+     */
+    public boolean getAudioG() {
+        return false;
+    }
+    
+    /**
+     * Getter de visites
+     * @return false si l'activitat no es una visita
+     */
+    public boolean getAdaptC() {
+        return false;
+    }
+
+    /**
+     * toString
+     */
     public String toString () {
         return ("\nNom: "+nom+" Lloc: "+lloc+" amb codi postal "+codiPostal+" el dia "+dia+" de novembre de 2023.\nEntitat que l'ha creat: "+entitatCrea+" amb el codi "+codi);
     }
 
+    /**
+     * Mètode abstracte que s'utilitza per a guardar els atributs de cada tipus d'activitat particular
+     * @return string amb el contingut dels atributs
+     */
     public abstract String atributsExtra();
+
+    /**
+     * Mètode abstracte que copia una instància
+     * @return instància copiada
+     */
     public abstract Activitats copia();
-
-
-
 }

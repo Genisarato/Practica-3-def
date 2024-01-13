@@ -8,33 +8,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-/*Classe de llista usuaris, amb el seu constructor, com que no tinc decidit fer la excepcio del nickname, que suposo que al main, he fet
- * un mètode auxiliar per controlar que no hi ha cap nicnkame igual a la llista. S'hauria de implementar una excepcio, més endevant ho
- * intentaré :)
- */
-
 public class LlistaUsuaris extends Llista<Usuaris>{
-    
     private Usuaris[] llista;
-    /*Constructor*/
+
+    /**
+     * Constructor
+     * @param capacitat
+     */
     public LlistaUsuaris(int capacitat){
         super();
         llista = new Usuaris[capacitat];
     }
 
-    
     /** 
+     * Métode de afegir un usuari comprovant que l'usuari no existeixi sino directament la descarta
      * @param nom
      * @param mail
      * @param codi
      */
-    /*Mètode afegir pasant tot per paràmetre i comprovant que no hi ha cap nickname igual,
-     * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
-     * @param nom/nickanme
-     * @param mail
-     * @param codi Postal
-     */
-    /*Es podria borrar el mètode, pero encara no. */
     public void agregar(String nom, String mail, int codi){
         if(nElem<llista.length){
             boolean afegit = false;
@@ -54,21 +45,16 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         }
     }
 
-    /*Mètode auxiliar per afegir un usuari de l'arxiu llista_usuaris.txt a la llista sense copiar al arxiu per no tenir duplicats.
-     * També es podria fer dins al bucle de llegirfitxer, era per fer-ho més elegant :) 
-     *
-    private void afegirsensecopiar(Usuaris usuari){
-                llista[nElem] = usuari.copia();
-                nElem++;
-    }*/
-
     /* Mètode que llegeix el contingut del fitxer llista_usuaris.txt 
     *  ATENCIO: AQUEST MÈTODE SEMPRE S'HA DE FER ABANS DE COMENÇAR AMB EL PROGAMA
      * JA QUE ES DONA PER SUPOSAT QUE NO DONA MAI MÉS GRAN QUE LA LENGTH 
      * NI HI HA CAP NICKNAME IGUAL(JA QUE TOT EL QUE HI HA A L'ARXIU JA ESTA CORRECTE).
      * AL MAIN S'HA DE FER A LES PRIMERES LINIES.
      * SI NO POT OCASIONAR PROBLEMES A LA LLISTA
-     * 
+     */
+    /**
+     * Mètode que llegeix el contingut del fitxer llista_usuaris.txt
+     * @param nomarxiu
      */
     public void llegirfitxer(String nomarxiu){
         File file = new File("src", nomarxiu);
@@ -91,14 +77,9 @@ public class LlistaUsuaris extends Llista<Usuaris>{
 
     }
     
-
-    
     /** 
-     * @param n
-     */
-    /*Mètode afegir pasant un usuari directament que també comprova que no hi ha cap nickname igual,
-     * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
-     * @param usuari
+     * Métode de afegir un usuari comprovant que l'usuari no existeixi sino directament la descarta
+     * @param n - instància d'usuaris
      */
     public void agregar(Usuaris n){
         if(nElem < llista.length){
@@ -124,10 +105,18 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         }
     }
 
+    /**
+     * Getter de nElem
+     * @return nElem
+     */
     public int tamano(){
         return nElem;
     }
 
+    /**
+     * Mètode que elimina una instància d'usuaris
+     * @param n - instància d'usuaris
+     */
     public void eliminar(Usuaris n){
         int j = 0;
         boolean trobat = false;
@@ -153,9 +142,11 @@ public class LlistaUsuaris extends Llista<Usuaris>{
      * I ABANS DE TANCAR EL PROGAMA, SINÓ ES PERDRA TOT EL CONTINUGT DE LLISTA NO GUARDAT ANTERIORMENT, JA QUE
      * EL MÉTODE ELIMINAR ERA MÉS FÀCIL LA IMPLEMENTACIÓ AIXÍ I ÉS MÉS EFICIENT
      */
-    public void guardarArxiu(){
-        String nomarxiu = "Llista_usuaris.txt";
-
+    /**
+     * Mètode per guardar la llista al arxiu Llista_usuaris.txt
+     * @param nomarxiu
+     */
+    public void guardarArxiu(String nomarxiu){
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
@@ -172,6 +163,9 @@ public class LlistaUsuaris extends Llista<Usuaris>{
 
     }
 
+    /**
+     * toString
+     */
     @Override
     public String toString() {
             String text = "";
@@ -181,7 +175,11 @@ public class LlistaUsuaris extends Llista<Usuaris>{
             return text;
     }
 
-    /*Mètode que comprova que el nickname no està a la llista*/
+    /**
+     * Mètode que comprova que el nickname no està a la llista
+     * @param nom
+     * @return true si hi és, false si no hi es
+     */
     public boolean nicknameigual(String nom){
         boolean trobat = false;
         for(int i = 0; i<nElem; i++){
@@ -190,6 +188,9 @@ public class LlistaUsuaris extends Llista<Usuaris>{
        return trobat;   
     }
 
+    /**
+     * Mètode que buida l'arxiu
+     */
     public void vaciar(){
         nElem = 0;
         String nomarxiu = "Llista_usuaris.txt";
@@ -202,6 +203,13 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         }
     }
 
+    /**
+     * Mètode que troba un usuari determinat a través dels seus atributs
+     * @param nom
+     * @param mail
+     * @param codiPostal
+     * @return null si no s'ha trobat, sino es retorna l'usuari
+     */
     public Usuaris trobaUsuari(String nom, String mail, int codiPostal){
         boolean trobat = false;
         int i;
@@ -215,6 +223,10 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         return u;
     }
 
+    /**
+     * Mètode actualitza el nombre de tallers als que està apuntat un usuari
+     * @param u - instància d'usuaris
+     */
     public void actualitzarApuntats(Usuaris u){
         boolean trobat = false;
         for (int i = 0; i < nElem && !trobat; i++){
@@ -225,6 +237,10 @@ public class LlistaUsuaris extends Llista<Usuaris>{
         }
     }
 
+    /**
+     * Mètode que busca quin usuari s'ha apuntat a més tallers
+     * @return usuari que s'ha apuntat a més tallers
+     */
     public Usuaris usuarimesapuntat() {
         int max = 0;
         Usuaris usuarimesapuntat = null;
@@ -234,14 +250,21 @@ public class LlistaUsuaris extends Llista<Usuaris>{
                 usuarimesapuntat = llista[i].copia();
             }
         }
-        return usuarimesapuntat;
+        return usuarimesapuntat.copia();
     }
 
-
+    /**
+     * Crida a toString
+     */
     public void imprimir() {
         System.out.println(toString());
     }
 
+    /**
+     * Mètode que comprova si la llista conté un usuari concret
+     * @param elemento - instància d'usuaris
+     * @return true si ja existeix, false si no existeix
+     */
     @Override
     public boolean contiene(Usuaris elemento) {
         boolean conte = false;

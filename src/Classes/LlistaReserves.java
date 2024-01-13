@@ -12,8 +12,9 @@ import java.io.ObjectOutputStream;
 public class LlistaReserves extends Llista<Reserves> {
     private Reserves[] llista;
 
-    /*
+    /**
      * Constructor
+     * @param capacitat
      */
     public LlistaReserves(int capacitat) {
         super();
@@ -21,14 +22,9 @@ public class LlistaReserves extends Llista<Reserves> {
     }
 
     /**
-     * @param n
+     * Métode de afegir una reserva comprovant que la reserva no estigui feta sino directament la descarta
+     * @param n - instància de reserves
      * @throws Excepcions
-     */
-    /*
-     * Métode de afegir una reserva comprovant que la reserva no estigui feta sino
-     * directament la descarta
-     * 
-     * @param Reserva
      */
     public void agregar(Reserves n) throws Excepcions {
         if (nElem < llista.length) {
@@ -42,11 +38,13 @@ public class LlistaReserves extends Llista<Reserves> {
                 throw new Excepcions("La reserva ja s'ha fet previament");
             }
         }
+        else throw new Excepcions("No queden places lliures");
     }
 
     /**
-     * @param r
-     * @return boolean
+     * Mètode que mira si una reserva ja existeix
+     * @param r - instància de reserves
+     * @return true si existeix, false si no
      */
     public boolean reservaExistent(Reserves r) {
         boolean trobat = false;
@@ -57,13 +55,11 @@ public class LlistaReserves extends Llista<Reserves> {
         return trobat;
     }
 
-    /*
-     * Métode de afegir un usuari i un taller, que es transforma amb una reserva
-     * comprovant també que la reserva no estigui feta, sinó la descarta
-     * 
-     * @Usuari
-     * 
-     * @taller
+    /**
+     * Mètode que afegeix la còpia d'una entitat a la última posició disponible de la llista 
+     * @param u - instància d'usuaris
+     * @param taller - instància de tallers
+     * @throws Excepcions
      */
     public void agregar(Usuaris u, Tallers taller) throws Excepcions {
         if (nElem < llista.length) {
@@ -81,16 +77,18 @@ public class LlistaReserves extends Llista<Reserves> {
     }
 
     /*
-     * Mètdoe per guardar la llista al arxiu Llista_reserves.ser
+     * Mètode per guardar la llista al arxiu Llista_reserves.ser
      * ATENCIO: S'HA DE FER UNA VEGADA S'HAN FINALITZAT LES OPERACIONS DE LA LLISTA:
      * AGREGAR, BORRAR, ETC..
      * I ABANS DE TANCAR EL PROGAMA, SINÓ ES PERDRA TOT EL CONTINUGT DE LLISTA NO
      * GUARDAT ANTERIORMENT, JA QUE
      * EL MÉTODE ELIMINAR ERA MÉS FÀCIL LA IMPLEMENTACIÓ AIXÍ I ÉS MÉS EFICIENT
      */
-    public void guardarArxiu() {
-        String nomarxiu = "Llista_reserves.ser";
-
+    /**
+     * Mètode per guardar la llista al arxiu Llista_reserves.ser
+     * @param nomarxiu
+     */
+    public void guardarArxiu(String nomarxiu) {
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaAbsoluta))) {
@@ -104,7 +102,9 @@ public class LlistaReserves extends Llista<Reserves> {
         }
     }
 
-    /* Métode toString */
+    /**
+     * toString
+     */
     @Override
     public String toString() {
         String text = "";
@@ -114,12 +114,17 @@ public class LlistaReserves extends Llista<Reserves> {
         return text;
     }
 
-    /* Métode que retorna el número d'elements */
+    /**
+     * Getter
+     */
     public int tamano() {
         return nElem;
     }
 
-    /* Void que elimina una reserva en específic */
+    /**
+     * Mètode que elimina una instància de reserves concreta
+     * @param reserva
+     */
     public void eliminar(Reserves reserves) {
         int j = -1;
         int i;
@@ -136,9 +141,8 @@ public class LlistaReserves extends Llista<Reserves> {
         }
     }
 
-    /*
-     * Métode que buida la llista i l'arxiu
-     * ATENCIÓ: BORRA TOT L'ARXIU, EN CUIDADO QUAN ES CRIDA AL MÉTODE
+    /**
+     * Mètode que buida l'arxiu
      */
     public void vaciar() {
         nElem = 0;
@@ -150,15 +154,17 @@ public class LlistaReserves extends Llista<Reserves> {
         }
     }
 
-    /* Métode que mostra la llista per pantalla */
+    /**
+     * Crida a toString
+     */
     public void imprimir() {
         System.out.println(toString());
     }
 
-    /*
-     * Métode que retorna un boolea comforme una reserva está dins la llista o no
-     * 
-     * @param Reserva
+    /**
+     * Mètode que comprova si la llista conté una instància de reserves específica
+     * @param reserva - instància a buscar
+     * @return true si sí hi és o false si no hi és
      */
     public boolean contiene(Reserves reserva) {
         boolean conte = false;
@@ -169,10 +175,10 @@ public class LlistaReserves extends Llista<Reserves> {
         return conte;
     }
 
-    /*
-     * Métode privat que comprova que la reserva no estigui feta
-     * 
-     * @param Reserva
+    /**
+     * Mètode private que comprova si una reserva ja és present
+     * @param reserva
+     * @throws Excepcions
      */
     private void comprovaReserva(Reserves reserva) throws Excepcions {
         for (int i = 0; i < nElem; i++) {
@@ -190,6 +196,10 @@ public class LlistaReserves extends Llista<Reserves> {
      * AL MAIN S'HA DE FER A LES PRIMERES LINIES.
      * SI NO POT OCASIONAR PROBLEMES A LA LLISTA
      * 
+     */
+    /**
+     * Mètode que llegeix el contingut del fitxer llista_reserves.ser 
+     * @param nomarxiu
      */
     public void llegirfitxer(String nomarxiu) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomarxiu))) {
@@ -213,21 +223,11 @@ public class LlistaReserves extends Llista<Reserves> {
         }
     }
 
-    /*
-     * Mètode auxiliar per afegir un usuari de l'arxiu llista_usuaris.txt a la
-     * llista sense copiar al arxiu per no tenir duplicats.
-     * També es podria fer dins al bucle de llegirfitxer, era per fer-ho més elegant
-     * :)
-     *
-     * private void afegirsensecopiar(Reserves reserva){
-     * llista[nElem] = reserva.copia();
-     * nElem++;
-     * }
+    /**
+     * Mètode que troben tots els usuaris d'un taller concret
+     * @param taller
+     * @return subllista amb tots els usuaris apuntats
      */
-
-    // Métode que retorna una llista de usuaris que estan apuntats a un taller en
-    // específic
-    // @param taller
     public LlistaUsuaris usuarisTaller(Tallers taller) {
         LlistaUsuaris usuaris = new LlistaUsuaris(nElem);
         for (int i = 0; i < nElem; i++) {
@@ -237,11 +237,22 @@ public class LlistaReserves extends Llista<Reserves> {
         return usuaris;
     }
 
+    /**
+     * Mètode que registra una valoració
+     * @param valoracio
+     * @param reserva
+     * @return el codi del taller el qual s'ha valorat
+     */
     public String valorarTaller(float valoracio, Reserves reserva) {
         reserva.valorar();
         return reserva.getCodiTaller();
     }
 
+    /**
+     * Mètode que troba una reserva específica
+     * @param codiReserva
+     * @return null si no s'ha trobat la reserva, sino retorna la instància de reserves que busquem
+     */
     public Reserves trobaReserva(String codiReserva) {
         boolean trobat = false;
         Reserves r = null;

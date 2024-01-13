@@ -12,7 +12,10 @@ import java.util.Scanner;
 public class LlistaEntitats extends Llista<Entitats>{
     private Entitats[] llista;
 
-    /*Constructor*/
+    /**
+     * Constructor
+     * @param capacitat
+     */
     public LlistaEntitats(int capacitat){
         super();
         llista = new Entitats[capacitat];
@@ -20,17 +23,11 @@ public class LlistaEntitats extends Llista<Entitats>{
 
     
     /** 
+     * Mètode que afegeix la còpia d'una entitat a la última posició disponible de la llista 
      * @param n
      * @param telef
      * @param mail
      */
-    /*Mètode afegir pasant tot per paràmetre
-     * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
-     * @param nom entitat
-     * @param mail
-     * @param codi Telefon(TO DO fer el comprovar que el telefon es de 9 xifres)
-     */
-    /*Es podria borrar el mètode, pero encara no. */
     public void agregar(String n, int telef, String mail) {
         if(nElem < llista.length){
             Entitats copia = new Entitats(n, telef, mail);
@@ -41,11 +38,8 @@ public class LlistaEntitats extends Llista<Entitats>{
 
     
     /** 
-     * @param n
-     */
-    /*Mètode afegir pasant una entitat directament
-     * més endavant s'ha d'implementar el escriure al fitxer cada entitat quan es fiqui a la llista
-     * @param entitat
+     * Mètode que afegeix la còpia d'una entitat a la última posició disponible de la llista
+     * @param n - instància a afegir
      */
     public void agregar(Entitats n){
         if(nElem < llista.length){
@@ -54,10 +48,14 @@ public class LlistaEntitats extends Llista<Entitats>{
         }
     }
 
-     /* Mètode que llegeix el contingut del fitxer llista_entitats.txt 
-    *  ATENCIO: AQUEST MÈTODE SEMPRE S'HA DE FER ABANS DE COMENÇAR AMB EL PROGAMA
+     /*
+     *  ATENCIO: AQUEST MÈTODE SEMPRE S'HA DE FER ABANS DE COMENÇAR AMB EL PROGAMA
      * JA QUE ES DONA PER SUPOSAT QUE NO DONA MAI MÉS GRAN QUE LA LENGTH.
      * SI ES FA DESPRÉS POT OCASIONAR PROBLEMES
+     */
+    /**
+     * Mètode que llegeix el contingut del fitxer llista_entitats.txt 
+     * @param nomarxiu
      */
     public void llegirfitxer(String nomarxiu){
        
@@ -78,22 +76,25 @@ public class LlistaEntitats extends Llista<Entitats>{
         }
     }
 
-    /*Mètode auxiliar per afegir una entitat de l'arxiu llista_entitats.txt a la llista sense copiar al arxiu per no tenir duplicats.
-     * També es podria fer dins al bucle de llegirfitxer, era per fer-ho més elegant :) 
+    /**
+     * Mètode auxiliar per afegir una entitat de l'arxiu llista_entitats.txt a la llista sense copiar al arxiu per no tenir duplicats.
+     * @param entitats
      */
-    private void afegirsensecopiar(Entitats entitats){          //ES POT ELIMINAR??
+    private void afegirsensecopiar(Entitats entitats){  
         llista[nElem] = entitats.copia();
         nElem++;
     }
 
-    /*Mètdoe per guardar la llista al arxiu Llista_entitats.txt
+    /*
      * ATENCIO: S'HA DE FER UNA VEGADA S'HAN FINALITZAT LES OPERACIONS DE LA LLISTA: AGREGAR, BORRAR, ETC..
      * I ABANS DE TANCAR EL PROGAMA, SINÓ ES PERDRA TOT EL CONTINUGT DE LLISTA NO GUARDAT ANTERIORMENT, JA QUE
      * EL MÉTODE ELIMINAR ERA MÉS FÀCIL LA IMPLEMENTACIÓ AIXÍ I ÉS MÉS EFICIENT
      */
-    public void guardarArxiu(){
-        String nomarxiu = "Llista_entitats.txt";
-
+    /**
+     * Mètode per guardar la llista al arxiu Llista_entitats.txt
+     * @param nomarxiu
+     */
+    public void guardarArxiu(String nomarxiu){
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
@@ -109,21 +110,31 @@ public class LlistaEntitats extends Llista<Entitats>{
         }
 
     }
-    /*toString */
+
+    /**
+     * toString
+     */
     @Override
     public String toString() {
             String text = "";
             for (int i = 0; i < nElem; i++) {
                 text = text + llista[i] + "\n";
             }
-            return text;
+        return text;
     }
 
-    
+    /**
+     * Getter
+     * @return nElem
+     */
     public int tamano(){
         return nElem;
     }
 
+    /**
+     * Mètode que elimina una instància d'entitat
+     * @param entitat - instància a eliminar
+     */
     public void eliminar(Entitats entitat){
         int j = -1;
         int i;
@@ -139,6 +150,9 @@ public class LlistaEntitats extends Llista<Entitats>{
         }
     }
 
+    /**
+     * Mètode que buida un fitxer
+     */
     public void vaciar(){
         nElem = 0;
         String nomarxiu = "Llista_entitats.txt";
@@ -151,10 +165,18 @@ public class LlistaEntitats extends Llista<Entitats>{
         }
     }
 
+    /**
+     * Crida a toString
+     */
     public void imprimir(){
         System.out.println(toString());
     }
 
+    /**
+     * Mètode que comprova si la llista conté una instància d'entitats específica
+     * @param entitat - instància a buscar
+     * @return true si sí hi és o false si no hi és
+     */
     public boolean contiene(Entitats entitat){
         boolean conte = false;
         for(int i = 0; i<nElem; i++){

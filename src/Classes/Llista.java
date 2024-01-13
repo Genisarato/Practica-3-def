@@ -9,14 +9,45 @@ public abstract class Llista<T> {
     }
 
     // Métodos abstractos que deben ser implementados por las subclases
-    public abstract void agregar(T elemento) throws Excepcions;
-    public abstract void eliminar(T elemento);
-    public abstract boolean contiene(T elemento);
-    public abstract int tamano();
-    public abstract void imprimir();
-    public abstract void vaciar();
-    public abstract String toString();
-    /*Pou aixo dixau q son proves, pasa del tema este q ia teu asplicare :) */
-    //pasaallista(String llegit);
 
+    /**
+     * Mètode que s'encarrega d'afegir instàncies a una llista
+     * @param elemento
+     * @throws Excepcions
+     */
+    public abstract void agregar(T elemento) throws Excepcions;
+
+    /**
+     * Mètode que elimina una instància en concret
+     * @param elemento
+     */
+    public abstract void eliminar(T elemento);
+
+    /**
+     * Mètode que comprova si hi ha un cert element a la llista
+     * @param elemento
+     * @return true si hi és present, false si no hi és
+     */
+    public abstract boolean contiene(T elemento);
+
+    /**
+     * Getter de nElem
+     * @return nElem
+     */
+    public abstract int tamano();
+    
+    /**
+     * Crida a toString dins la classe
+     */
+    public abstract void imprimir();
+
+    /**
+     * Mètode que buida un fitxer
+     */
+    public abstract void vaciar();
+
+    /**
+     * toString
+     */
+    public abstract String toString();
 }

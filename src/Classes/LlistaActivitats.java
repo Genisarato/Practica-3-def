@@ -12,19 +12,21 @@ import java.util.Scanner;
 public class LlistaActivitats extends Llista<Activitats>{
     private Activitats[] llista;
 
-    
+    /**
+     * Constructor
+     * @param capacitat
+     */
     public LlistaActivitats(int capacitat){
         super();
         llista = new Activitats[capacitat];
     }
     
     /**
-    * Retorna el tamaño actual de la estructura de datos.
-    **/
+     * Getter
+     */
     public int tamano(){
         return nElem;
     }
-
 
     /**
      * Mètode que troba totes les activitats que ha fet una entitat
@@ -42,7 +44,8 @@ public class LlistaActivitats extends Llista<Activitats>{
     
     
     /** 
-     * @param a
+     * Mètode que busca si hi ha una activitat específica a la llista
+     * @param a instància
      * @throws Excepcions
      */
     public void mateixaActivitat(Activitats a) throws Excepcions{
@@ -57,11 +60,11 @@ public class LlistaActivitats extends Llista<Activitats>{
      * @param ent - entitat de la que en volem sabes les visites
      * @return llista amb totes les visites que ha creat una entitat concreta
      */
-    public LlistaActivitats visitesMateixaEntitat(String ent){
+    public LlistaActivitats visitesMateixaEntitat(String ent, boolean audioG, boolean adaptC){
         LlistaActivitats aux = new LlistaActivitats(nElem);
         for (int i = 0; i < nElem; i++){
             if (llista[i] instanceof Visites){
-                if (llista[i].getEntitatCrea().equalsIgnoreCase(ent)) aux.agregar(llista[i]);
+                if (llista[i].getEntitatCrea().equalsIgnoreCase(ent) && llista[i].getAudioG() == audioG && llista[i].getAdaptC() == adaptC) aux.agregar(llista[i]);
             }
         }
         return aux;
@@ -97,7 +100,7 @@ public class LlistaActivitats extends Llista<Activitats>{
      * Mètode que troba el taller que tenia ocupació en proporció amb les places que oferia
      * @return taller que ha tingut més èxit    
      */
-    public Tallers tallerExit (){ //
+    public Tallers tallerExit (){
         int tallerSup = -1;
         for(int i = 0; i < nElem; i++){
             if(llista[i] instanceof Tallers){
@@ -108,7 +111,6 @@ public class LlistaActivitats extends Llista<Activitats>{
         return (Tallers)llista[tallerSup];
     }
 
-    //FALTA QUE EN EL MAIN ES MOSTRI EN UN BUCLE LES DADES DE TOTES LES XERRADES
     /**
      * Mètode que troba totes les xerrades que fa una mateixa persona
      * @param nom - nom de la persona de la que en volem saber les xerrades
@@ -123,10 +125,10 @@ public class LlistaActivitats extends Llista<Activitats>{
         }
         return aux;
     }
-
     
     /** 
-     * @return boolean
+     * Mètode que comprova que hi hagi visites en la llista
+     * @return true si hi ha visites, false si no n'hi ha
      */
     public boolean hiHaVisites(){
         boolean trobat = false;
@@ -136,6 +138,10 @@ public class LlistaActivitats extends Llista<Activitats>{
         return trobat;
     }
 
+    /**
+     * Mètode que comprova que hi hagi tallers en la llista
+     * @return true si hi ha tallers, false si no n'hi ha
+     */
     public boolean hiHaTallers(){
         boolean trobat = false;
         for (int i = 0; i < nElem && !trobat; i++){
@@ -144,6 +150,10 @@ public class LlistaActivitats extends Llista<Activitats>{
         return trobat;
     }
 
+    /**
+     * Mètode que comprova que hi hagi xerrades en la llista
+     * @return true si hi ha xerrades, false si no n'hi ha
+     */
     public boolean hiHaXerrades(){
         boolean trobat = false;
         for (int i = 0; i < nElem && !trobat; i++){
@@ -152,6 +162,11 @@ public class LlistaActivitats extends Llista<Activitats>{
         return trobat;
     }
 
+    /**
+     * Mètode que calcula la nota mitjana d'un taller
+     * @param codi codi del taller
+     * @return nota ja calculada
+     */
     public float notaMitjanaTaller(String codi){ 
         Boolean trobat = false;
         float resultat = (float) 0.0;
@@ -164,6 +179,11 @@ public class LlistaActivitats extends Llista<Activitats>{
         return resultat;
     }
 
+    /**
+     * Mètode que troba un taller obtenint el seu codi per paràmetre
+     * @param codi codi del taller
+     * @return instància del taller si el trona, sino retorna null
+     */
    public Tallers trobaTaller(String codi) {
         Tallers t = null; // Inicializamos t a null
         boolean trobat = false;
@@ -179,27 +199,11 @@ public class LlistaActivitats extends Llista<Activitats>{
         return t;
     }
     
-    
-    //CONVERTIR A BOOLEAN PER A RETORNAR ALGO PER A SABER SI S'HA POGUT ELIMINAR O NO?
     /**
-     * Mètode que elimina un taller determinat només en el cas que no hi hagi ningú apuntat
-     * @param codi - codi del taller a eliminar
+     * Mètode que elimina un taller en el cas que no tingui apuntats
+     * @param codi codi del taller
+     * @return true si s'ha pogut eliminar, false si no s'ha pogut eliminar
      */
-    /*public void eliminarTaller(String codi){
-        boolean trobat = false;
-        for (int i = 0; i < nElem && !trobat; i++){
-            if (llista[i].getCodi().equalsIgnoreCase(codi)){
-                if (llista[i].getUsuarisApuntats() == 0){
-                    for (int j = i; j < nElem; j++){
-                        llista[j] = llista[j+1];
-                    }
-                    nElem--;
-                    trobat = true;
-                }
-            }
-        }
-    }*/
-    /*Versió amb boolean per a saber si s'ha eliminat o no.*/ 
     public boolean eliminarTaller(String codi){
         boolean trobat = false;
         for (int i = 0; i < nElem && !trobat; i++){
@@ -216,10 +220,14 @@ public class LlistaActivitats extends Llista<Activitats>{
         return trobat;
     }
 
-     /* Mètode que llegeix el contingut del fitxer llista_entitats.txt 
-    *  ATENCIO: AQUEST MÈTODE SEMPRE S'HA DE FER ABANS DE COMENÇAR AMB EL PROGAMA
+     /*
+     * ATENCIO: AQUEST MÈTODE SEMPRE S'HA DE FER ABANS DE COMENÇAR AMB EL PROGAMA
      * JA QUE ES DONA PER SUPOSAT QUE NO DONA MAI MÉS GRAN QUE LA LENGTH.
      * SI ES FA DESPRÉS POT OCASIONAR PROBLEMES
+     */
+    /**
+     * Mètode que llegeix el contingut del fitxer llista_activitats.txt 
+     * @param nomarxiu
      */
      public void llegirfitxer(String nomarxiu){
         File file = new File("src", nomarxiu);
@@ -267,8 +275,6 @@ public class LlistaActivitats extends Llista<Activitats>{
         catch (ArrayIndexOutOfBoundsException e){
             System.out.println("Fora de Rang: " + e);
         }
-        
-
     }
 
     /**
@@ -306,8 +312,7 @@ public class LlistaActivitats extends Llista<Activitats>{
      * Mètode per guardar una activitat a l'arxiu Llista_activitats.txt
      * @param a activitat a guardar
      */
-    public void guardarArxiu(){
-        String nomarxiu = "Llista_activitats.txt";
+    public void guardarArxiu(String nomarxiu){
         String rutaAbsoluta = new File("src", nomarxiu).getAbsolutePath();
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))){
@@ -324,7 +329,9 @@ public class LlistaActivitats extends Llista<Activitats>{
 
     }
 
-    //DE VERITAT ES TANCA L'ARXIU? NO ES FA SERVIR .close() ENLLOC. S'HAURIA DE DESCOMENTAR EL NOU try?
+    /**
+     * Mètode que buida l'arxiu
+     */
     public void vaciar(){
         String nomArxiu = "Llista_activitats.txt";
         String rutaAbsoluta = new File("src", nomArxiu).getAbsolutePath();
@@ -358,6 +365,9 @@ public class LlistaActivitats extends Llista<Activitats>{
         }
     }
 
+    /**
+     * toString
+     */
     @Override
     public String toString() {
         String text = "";
@@ -366,9 +376,10 @@ public class LlistaActivitats extends Llista<Activitats>{
         }
         return text;
     }
+    
     /**
-    * Imprimeix la representació en cadena de l'objecte, toString.
-    **/
+     * Crida al toString
+     */
     public void imprimir(){
         System.out.println(toString());
     }

@@ -6,18 +6,6 @@
 
 package Aplication;
 
-/*
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-*/
-
 import java.util.Scanner;
 
 import Classes.Activitats;
@@ -27,7 +15,7 @@ import Classes.Excepcions;
 import Classes.Usuaris;
 import Classes.Visites;
 import Classes.Xerrades;
-import GraphicInterface.Finestra;
+import InterfGraf.Finestra;
 //import Classes.Llista;
 import Classes.LlistaActivitats;
 import Classes.LlistaEntitats;
@@ -163,13 +151,15 @@ public class Main {
 		System.out.println("\nIntrodueix el número de la operació que vulguis realitzar\n");
 		System.out.println("\t1. Mostrar les dades de qualsevol llista que tingueu definida.");
 		System.out.println("\t2. Obtenir i mostrar la llista d'activitats que ofereix una entitat concreta.");
-		System.out.println("\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
+		System.out.println(
+				"\t3. Obtenir i mostrar la llista de les activitats que es duen a terme en un dia indicat per teclat.");
 		System.out.println("\t4. Obtenir i mostrar la llista dels tallers que tenen places disponibles.");
 		System.out.println("\t5. Afegir una nova activitat ");
 		System.out.println("\t6. Registrar la petició d'un usuari per reservar un taller.");
 		System.out.println("\t7. Mostrar els usuaris que s'han apuntat a un taller.");
 		System.out.println("\t8. Calcular l'usuari que s'ha apuntat a més tallers.");
-		System.out.println("\t9. Registrar la nota que un usuari que s'ha apuntat a un taller li dona un cop s'ha fet.");
+		System.out
+				.println("\t9. Registrar la nota que un usuari que s'ha apuntat a un taller li dona un cop s'ha fet.");
 		System.out.println("\t10. Calcular la nota mitja que ha rebut un taller.");
 		System.out.println("\t11. Quin és el taller que ha tingut més èxit?");
 		System.out.println("\t12. Obtenir i mostrar les dades de la llista de visites ofertes per una entitat");
@@ -298,12 +288,11 @@ public class Main {
 		if (llisA.trobaTaller(codi) == null)
 			System.out.println("L'activitat que has introduit no es tracta d'un taller.");
 		else {
-			try{
+			try {
 				llisR.agregar(u, llisA.trobaTaller(codi));
 				llisU.actualitzarApuntats(u);
 				System.out.println("\nReserva realitzada!");
-			}
-			catch (Excepcions e){
+			} catch (Excepcions e) {
 				llisA.trobaTaller(codi).restaApuntat();
 			}
 		}
@@ -333,7 +322,7 @@ public class Main {
 		String codiReserva = (teclat.nextLine());
 		System.out.println("Introdueix la nota que li poses al taller: ");
 		float nota = Float.parseFloat(teclat.nextLine());
-		llisA.trobaTaller(llisR.valorarTaller(nota, llisR.trobaReserva(codiReserva))).afegirValoracio(nota); 
+		llisA.trobaTaller(llisR.valorarTaller(nota, llisR.trobaReserva(codiReserva))).afegirValoracio(nota);
 		// nota es pot arribara treure de valorarTaller
 		// llisA.trobaTaller retorna el taller al qual hem d'afegir una valoracio
 		// llisR.valorarTaller actualitza el boolea de la reserva per a posar-lo a true
@@ -351,20 +340,34 @@ public class Main {
 	private static void op11(LlistaActivitats llisA) {
 		if (llisA.hiHaTallers())
 			System.out.println("El taller que ha tingut més èxit ha estat:\n" + llisA.tallerExit());
-		else System.out.println("No hi ha tallers.");
+		else
+			System.out.println("No hi ha tallers.");
 	}
 
 	// 12. Obtenir i mostrar les dades de la llista de visites ofertes per una
 	// entitat");
 	private static void op12(LlistaActivitats llisA, Scanner teclat) {
 		String nom;
+		boolean audioG, adaptC;
 		System.out.println("Introdueix l'entitat que vols buscar");
 		nom = teclat.nextLine();
+		System.out.println("\nHan de tenir audioguia?");
+		String aux = teclat.nextLine();
+		if (aux.equalsIgnoreCase("no"))
+			audioG = false;
+		else
+			audioG = true;
+		System.out.println("\nHan d'estar adaptades per a persones cegues?");
+		aux = teclat.nextLine();
+		if (aux.equalsIgnoreCase("no"))
+			adaptC = false;
+		else
+			adaptC = true;
 		if (llisA.hiHaVisites()) {
-			if (llisA.visitesMateixaEntitat(nom) == null)
-				System.out.println("No hi ha cap visita d'aquesta llista.");
+			if (llisA.visitesMateixaEntitat(nom, audioG, adaptC) == null)
+				System.out.println("No hi ha cap visita amb aquests criteris en la llista.");
 			else
-				System.out.println(llisA.visitesMateixaEntitat(nom));
+				System.out.println(llisA.visitesMateixaEntitat(nom, audioG, adaptC));
 		} else
 			System.out.println("La llista no conte visites.");
 	}
@@ -411,26 +414,26 @@ public class Main {
 			} while ((save < 0 && save > 4) || coincideix);
 			switch (save) {
 				case 1:
-					llisA.guardarArxiu();
-					llisU.guardarArxiu();
-					llisE.guardarArxiu();
-					llisR.guardarArxiu();
+					llisA.guardarArxiu("Llista_activitats.txt");
+					llisU.guardarArxiu("Llista_usuaris.txt");
+					llisE.guardarArxiu("Llista_entitats.txt");
+					llisR.guardarArxiu("Llista_reserves.ser");
 					guardarMes = false;
 					break;
 				case 2:
-					llisE.guardarArxiu();
+					llisE.guardarArxiu("Llista_entitats.txt");
 					guardarMes = guardarLlista(teclat);
 					break;
 				case 3:
-					llisU.guardarArxiu();
+					llisU.guardarArxiu("Llista_usuaris.txt");
 					guardarMes = guardarLlista(teclat);
 					break;
 				case 4:
-					llisA.guardarArxiu();
+					llisA.guardarArxiu("Llista_activitats.txt");
 					guardarMes = guardarLlista(teclat);
 					break;
 				case 5:
-					llisR.guardarArxiu();
+					llisR.guardarArxiu("Llista_reserves.ser");
 					guardarMes = guardarLlista(teclat);
 					break;
 			}
@@ -449,52 +452,3 @@ public class Main {
 		return guardarMes;
 	}
 }
-/*
-class MainTest {
-
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.setOut(System.out);
-    }
-
-    @Test
-    void testMenuOption1() {
-        // Redirect system output to capture printed messages
-        System.setOut(new PrintStream(outputStreamCaptor));
-
-        // Simulate user input for option 1
-        String simulatedUserInput = "1\n1\n";
-        System.setIn(new java.io.ByteArrayInputStream(simulatedUserInput.getBytes()));
-
-        // Call the main method
-        Main.main(new String[]{});
-
-        // Verify if the output contains the expected message
-        assertTrue(outputStreamCaptor.toString().contains("Has escollit mostrar les dades de qualsevol llista"));
-    }
-
-    @Test
-    void testMenuOption2() {
-        // Redirect system output to capture printed messages
-        System.setOut(new PrintStream(outputStreamCaptor));
-
-        // Simulate user input for option 2
-        String simulatedUserInput = "2\nEntitat\n";
-        System.setIn(new java.io.ByteArrayInputStream(simulatedUserInput.getBytes()));
-
-        // Call the main method
-        Main.main(new String[]{});
-
-        // Verify if the output contains the expected message
-        assertTrue(outputStreamCaptor.toString().contains("Has escollit obtenir i mostrar la llista d’activitats"));
-    }
-
-    // Add more test cases for other menu options as needed
-}*/

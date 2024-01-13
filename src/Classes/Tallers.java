@@ -6,13 +6,25 @@
 
 package Classes;
 
-/*Els tallers es fan en una hora concreta del dia, i tenen una durada determinada. Tenen també
-una capacitat fixada, i els usuaris s’hi ha de registrar*/
 public class Tallers extends Activitats {
     private float sumaVal;
     private int capacitat, usuarisApuntats, nVal;
     private String hora, durada;
 
+    /**
+     * Constructor
+     * @param nom
+     * @param lloc
+     * @param dia
+     * @param entitatCrea
+     * @param codiPostal
+     * @param hora
+     * @param durada
+     * @param capacitat
+     * @param usuarisApuntats
+     * @param sumaVal
+     * @param nVal
+     */
     public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String hora, String durada,
             int capacitat, int usuarisApuntats, float sumaVal, int nVal) {
         super(nom, lloc, dia, entitatCrea, codiPostal);
@@ -25,6 +37,21 @@ public class Tallers extends Activitats {
 
     }
 
+    /**
+     * Constructor amb codi d'activitat ja generat
+     * @param nom
+     * @param lloc
+     * @param dia
+     * @param entitatCrea
+     * @param codiPostal
+     * @param codi
+     * @param hora2
+     * @param durada2
+     * @param capacitat
+     * @param usuarisApuntats
+     * @param sumaVal2
+     * @param nVal
+     */
     public Tallers(String nom, String lloc, int dia, String entitatCrea, int codiPostal, String codi,
             String hora2, String durada2, int capacitat, int usuarisApuntats, float sumaVal2, int nVal) {
         super(nom, lloc, dia, entitatCrea, codiPostal, codi);
@@ -37,44 +64,66 @@ public class Tallers extends Activitats {
     }
 
     /**
-     * @return String
+     * Getter
+     * @return hora
      */
     public String getHora() {
         return hora;
     }
 
     /**
-     * @return String
+     * Getter
+     * @return durada
      */
     public String getDurada() {
         return durada;
     }
 
     /**
-     * @return int
+     * Getter
+     * @return capacitat
      */
     public int getcapacitat() {
         return capacitat;
     }
 
+    /**
+     * Getter
+     * @return usuaris apuntats al taller
+     */
     @Override
     public int getUsuarisApuntats() {
         return usuarisApuntats;
     }
 
+    /**
+     * Mètode que apunta un usuari al taller
+     */
     public void apuntarUsuari() {
         usuarisApuntats++;
     }
 
+    /**
+     * Mètode que afegeix una valoració
+     * @param valoracion
+     */
     public void afegirValoracio(float valoracion) {
         sumaVal = sumaVal + valoracion;
         nVal++;
     }
 
+    /**
+     * Mètode que calcula la valoració mitjana del taller
+     * @return valoració mitjana
+     */
     public float mitjanaValoracions() {
         return (float) (sumaVal / nVal);
     }
 
+    /**
+     * Mètode que s'utilitza per a saber l'èxit del taller en proporció
+     * @return proporció d'apuntats entre capacitat del taller
+     */
     @Override
     public float proporcioTallers() {
         float res;
@@ -85,26 +134,34 @@ public class Tallers extends Activitats {
         return res;
     }
 
+    /**
+     * Mètode per a saber si hi ha places lliures
+     * @return true si hi ha places lliures, false si està ple
+     */
     @Override
     public boolean placesLliures() {
         return capacitat > usuarisApuntats;
     }
 
+    /**
+     * Mètode que resta u a usuarisApuntats (soluciona un error concret)
+     */
     public void restaApuntat(){
         usuarisApuntats--;
     }
 
-    public float adaptarHora(String horari) {
-        String[] parts = horari.split(":");
-        int hores = Integer.parseInt(parts[0]);
-        float mins = (float) (Integer.parseInt(parts[1]) / 60);
-        return (float) (hores + mins);
-    }
-
+    /**
+     * Mètode que dona format als atributs del taller per a poder afegir-los al fitxer
+     * @return string amb tots els atributs separats per ";"
+     */
     public String atributsExtra() {
         return (hora + ";" + durada + ";" + capacitat + ";" + usuarisApuntats + ";" + sumaVal + ";" + nVal);
     }
 
+    /**
+     * Mètode còpia
+     * @return còpia de la instància
+     */
     @Override
     public Tallers copia() {
         Activitats aux = new Tallers(nom, lloc, dia, entitatCrea, codiPostal, codi, hora, durada, capacitat,
@@ -112,6 +169,9 @@ public class Tallers extends Activitats {
         return (Tallers) aux;
     }
 
+    /**
+     * toString
+     */
     public String toString() {
         return (super.toString() + "\nA les " + hora + "h, amb una durada de " + durada + "h.\nTé capacitat per a "
                 + capacitat + " persones, i hi ha " + usuarisApuntats + " usuaris apuntats.");
