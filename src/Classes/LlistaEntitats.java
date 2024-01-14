@@ -8,17 +8,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-
+//Authors: Genís Aragonès Torralbo
 public class LlistaEntitats extends Llista<Entitats>{
     private Entitats[] llista;
 
     /**
      * Constructor
-     * @param capacitat
      */
-    public LlistaEntitats(int capacitat){
+    public LlistaEntitats(){
         super();
-        llista = new Entitats[capacitat];
+        llista = new Entitats[1000];
     }
 
     

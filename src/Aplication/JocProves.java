@@ -18,8 +18,8 @@ public class JocProves {
     public static void main(String[] args){
 		//Scanner teclat = new Scanner(System.in);
 		LlistaActivitats llisA = new LlistaActivitats(100);
-		LlistaEntitats llisE = new LlistaEntitats(100);
-		LlistaUsuaris llisU = new LlistaUsuaris(100);
+		LlistaEntitats llisE = new LlistaEntitats();
+		LlistaUsuaris llisU = new LlistaUsuaris();
 		LlistaReserves llisR = new LlistaReserves(100);
         Entitats e1 = new Entitats("Proide", 609618168, "proide@fundacioproide.org");
         Entitats e2 = new Entitats("Ajuntament de Tarragona", 977296119, "omic@tarragona.cat");
@@ -43,12 +43,11 @@ public class JocProves {
         llisA.agregar(v2);
         llisA.agregar(x1);
         llisA.agregar(x2);
-        llisU.agregar(u1);
-        llisU.agregar(u2);
-        llisU.agregar(u3);
 
         comprovaCrearReserves(llisR, u1, u2, u3, t2);
         comprovaEliminarTaller(llisR, llisA, t1, t2, u1, u2);
+        comprovaUsuaris(u1, u2, u3, llisU);
+        comprovaVisites(v1, v2, v2, llisA);
     }
 
     private static void comprovaCrearReserves(LlistaReserves llisR, Usuaris u1, Usuaris u2, Usuaris u3, Tallers t2){
@@ -84,5 +83,70 @@ public class JocProves {
         System.out.println("\nS'intenta eliminar el taller 1:" + t1);
         if (llisA.eliminarTaller(t1.getCodi())) System.out.print("S'ha eliminat correctament. Les activitats actuals son:" + llisA);   //Com que no hi ha usuaris apuntats al taller, se'ns permet eliminar-lo
         else System.out.println("No s'ha pogut eliminar. Les activitats actuals són:" + llisA);
+    }
+
+    private static void comprovaUsuaris(Usuaris u1, Usuaris u2, Usuaris u3, LlistaUsuaris llistau){
+
+        try{
+            llistau.agregar(u1);
+        }
+        catch(Excepcions e){
+            System.err.println(e.getMessage());
+        }
+        try{
+            llistau.agregar(u2);
+        }
+        catch(Excepcions e){
+            System.out.println(e.getMessage());
+        }
+        try{
+            llistau.agregar(u3);
+        }
+        catch(Excepcions e){
+            System.out.println(e.getLocalizedMessage());
+        }
+
+        System.out.println("La llista d'usuaris queda:" +llistau);
+        System.out.println("Es vol eliminar l'usuari 3 \n");
+        llistau.eliminar(u3);
+        System.out.println("La llista queda com:" +llistau + "\n");
+        System.out.println("Es vol eliminar un usuari que no esta dins la llista:" +llistau+ "\n");
+        Usuaris usuariprova = new Usuaris("Alberto", "mail.com", 43582);
+        llistau.eliminar(usuariprova);
+        System.out.println("La llista queda com:" +llistau+ "\n");
+    }
+
+
+    private static void comprovaEntitats(Entitats e1, Entitats e2, Entitats e3, LlistaEntitats llistae){
+        System.out.println("Com que en la classa Llista entitats no hi ha cap excepcio els qual haguem de controlar agreguem directe.\n");
+        llistae.agregar(e1);
+        llistae.agregar(e2);
+        llistae.agregar(e3);
+        System.out.println("La llista queda com:" + llistae + "\n");
+        System.out.println("Borrem entitat 1\n");
+        llistae.eliminar(e1);
+        System.out.println("La llista queda com:" + llistae+ "\n");
+        System.out.println("Provem de borra una entitat que no esta en la llista");
+        Entitats entitatprova = new Entitats("Aigua SL", 0, "aigua@gmail.com");
+        llistae.eliminar(entitatprova);
+        System.out.println("La llista queda com:" + llistae + "\n");
+
+    }
+
+
+    private static void comprovaVisites(Visites v1, Visites v2, Visites v3, LlistaActivitats llistaA){
+        System.out.println("Métode per provar d'agregar visites a la llista tallers\n");
+        llistaA.agregar(v1);
+        llistaA.agregar(v2);
+        llistaA.agregar(v3);
+
+        System.out.println("La llista queda com:" + llistaA + "\n");
+        System.out.println("Provem a eliminar la visita 2");
+        llistaA.eliminar(v2);
+        System.out.println("La llista queda com:" + llistaA + "\n");
+        System.out.println("Provem a eliminar una visita que no esta dins la llista");
+        Visites visitaprova = new Visites("Visita a la desembocadura", "La cava", 13, "La Cava SL",80, false, false);
+        llistaA.eliminar(visitaprova);
+        System.out.println("La llista queda com:" + llistaA + "\n");
     }
 }

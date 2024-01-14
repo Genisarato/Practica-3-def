@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 //Authors: Genís Aragonès Torralbo
+//Authors: Pau Forès Prats
 
 public class Finestra extends JFrame {
 

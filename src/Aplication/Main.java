@@ -32,8 +32,8 @@ public class Main {
 		int opcio = 0;
 		Scanner teclat = new Scanner(System.in);
 		LlistaActivitats llisA = new LlistaActivitats(100);
-		LlistaEntitats llisE = new LlistaEntitats(100);
-		LlistaUsuaris llisU = new LlistaUsuaris(100);
+		LlistaEntitats llisE = new LlistaEntitats();
+		LlistaUsuaris llisU = new LlistaUsuaris();
 		LlistaReserves llisR = new LlistaReserves(100);
 		llisA.llegirfitxer("Llista_activitats.txt");
 		llisE.llegirfitxer("Llista_entitats.txt");
@@ -277,10 +277,15 @@ public class Main {
 
 		System.out.println("\nA quin taller es vol inscriure? Introdueix el seu codi: ");
 		codi = teclat.nextLine();
-
+		
 		if (!llisU.nicknameigual(nom)) {
 			u = new Usuaris(nom, mail, codiPostal);
-			llisU.agregar(u);
+			try{
+				llisU.agregar(u);
+			}
+			catch(Excepcions e){
+				System.err.println(e.getMessage());
+			}
 		} else {
 			u = llisU.trobaUsuari(nom, mail, codiPostal);
 		}

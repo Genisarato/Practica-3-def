@@ -229,10 +229,15 @@ public class LlistaReserves extends Llista<Reserves> {
      * @return subllista amb tots els usuaris apuntats
      */
     public LlistaUsuaris usuarisTaller(Tallers taller) {
-        LlistaUsuaris usuaris = new LlistaUsuaris(nElem);
+        LlistaUsuaris usuaris = new LlistaUsuaris();
         for (int i = 0; i < nElem; i++) {
             if (llista[i].getCodiTaller().equalsIgnoreCase(taller.getCodi()))
-                usuaris.agregar(llista[i].getUsuari());
+                try{
+                    usuaris.agregar(llista[i].getUsuari());
+                }
+                catch(Excepcions e){
+                    
+                }
         }
         return usuaris;
     }

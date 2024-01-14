@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+//Authors: Genís Aragonès Torralbo
+
 public class LlistaUsuaris extends Llista<Usuaris>{
     private Usuaris[] llista;
 
@@ -15,9 +17,9 @@ public class LlistaUsuaris extends Llista<Usuaris>{
      * Constructor
      * @param capacitat
      */
-    public LlistaUsuaris(int capacitat){
+    public LlistaUsuaris(){
         super();
-        llista = new Usuaris[capacitat];
+        llista = new Usuaris[1000];
     }
 
     /** 
@@ -68,7 +70,12 @@ public class LlistaUsuaris extends Llista<Usuaris>{
                 int codi = Integer.parseInt(parts[2].trim());
                 int tallerApuntats = Integer.parseInt(parts[3].trim());
                 Usuaris usuari = new Usuaris(nom, mail, codi, tallerApuntats);
-                this.agregar(usuari);
+                try{
+                    this.agregar(usuari);
+                }
+                catch(Excepcions e){
+                    System.out.println("M'ha saltal la línea");
+                }
                 
             }
         } catch (FileNotFoundException e) {
@@ -81,26 +88,15 @@ public class LlistaUsuaris extends Llista<Usuaris>{
      * Métode de afegir un usuari comprovant que l'usuari no existeixi sino directament la descarta
      * @param n - instància d'usuaris
      */
-    public void agregar(Usuaris n){
-        if(nElem < llista.length){
-            boolean afegit = false;
-            while (!afegit){
-                if (!nicknameigual(n.getNickname())){
-                    llista[nElem] = n.copia();
-                    nElem++;
-                    afegit = true;
-                }
-
-                /*try{
+    public void agregar(Usuaris n) throws Excepcions{
+        if(nElem < llista.length){{
+                try{
                     nicknameigual(n.getNickname());
                     llista[nElem] = n.copia();
                     nElem++;
-                    afegit = true;
                 }catch(RuntimeException e){
-                    System.out.println(e.getMessage());
-                    System.out.println("Introdueix un altre nickname");
-                    //Implementar llegir un altre nickname i el setNickname
-                }*/
+                    throw new Excepcions("El nickname ja està ficat");
+                }
             }
         }
     }
@@ -180,12 +176,15 @@ public class LlistaUsuaris extends Llista<Usuaris>{
      * @param nom
      * @return true si hi és, false si no hi es
      */
-    public boolean nicknameigual(String nom){
-        boolean trobat = false;
+    public boolean nicknameigual(String nom) throws RuntimeException{
+        Boolean trobat = false;
         for(int i = 0; i<nElem; i++){
-            if(llista[i].getNickname().equalsIgnoreCase(nom)) trobat = true; //throw new RuntimeException("El nickname está usat.");
+            if(llista[i].getNickname().equalsIgnoreCase(nom)){
+                trobat = true;
+                throw new RuntimeException("El nickname está usat.");
+            } 
         }
-       return trobat;   
+        return trobat;  
     }
 
     /**
