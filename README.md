@@ -1,18 +1,14 @@
-## Getting Started
+First Java OOP Practice
+Description
+This repository contains our first practice in Java, where we applied fundamental concepts of Object-Oriented Programming (OOP). In this practice, we focused on using inheritance, polymorphism, and other key OOP concepts to create a set of classes that interact with each other.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Objectives
+Learn the basics of OOP in Java.
+Apply inheritance to create relationships between classes.
+Use polymorphism to implement methods with different behaviors based on the object type.
+Experiment with encapsulation and abstraction to improve the structure of the code.
+Features
+Implementation of base classes and subclasses to practice inheritance.
+Use of polymorphism to change method behavior depending on the specific object.
+Examples of private/protected methods and attributes to demonstrate the use of encapsulation.
+Constructors and getter/setter methods to manage object data securely.
